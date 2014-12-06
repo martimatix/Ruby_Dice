@@ -43,23 +43,14 @@ class Score_Sheet
 		end
 	end
 
-	# small_straight and large_straight currently not working
 
-	# def small_straight(dice)
-	# 	if dice.each_cons(4).count >= 2
-	# 		return 30
-	# 	else
-	# 		return 0
-	# 	end
-	# end
+	def small_straight(dice)
+		straight(dice, 4, 30)
+	end
 
-	# def large_straight(dice)
-	# 		if dice.each_cons(5).count == 1
-	# 		return 40
-	# 	else
-	# 		return 0
-	# 	end
-	# end
+	def large_straight(dice)
+		straight(dice, 5, 40)
+	end
 	
 
 
@@ -86,11 +77,25 @@ class Score_Sheet
 			return 0
 		end
 	end
+
+	# common code for both small straight (SS) and large straight (LS)
+	# limit = 4 for SS and limit = 5 for LS
+	# score is the score to return
+	def straight(dice, limit, score)
+		#each_cons is generating every possible value for a straight of length limit
+		(1..6).each_cons(limit).each do |i|
+			# Asking if i is a subset of dice
+			if (i - dice).empty?
+				return score
+			end
+		end
+		return 0
+	end
 		
 end
 
 # test
-dice = [6, 6, 6, 6, 6]
+dice = [1, 2, 3, 4, 5]
 ss = Score_Sheet.new()
 
-puts ss.small_straight(dice)
+puts ss.large_straight(dice)
