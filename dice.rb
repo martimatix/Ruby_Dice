@@ -25,6 +25,11 @@ class Dice
 		puts "\n"
 	end
 
+	# Orders dice in ascending order
+	def sort()
+		@five_dice = @five_dice.sort
+	end
+
 end
 
 # testing
@@ -32,6 +37,8 @@ d = Dice.new()
 
 (0..5).each do
 	d.roll_all
+	d.display()
+	d.sort()
 	d.display()
 end
 
