@@ -20,7 +20,7 @@ class ScoreSheet # Class for Score Sheet
 			   field is a score field on the yahtzee score sheet
 =end
 	def enter_score(Dice, field)
-		@sheet[field] = send(field, Dice.five_dice)
+		@sheet[field] = send field, Dice.five_dice
 
 		# need to do: calculate bonuses and totals
 		# need to do: test if @scores is filled. If true -> set @filled to true
