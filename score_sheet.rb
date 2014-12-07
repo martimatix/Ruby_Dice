@@ -51,6 +51,10 @@ class Score_Sheet
 	def large_straight(dice)
 		straight(dice, 5, 40)
 	end
+
+	def chance(dice)
+		return dice.reduce(:+)
+	end
 	
 
 
@@ -98,4 +102,4 @@ end
 dice = [1, 2, 3, 4, 5]
 ss = Score_Sheet.new()
 
-puts ss.large_straight(dice)
+puts ss.chance(dice)
