@@ -11,3 +11,4 @@ Furthermore, it's to become accustomed to the git workflow.
 Contributions are most welcome!
 DIS
   gem.authors = "Zachary Perlmutter", "martimatrix"
+end
