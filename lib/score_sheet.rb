@@ -1,24 +1,42 @@
 class ScoreSheet # Class for Score Sheet
+
+	@@upper_scores = [:ones, :twos, :threes, :fours, :fives, :sixes]
+	@@lower_scores = [:full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance]
+
+	# true if the score sheet is completely filled and no legal moves remain
+	@filled = false
+
+	@scores = Hash.new
+	# Hash table of two element arrays where the first value is the score and the second is whether the field has been played
+    Array.new(@@upper_scores).concat(@@lower_scores).each {|s| @sheet[s] = [0, false]}
+
+	@@bonuses_and_totals = [:upper_score_bonus => 0, :upper_score_total => 0, :lower_score_total => 0, :total => 0]
+
+
+
 =begin
 	Enter a score
 	Arguments: dice is an instance of the dice class
-				 field is a score field on the yahtzee score sheet
+			   field is a score field on the yahtzee score sheet
 =end
-	def enter_score(dice, field); end
+	def enter_score(Dice, field)
+		@sheet[field] = send(field, Dice.five_dice)
+
+		# need to do: calculate bonuses and totals
+		# need to do: test if @scores is filled. If true -> set @filled to true
+
+	end
 =begin
 	***Methods for calculating score***
 	The methods take an array of five ints as an argument
+=end
 
-	single_face calculates the score for the upper half fields of the score sheet
-	value indicates which dice face is being counted
-=end
-	def single_face(dice, value)
-=begin
-		dice.select{|number| number == value} filters the value
-		reduce(:+) sums the array
-=end
-		return dice.select{|number| number == value}.reduce(:+)
-	end
+	def ones(dice); 	single_face(1); end
+	def twos(dice); 	single_face(2); end
+	def threes(dice); 	single_face(3); end
+	def fours(dice); 	single_face(4); end
+	def fives(dice); 	single_face(5); end
+	def sixes(dice); 	single_face(6); end
 
 	def three_of_a_kind(dice); of_a_kind dice, 3; end # Checks to see if you have a 3 of a kind
 	def four_of_a_kind(dice); of_a_kind dice, 4; end
@@ -43,6 +61,16 @@ class ScoreSheet # Class for Score Sheet
 =begin
 	***Helper methods for score calculation methods***
 
+	single_face calculates the score for the upper half fields of the score sheet
+	value indicates which dice face is being counted
+=end
+	def single_face(dice, value)
+=begin
+		dice.select{|number| number == value} filters the value
+		reduce(:+) sums the array
+=end
+		return dice.select{|number| number == value}.reduce(:+)
+	end
 	freq returns a frequency hash table
 =end
 	def freq(dice)
@@ -79,6 +107,11 @@ class ScoreSheet # Class for Score Sheet
 		end
 		return 0
 	end
+
+	def display()
+		# displays score sheet
+	end
+
 		
 end
 
