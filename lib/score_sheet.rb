@@ -10,7 +10,7 @@ class ScoreSheet # Class for Score Sheet
 	# Hash table of two element arrays where the first value is the score and the second is whether the field has been played
     Array.new(@@upper_scores).concat(@@lower_scores).each {|s| @sheet[s] = [0, false]}
 
-	@@bonuses_and_totals = [:upper_score_bonus => 0, :upper_score_total => 0, :lower_score_total => 0, :total => 0]
+	@@bonuses_and_totals = {upper_score_bonus: 0, upper_score_total: 0, lower_score_total: 0, total: 0}
 
 
 
