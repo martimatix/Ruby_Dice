@@ -2,7 +2,7 @@ Gem::Specification.new do |gem|
   gem.name = "ruby-dice"
   gem.version = "0.0.0"
   gem.files = Dir.glob "lib/*.rb"
-  gem.emails = "zrp200@gmail.com"
+  gem.emails = "zrp200@gmail.com", "zenitram.oiram@gmail.com"
   gem.extra_rdoc_files = Dir.glob "*md"
   gem.summary = "A Yahtzee clone written in ruby that runs in the terminal"
   gem.discription = <<DIS
