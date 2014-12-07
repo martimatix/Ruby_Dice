@@ -1,1 +1,3 @@
 #!/usr/bin/env ruby
+require "dice"
+require "score_sheet"
