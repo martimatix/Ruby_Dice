@@ -1,0 +1,12 @@
+language: ruby
+rvm: ruby-head
+install: bundle install
+notifications:
+  email:
+    recipients:
+      - 8185408099@vtext.com
+      - zenitram.oiram@gmail.com
+    on_success: change
+    on_failure: change
+script: bundle exec rspec spec
+
