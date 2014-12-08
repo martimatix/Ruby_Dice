@@ -12,5 +12,6 @@ Contributions are most welcome!
 DIS
   gem.authors = "Zachary Perlmutter", "Mario Martinez"
   gem.add_development_dependency "rspec", ">= 3.1"
+  gem.add_development_dependency "rspec-its"
   gem.license = "MIT"
 end
