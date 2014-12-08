@@ -1,20 +1,14 @@
 require_relative "fivedice.rb"
 class ScoreSheet # Class for Score Sheet
-
-	@@upper_scores = [:ones, :twos, :threes, :fours, :fives, :sixes]
-	@@lower_scores = [:full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance]
-
-	# true if the score sheet is completely filled and no legal moves remain
-	@filled = false
-
-	@scores = Hash.new
-	# Hash table of two element arrays where the first value is the score and the second is whether the field has been played
-    Array.new(@@upper_scores).concat(@@lower_scores).each {|s| @sheet[s] = [0, false]}
-
+	@@upper_scores = :ones, :twos, :threes, :fours, :fives, :sixes
+	@@lower_scores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance
+	attr_reader :scores # Hash table of two element arrays where the first value is the score and the second is whether the field has been played
+	attr_reader :filled # true if the score sheet is completely filled and no legal moves remain
+	def initialize
+		@filled, @scores = false, Hash.new
+		Array.new(@@upper_scores).concat(@@lower_scores).each {|s| @sheet[s] = [0, false]}
+	end
 	@@bonuses_and_totals = {upper_score_bonus: 0, upper_score_total: 0, lower_score_total: 0, total: 0}
-
-
-
 =begin
 	Enter a score
 	Arguments: dice is an instance of the FiveDice class
@@ -22,22 +16,22 @@ class ScoreSheet # Class for Score Sheet
 =end
 	def enter_score(dice, field)
 		@sheet[field] = send field, dice.dice
-
-		# need to do: calculate bonuses and totals
-		# need to do: test if @scores is filled. If true -> set @filled to true
-
+=begin
+		need to do: calculate bonuses and totals
+		need to do: test if @scores is filled. If true -> set @filled to true
+=end
 	end
 =begin
 	***Methods for calculating score***
 	The methods take an array of five ints as an argument
 =end
 
-	def ones(dice); 	single_face(1); end
-	def twos(dice); 	single_face(2); end
-	def threes(dice); 	single_face(3); end
-	def fours(dice); 	single_face(4); end
-	def fives(dice); 	single_face(5); end
-	def sixes(dice); 	single_face(6); end
+	def ones(dice); 	single_face 1	;end
+	def twos(dice);		single_face 2	;end
+	def threes(dice);	single_face 3	;end
+	def fours(dice); 	single_face 4	;end
+	def fives(dice); 	single_face 5	;end
+	def sixes(dice); 	single_face 6	;end
 
 	def three_of_a_kind(dice); of_a_kind dice, 3; end # Checks to see if you have a 3 of a kind
 	def four_of_a_kind(dice); of_a_kind dice, 4; end
@@ -56,7 +50,7 @@ class ScoreSheet # Class for Score Sheet
 	def small_straight(dice); straight dice, 4, 30; end
 	def large_straight(dice); straight dice, 5, 40; end
 
-	def chance(dice); dice.reduce(:+); end
+	def chance(dice); dice.reduce :+; end
 	
 
 =begin
@@ -79,8 +73,8 @@ class ScoreSheet # Class for Score Sheet
 		#=> {1=>3, 2=>1, 3=>1}
 	end
 
-	# returns a 2 element array with the mode and modal frequency
-	def mode(dice)
+	
+	def mode(dice) # returns a 2 element array with the mode and model frequency
 		return freq(dice).max_by{|k,v| v}
 	end
 =begin
