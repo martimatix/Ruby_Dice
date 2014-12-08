@@ -1,3 +1,4 @@
+require_relative "fivedice.rb"
 class ScoreSheet # Class for Score Sheet
 
 	@@upper_scores = [:ones, :twos, :threes, :fours, :fives, :sixes]
@@ -16,11 +17,11 @@ class ScoreSheet # Class for Score Sheet
 
 =begin
 	Enter a score
-	Arguments: dice is an instance of the dice class
+	Arguments: dice is an instance of the FiveDice class
 			   field is a score field on the yahtzee score sheet
 =end
-	def enter_score(Dice, field)
-		@sheet[field] = send field, Dice.five_dice
+	def enter_score(dice, field)
+		@sheet[field] = send field, dice.dice
 
 		# need to do: calculate bonuses and totals
 		# need to do: test if @scores is filled. If true -> set @filled to true
