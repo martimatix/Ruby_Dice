@@ -28,12 +28,12 @@ class ScoreSheet # Class for Score Sheet
 		@filled = @sheet.each{|x| x[1]}.all? {|x| x == true}
 	end
 
-	def ones(dice); 	single_face 1	;end
-	def twos(dice);		single_face 2	;end
-	def threes(dice);	single_face 3	;end
-	def fours(dice); 	single_face 4	;end
-	def fives(dice); 	single_face 5	;end
-	def sixes(dice); 	single_face 6	;end
+	def ones(dice); 	single_face 1	;end # The total of all the ones
+	def twos(dice);		single_face 2	;end # The total of all the twos
+	def threes(dice);	single_face 3	;end # The total of all the threes
+	def fours(dice); 	single_face 4	;end # The total of all the fours
+	def fives(dice); 	single_face 5	;end # The total of all the fives
+	def sixes(dice); 	single_face 6	;end # The total of all the sixes
 
 	def three_of_a_kind(dice); of_a_kind dice, 3; end # Checks to see if you have a 3 of a kind
 	def four_of_a_kind(dice); of_a_kind dice, 4; end
