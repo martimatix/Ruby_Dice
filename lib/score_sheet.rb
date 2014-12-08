@@ -18,7 +18,7 @@ class ScoreSheet # Class for Score Sheet
 		@sheet[field] = send field, dice.dice.num
 =begin
 		need to do: calculate bonuses and totals
-		need to do: test if @scores is filled. If true -> set @filled to true
+		need to do: test if @sheet is filled. If true -> set @filled to true
 =end
 	end
 =begin
