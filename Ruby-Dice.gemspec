@@ -15,4 +15,5 @@ DIS
   gem.add_development_dependency "rspec", ">= 3.1"
   gem.add_development_dependency "rspec-its"
   gem.license = "MIT"
+  gem.requirements << "terminal"
 end
