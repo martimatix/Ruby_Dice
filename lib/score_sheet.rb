@@ -1,5 +1,6 @@
 require_relative "fivedice.rb"
 class ScoreSheet # Class for Score Sheet
+	
 	@@upper_scores = :ones, :twos, :threes, :fours, :fives, :sixes
 	@@lower_scores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance
 	attr_reader :sheet # Hash table of two element arrays where the first value is the score and the second is whether the field has been played
@@ -7,8 +8,8 @@ class ScoreSheet # Class for Score Sheet
 	def initialize
 		@filled, @sheet = false, Hash.new
 		Array.new(@@upper_scores).concat(@@lower_scores).each {|s| @sheet[s] = [0, false]}
+		@upper_score_bonus, @upper_score_total, @lower_score_total, @total = 0, 0, 0, 0
 	end
-	@@bonuses_and_totals = {upper_score_bonus: 0, upper_score_total: 0, lower_score_total: 0, total: 0}
 =begin
 	Enter a score
 	Arguments: dice is an instance of the FiveDice class
@@ -38,7 +39,7 @@ class ScoreSheet # Class for Score Sheet
 
 	def yahtzee(dice); of_a_kind dice, 5; end # Checks to see if all the dice are the same
 		
-	end
+
 
 	def full_house(dice)
 		f_table = freq dice
