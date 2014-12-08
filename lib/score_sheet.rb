@@ -15,7 +15,7 @@ class ScoreSheet # Class for Score Sheet
 			   field is a score field on the yahtzee score sheet
 =end
 	def enter_score(dice, field)
-		@sheet[field] = send field, dice.dice
+		@sheet[field] = send field, dice.dice.num
 =begin
 		need to do: calculate bonuses and totals
 		need to do: test if @scores is filled. If true -> set @filled to true
@@ -36,8 +36,8 @@ class ScoreSheet # Class for Score Sheet
 	def three_of_a_kind(dice); of_a_kind dice, 3; end # Checks to see if you have a 3 of a kind
 	def four_of_a_kind(dice); of_a_kind dice, 4; end
 
-	def yahtzee(dice) # Checks to see if all the dice are the same
-		of_a_kind dice, 5
+	def yahtzee(dice); of_a_kind dice, 5; end # Checks to see if all the dice are the same
+		
 	end
 
 	def full_house(dice)
@@ -84,7 +84,7 @@ class ScoreSheet # Class for Score Sheet
 =end
 	def of_a_kind(dice, limit)
 		model_value, mode_f = mode dice
-		if mode_f >= limit then return dice.reduce(:+)
+		if mode_f >= limit then return dice.reduce :+
 		else; return 0
 		end
 	end
