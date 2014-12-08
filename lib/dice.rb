@@ -4,5 +4,6 @@ class Dice # Class for a die in the game
 	def initialize; @num = Faces.sample; end
 	def roll; @num = Faces.sample; end # Rolls the dice
 	alias to_s num
+	alias inspect num
 end
 
