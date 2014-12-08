@@ -17,15 +17,16 @@ class ScoreSheet # Class for Score Sheet
 =end
 	def enter_score(dice, field)
 		@sheet[field] = send field, dice.dice.num
-=begin
-		need to do: calculate bonuses and totals
-		need to do: test if @sheet is filled. If true -> set @filled to true
-=end
+		# Check if upper score bonus can be awarded
+		raw_upper = @sheet.select{|x| @@upper_scores.include? x }.each{|x| x[1]}.reduce :+
+		if raw_upper >= 63; @upper_score_bonus = 35; end
+
+		@upper_score_total = raw_upper + bonus
+		@lower_score_total = @sheet.select{|x| @@lower_scores.include? x }.each{|x| x[1]}.reduce :+
+		@total = @lower_score_total + @upper_score_total
+
+		@filled = @sheet.each{|x| x[1]}.all? {|x| x == true}
 	end
-=begin
-	***Methods for calculating score***
-	The methods take an array of five ints as an argument
-=end
 
 	def ones(dice); 	single_face 1	;end
 	def twos(dice);		single_face 2	;end
@@ -38,8 +39,6 @@ class ScoreSheet # Class for Score Sheet
 	def four_of_a_kind(dice); of_a_kind dice, 4; end
 
 	def yahtzee(dice); of_a_kind dice, 5; end # Checks to see if all the dice are the same
-		
-
 
 	def full_house(dice)
 		f_table = freq dice
