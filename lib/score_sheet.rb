@@ -104,13 +104,6 @@ class ScoreSheet # Class for Score Sheet
 		return 0
 	end
 
-	def display()
-		# displays score sheet
-	end
-
+	def display; end # displays score sheet
 		
 end
-
-# test
-dice, ss = [1, 2, 3, 4, 5], ScoreSheet.new
-puts ss.chance dice
