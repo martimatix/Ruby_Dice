@@ -97,7 +97,7 @@ class ScoreSheet # Class for Score Sheet
 		end
 		return 0
 	end
-
+	public
 	def display; end # displays score sheet
 		
 end
