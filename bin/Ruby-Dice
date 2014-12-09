@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 require "dice"
-require "score_sheet"
+require "scoresheet"
+sheet = ScoreSheet.new
