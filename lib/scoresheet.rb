@@ -4,30 +4,27 @@ class ScoreSheet # Class for Score Sheet
 	@@upper_scores = :ones, :twos, :threes, :fours, :fives, :sixes
 	@@lower_scores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance
 	attr_reader :sheet # Hash table of two element arrays where the first value is the score and the second is whether the field has been played
-	attr_reader :filled # true if the score sheet is completely filled and no legal moves remain
 	attr_reader :dice # The dice used
 	def initialize
-		@filled, @sheet, @dice = false, Hash.new, Dice.new
+		@sheet, @dice = Hash.new, Dice.new
 		Array.new(@@upper_scores).concat(@@lower_scores).each {|s| @sheet[s] = [0, false]}
-		@upper_score_bonus, @upper_score_total, @lower_score_total, @total = 0, 0, 0, 0
 	end
 =begin
 	Enter a score
 			   field is a score field on the yahtzee score sheet
 =end
-	def enter_score(field)
-		@sheet[field] = send field, @dice.dice
-		# Check if upper score bonus can be awarded
-		raw_upper = @sheet.select{|x| @@upper_scores.include? x }.each{|x| x[1]}.reduce :+
-		if raw_upper >= 63; @upper_score_bonus = 35; end
-
-		@upper_score_total = raw_upper + bonus
-		@lower_score_total = @sheet.select{|x| @@lower_scores.include? x }.each{|x| x[1]}.reduce :+
-		@total = @lower_score_total + @upper_score_total
-
-		@filled = @sheet.each{|x| x[1]}.all? {|x| x == true}
+	def enter_score(field); @sheet[field] = send field, @dice.dice; end
+	def filled; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # true if the score sheet is completely filled and no legal moves remain
+	def raw_upper; @sheet.select{|x| @@upper_scores.include? x }.each{|x| x[1]}.reduce :+; end
+	def upper_score_bonus # Check if upper score bonus can be awarded
+		if raw_upper >= 63 then return 35
+		else; return 0
+		end
 	end
-
+	def upper_score_total; raw_upper + bonus; end
+	def lower_score_total; @sheet.select{|x| @@lower_scores.include? x }.each{|x| x[1]}.reduce :+; end
+	def total; lower_score_total + upper_score_total; end
+		
 	def ones; 	single_face 1	;end # The total of all the ones
 	def twos;	single_face 2	;end # The total of all the twos
 	def threes;	single_face 3	;end # The total of all the threes
