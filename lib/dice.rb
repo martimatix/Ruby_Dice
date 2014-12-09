@@ -1,4 +1,3 @@
-
 class Dice  # Class for working with the 5 dice at the same time
 	attr_reader :dice # The dice in the game
 	def initialize; @dice = Array.new(5) {new_dice}; end
