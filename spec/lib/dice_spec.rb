@@ -1,6 +1,6 @@
 require "spec_helper"
 require "dice"
-RSpec.describe FiveDice do
+RSpec.describe Dice do
  	describe "#new" do
   		describe "dice" do
     			subject {Dice.new.dice}
