@@ -1,4 +1,3 @@
 #!/usr/bin/env ruby
 require "dice"
-require "fivedice"
 require "score_sheet"
