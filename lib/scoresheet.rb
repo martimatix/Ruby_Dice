@@ -6,7 +6,7 @@ class ScoreSheet # Class for Score Sheet
 	attr_reader :sheet # Hash table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice # The dice used
 	def initialize
-		@sheet, @dice = Hash.new, Dice.new
+		@sheet, @dice, @yahtzee = Hash.new, Dice.new, 0
 		Array.new(@@upper_scores).concat(@@lower_scores).each {|s| @sheet[s] = [0, false]}
 	end
 =begin
@@ -21,9 +21,10 @@ class ScoreSheet # Class for Score Sheet
 		else; return 0
 		end
 	end
-	def upper_score_total; raw_upper + bonus; end
-	def lower_score_total; @sheet.select{|x| @@lower_scores.include? x }.each{|x| x[1]}.reduce :+; end
+	def upper_score_total; raw_upper + bonus; end # The total score of the upper part of the ScoreSheet, including bonuses
+	def lower_score_total; @sheet.select{|x| @@lower_scores.include? x }.each{|x| x[1]}.reduce(:+) + yahtzee_bonus; end # The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end
+	def yahtzee_bonus; 100*@yahztee; end
 		
 	def ones; 	single_face 1	;end # The total of all the ones
 	def twos;	single_face 2	;end # The total of all the twos
@@ -35,8 +36,11 @@ class ScoreSheet # Class for Score Sheet
 	def three_of_a_kind; of_a_kind 3; end # Checks to see if you have a 3 of a kind
 	def four_of_a_kind; of_a_kind 4; end
 
-	def yahtzee; of_a_kind 5; end # Checks to see if all the dice are the same
-
+	def yahtzee # Checks to see if all the dice are the same
+		@yahtzee += 1 unless of_a_kind(5).zero?
+		return of_a_kind 5
+	end 
+	
 	def full_house
 		f_table = freq
 		if f_table.length == 1..2 && f_table.has_value?(3) then return 25
