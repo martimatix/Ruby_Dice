@@ -1,13 +1,13 @@
 require_relative "dice.rb"
 class ScoreSheet # Class for Score Sheet
 	
-	@@upper_scores = :ones, :twos, :threes, :fours, :fives, :sixes
-	@@lower_scores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance
+	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes
+	LowerScores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance
 	attr_reader :sheet # Hash table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice # The dice used
 	def initialize
 		@sheet, @dice, @yahtzee = Hash.new, Dice.new, 0
-		Array.new(@@upper_scores).concat(@@lower_scores).each {|s| @sheet[s] = [0, false]}
+		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
 =begin
 	Enter a score
@@ -15,15 +15,15 @@ class ScoreSheet # Class for Score Sheet
 =end
 	def enter_score(field); @sheet[field] = send field, @dice.dice; end
 	def filled; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # true if the score sheet is completely filled and no legal moves remain
-	def raw_upper; @sheet.select{|x| @@upper_scores.include? x }.each{|x| x[1]}.reduce :+; end
-	def upper_score_bonus # Check if upper score bonus can be awarded
+	def raw_upper; @sheet.select{|x| UpperScores.include? x }.each{|x| x[1]}.reduce :+; end
+	def upper_score_bonus # Checks if upper score bonus can be awarded
 		if raw_upper >= 63 then return 35
 		else; return 0
 		end
 	end
 	def upper_score_total; raw_upper + bonus; end # The total score of the upper part of the ScoreSheet, including bonuses
-	def lower_score_total; @sheet.select{|x| @@lower_scores.include? x }.each{|x| x[1]}.reduce(:+) + yahtzee_bonus; end # The total score of the lower part of the ScoreSheet
-	def total; lower_score_total + upper_score_total; end
+	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.each{|x| x[1]}.reduce(:+) + yahtzee_bonus; end # The total score of the lower part of the ScoreSheet
+	def total; lower_score_total + upper_score_total; end # The grand total
 	def yahtzee_bonus; 100*@yahztee; end
 		
 	def ones; 	single_face 1	;end # The total of all the ones
@@ -33,15 +33,15 @@ class ScoreSheet # Class for Score Sheet
 	def fives; 	single_face 5	;end # The total of all the fives
 	def sixes; 	single_face 6	;end # The total of all the sixes
 
-	def three_of_a_kind; of_a_kind 3; end # Checks to see if you have a 3 of a kind
-	def four_of_a_kind; of_a_kind 4; end
+	def three_of_a_kind; of_a_kind 3; end # Checks to see if you have 3 of the same dice
+	def four_of_a_kind; of_a_kind 4; end # Checks to see if you have 4 of the same dice
 
-	def yahtzee # Checks to see if all the dice are the same
+	def yahtzee # Checks to see if you have all of the same dice
 		@yahtzee += 1 unless of_a_kind(5).zero?
 		return of_a_kind 5
 	end 
 	
-	def full_house
+	def full_house # Checks to see if you have 3 of one kind of dice and 2 of another
 		f_table = freq
 		if f_table.length == 1..2 && f_table.has_value?(3) then return 25
 		else; return 0
@@ -51,7 +51,7 @@ class ScoreSheet # Class for Score Sheet
 	def small_straight; straight 4, 30; end
 	def large_straight; straight 5, 40; end
 
-	def chance; @dice.dice.reduce :+; end
+	def chance; @dice.dice.reduce :+; end # The sum of all the dice
 	
 	private
 =begin
