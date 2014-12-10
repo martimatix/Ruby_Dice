@@ -18,5 +18,7 @@ describe ScoreSheet do
 		its(:fours) {is_expected.to satisfy {|v| (v % 3).zero?}}
 		its(:fives) {is_expected.to satisfy {|v| (v % 3).zero?}}
 	end
-	describe "::UpperScores"
+	describe "::UpperScores" do
+		subject {ScoreSheet::UpperScores}
+	end
 end
