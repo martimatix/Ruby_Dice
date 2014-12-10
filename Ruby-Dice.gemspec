@@ -1,6 +1,8 @@
 Gem::Specification.new do |gem|
   gem.name = "Ruby-Dice"
-  gem.version = "0.0.0.pre"
+  gem.version = "0.0.0.pre" unless ENV['TRAVIS']
+  gem.version = ENV['TRAVIS_TAG'] if ENV['TRAVIS'] # Travis-CI takes your tag and uses it for the version
+  gem.version = ENV['TRAVIS_BUILD_ID'] if ENV['TRAVIS'] && ENV["TRAVIS_TAG"] == ""
   gem.files = Dir.glob "lib/*.rb"
   gem.email = "zrp200@gmail.com", "zenitram.oiram@gmail.com"
   gem.bindir = "bin"
