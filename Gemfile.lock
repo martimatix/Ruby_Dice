@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    Ruby-Dice (0.0.0)
+    Ruby-Dice (0.0.0.pre)
 
 GEM
   remote: https://rubygems.org/
