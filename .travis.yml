@@ -1,6 +1,8 @@
 language: ruby
 rvm: ruby-head
-install: bundle install
+install:
+- gem update --system
+- bundle install
 notifications:
   email:
     recipients:
@@ -8,5 +10,5 @@ notifications:
       - zenitram.oiram@gmail.com
     on_success: change
     on_failure: change
-script: bundle exec rspec spec --color -f doc
+script: bundle exec rspec spec
 
