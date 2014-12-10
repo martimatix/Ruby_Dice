@@ -11,7 +11,7 @@ describe ScoreSheet do
 		its(:sheet) {is_expected.to be_instance_of Hash}
 		its(:filled) {is_expected.to be false}
 		its(:yahtzee) {is_expected.to be_zero | eq(50)}
-		its(:yahztee_bonus) {is_expected.to be_zero | be % 100}
+		its(:yahztee_bonus) {is_expected.to be_zero}
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
 		its(:twos) {is_expected.to satisfy {|value| (value % 2).zero?}}
 	end
