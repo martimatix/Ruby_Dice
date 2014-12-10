@@ -2,10 +2,11 @@ Gem::Specification.new do |gem|
   gem.name = "Ruby-Dice"
   gem.version = "0.0.0"
   gem.files = Dir.glob "lib/*.rb"
-  gem.emails = "zrp200@gmail.com", "zenitram.oiram@gmail.com"
+  gem.email = "zrp200@gmail.com", "zenitram.oiram@gmail.com"
+  gem.bindir = "bin"
   gem.extra_rdoc_files = Dir.glob "*.md"
   gem.summary = "A Yahtzee clone written in Ruby that runs in the terminal"
-  gem.discription = <<DIS
+  gem.description = <<DIS
 This project is a personal project for educational purposes and becoming accustomed to the ruby programming paradigm.
 Furthermore, it's to become accustomed to the git workflow.
 Contributions are most welcome!
