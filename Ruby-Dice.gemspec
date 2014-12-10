@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name = "Ruby-Dice"
-  gem.version = "0.0.0"
+  gem.version = "0.0.0.pre"
   gem.files = Dir.glob "lib/*.rb"
   gem.email = "zrp200@gmail.com", "zenitram.oiram@gmail.com"
   gem.bindir = "bin"
