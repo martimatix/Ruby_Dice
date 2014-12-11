@@ -11,7 +11,6 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.5)
     multi_json (1.10.1)
-    pg (0.17.1-x86-mingw32)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -39,6 +38,5 @@ PLATFORMS
 DEPENDENCIES
   Ruby-Dice!
   codeclimate-test-reporter
-  pg
   rspec (>= 3.1)
   rspec-its
