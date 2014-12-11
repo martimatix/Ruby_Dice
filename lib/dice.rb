@@ -10,5 +10,5 @@ class Dice  # Class for working with the 5 dice at the same time
 		puts "\n"
 	end
 	private 
-	def new_dice; return (1..6).to_a.sample; end # Returns a random number between 1 and 6, inclusive
+	def new_dice; return (1..6).to_a.sample; end # @return [Fixnum] a random number between 1 and 6, inclusive
 end
