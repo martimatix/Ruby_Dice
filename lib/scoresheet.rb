@@ -1,20 +1,21 @@
 require_relative "dice.rb"
-class ScoreSheet # Class for Score Sheet
-	
+class ScoreSheet
 	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes
 	LowerScores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance
+	
 	attr_reader :sheet # Hash table of two element arrays where the first value is the score and the second is whether the field has been played
-	attr_accessor :dice # The dice used
+	attr_accessor :dice
+	
 	def initialize
 		@sheet, @dice = Hash.new, Dice.new
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
 =begin
 	Enter a score
-			   field is a score field on the yahtzee score sheet
+	@param field [Symbol] is a score field on the yahtzee score sheet
 =end
 	def enter_score(field); @sheet[field] = send field, @dice.dice; end
-	def filled; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # true if the score sheet is completely filled and no legal moves remain
+	def filled; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # @return true if the score sheet is completely filled and no legal moves remain
 	def raw_upper; @sheet.select{|x| UpperScores.include? x }.each{|x| x[1]}.reduce :+; end
 	def upper_score_bonus # Checks if upper score bonus can be awarded
 		if raw_upper >= 63 then return 35
@@ -35,7 +36,7 @@ class ScoreSheet # Class for Score Sheet
 	def three_of_a_kind; of_a_kind 3; end # Checks to see if you have 3 of the same dice
 	def four_of_a_kind; of_a_kind 4; end # Checks to see if you have 4 of the same dice
 
-	def yahtzee; of_a_kind 5; end# Checks to see if you have all of the same dice
+	def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
 	
 	def full_house # Checks to see if you have 3 of one kind of dice and 2 of another
 		f_table = freq
@@ -54,7 +55,7 @@ class ScoreSheet # Class for Score Sheet
 	***Helper methods for score calculation methods***
 
 	single_face calculates the score for the upper half fields of the score sheet
-	value indicates which dice face is being counted
+	@param value [Fixnum] indicates which dice face is being counted
 =end
 	def single_face(value)
 =begin
@@ -63,12 +64,12 @@ class ScoreSheet # Class for Score Sheet
 =end
 		return @dice.dice.select{|number| number == value}.reduce(:+)
 	end
-	def freq # freq returns a frequency hash table
+	def freq # @return a frequency hash table
 		return @dice.dice.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
 		#=> {1=>3, 2=>1, 3=>1}
 	end
 
-	def mode; return freq.max_by{|k,v| v}; end # returns a 2 element array with the mode and model frequency
+	def mode; return freq.max_by{|k,v| v}; end # @return [Array] a 2 element array with the mode and model frequency
 =begin
 	helper method for calculating the scores of three of a kind, four of a kind and yahtzee
 	Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 for yahtzee
@@ -82,7 +83,7 @@ class ScoreSheet # Class for Score Sheet
 =begin
 	common code for both small straight (SS) and large straight (LS)
 	limit = 4 for SS and limit = 5 for LS
-	score is the score to return
+	@param [Fixnum] score is the score to return
 =end
 	def straight(limit, score)
 		#each_cons is generating every possible value for a straight of length limit
