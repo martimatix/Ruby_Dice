@@ -13,14 +13,18 @@ class ScoreSheet
 	def enter_score(field); @sheet[field] = send field, @dice.dice; end # @param field [Symbol] is a score field an the yahtzee scoresheet
 	def filled; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # @return true if the score sheet is completely filled and no legal moves remain
 	def raw_upper; @sheet.select{|x| UpperScores.include? x }.each{|x| x[1]}.reduce :+; end
-	def upper_score_bonus # Checks if upper score bonus can be awarded
+=begin
+Checks if upper score bonus can be awarded
+@return [Fixnum]
+=end
+	def upper_score_bonus
 		if raw_upper >= 63 then return 35
 		else; return 0
 		end
 	end
 	def upper_score_total; raw_upper + bonus; end # The total score of the upper part of the ScoreSheet, including bonuses
 	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.each{|x| x[1]}.reduce(:+); end # The total score of the lower part of the ScoreSheet
-	def total; lower_score_total + upper_score_total; end # The grand total
+	def total; lower_score_total + upper_score_total; end # @return [Fixnum]
 		
 	def ones; 	single_face 1	;end # The total of all the ones
 	def twos;	single_face 2	;end # The total of all the twos
@@ -60,6 +64,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 =begin
 		@dice.select{|number| number == value} filters the value
 		reduce(:+) sums the array
+		@return [Fixnum]
 =end
 		return @dice.dice.select{|number| number == value}.reduce(:+)
 	end
@@ -82,7 +87,8 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 =begin
 	common code for both small straight (SS) and large straight (LS)
 	limit = 4 for SS and limit = 5 for LS
-	@param [Fixnum] score is the score to return
+	@param score [Fixnum] is the score to return
+	
 =end
 	def straight(limit, score)
 		#each_cons is generating every possible value for a straight of length limit
