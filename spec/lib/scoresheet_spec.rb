@@ -12,10 +12,9 @@ describe ScoreSheet do
 		its(:filled) {is_expected.to be false}
 		its(:yahtzee) {is_expected.to be_zero | eq(50)}
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
-		its(:ones) {is_expected.to satisfy {|value| (value % 1).zero?}}
-		its(:twos) {is_expected.to satisfy {|value| (value % 2).zero?}}
 	end
 	describe "::UpperScores" do
 		subject {ScoreSheet::UpperScores}
+		it {is_expected.to be_include :ones}
 	end
 end
