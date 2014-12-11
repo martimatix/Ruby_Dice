@@ -1,5 +1,5 @@
 language: ruby
-rvm: ruby-head
+rvm: 2.0.0
 install:
 - gem update --system
 - bundle install
