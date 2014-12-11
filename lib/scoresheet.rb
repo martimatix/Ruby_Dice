@@ -4,7 +4,7 @@ class ScoreSheet # Class for Score Sheet
 	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes
 	LowerScores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance
 	attr_reader :sheet # Hash table of two element arrays where the first value is the score and the second is whether the field has been played
-	attr_reader :dice # The dice used
+	attr_accessor :dice # The dice used
 	def initialize
 		@sheet, @dice = Hash.new, Dice.new
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
