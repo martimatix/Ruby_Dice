@@ -6,3 +6,5 @@ This project is a personal project for educational purposes and becoming accusto
 [![Inline docs](http://inch-ci.org/github/martimatix/Ruby-Dice.svg?branch=master)](http://inch-ci.org/github/martimatix/Ruby-Dice)
 [![Code Climate](https://codeclimate.com/github/martimatix/Ruby-Dice/badges/gpa.svg)](https://codeclimate.com/github/martimatix/Ruby-Dice)
 [![Build Status](https://travis-ci.org/martimatix/Ruby-Dice.svg)](https://travis-ci.org/martimatix/Ruby-Dice)
+## Other
+https://ruby-dice.herokuapp.com/
