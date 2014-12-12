@@ -12,12 +12,12 @@ class ScoreSheet
 	end
 	def enter_score(field); @sheet[field] = send field, @dice.dice; end # @param field [Symbol] is a score field an the yahtzee scoresheet
 	def filled; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # @return [Boolean] true if the score sheet is completely filled and no legal moves remain
-	def raw_upper; @sheet.select{|x| UpperScores.include? x }.each{|x| x[1]}.reduce :+; end
+	def raw_upper; @sheet.select{|x| UpperScores.include? x }.each{|x| x[1]}.reduce :+; end # @return [Fixnum]
 =begin
 Checks if upper score bonus can be awarded
 @return [Fixnum]
 =end
-	def upper_score_bonus
+	def upper_score_bonus # @return [Fixnum] 
 		if raw_upper >= 63 then return 35
 		else; return 0
 		end
@@ -41,15 +41,15 @@ Checks if upper score bonus can be awarded
 Checks to see if you have 3 of one kind of dice and 2 of another
 @return [Fixnum]
 =end
-	def full_house
+	def full_house # @return [Fixnum] the score; 25 if you have a full house and 0 if you don't
 		f_table = freq
 		if f_table.length == 1..2 && f_table.has_value?(3) then return 25
 		else; return 0
 		end
 	end
 
-	def small_straight; straight 4, 30; end
-	def large_straight; straight 5, 40; end
+	def small_straight; straight 4, 30; end # @return [Fixnum] 
+	def large_straight; straight 5, 40; end # @return [Fixnum] 
 
 	def chance; @dice.dice.reduce :+; end # @return [Fixnum] The sum of all the dice
 	
@@ -62,7 +62,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 =end
 	def single_face(value)
 =begin
-		@dice.select{|number| number == value} filters the value
+		dice.select{|number| number == value} filters the value
 		reduce(:+) sums the array
 		@return [Fixnum]
 =end
@@ -77,6 +77,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 =begin
 	helper method for calculating the scores of three of a kind, four of a kind and yahtzee
 	Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 for yahtzee
+	@return [Fixnum]
 =end
 	def of_a_kind(limit)
 		model_value, mode_f = mode
