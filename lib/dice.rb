@@ -5,7 +5,7 @@ class Dice  # Class for working with the 5 dice at the same time
 	def roll_all # Rolls all the dice
 		for die in @dice; die == new_dice; end
 	end
-	def display # Display instance variable dice
+	def display # @return [String] instance variable dice
 		@dice.each {|i| puts i}
 		puts "\n"
 	end
