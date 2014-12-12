@@ -12,6 +12,9 @@ describe ScoreSheet do
 		its(:filled) {is_expected.to be false}
 		its(:yahtzee) {is_expected.to be_zero | eq(50)}
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
+		for score in ScoreSheet::UpperScores
+			its(score) {is_expected.to be_instance_of Fixnum}
+		end
 	end
 	describe "::UpperScores" do
 		subject {ScoreSheet::UpperScores}
