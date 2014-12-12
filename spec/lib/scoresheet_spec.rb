@@ -14,7 +14,7 @@ describe ScoreSheet do
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
 		i = 1
 		for score in ScoreSheet::UpperScores
-			its(score) {is_expected.to be_instance_of(Fixnum) & satisfy {|v| (v % d).zero?}}
+			its(score) {is_expected.to be_instance_of Fixnum}
 			i += 1
 		end
 	end
