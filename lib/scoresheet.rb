@@ -66,7 +66,9 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		reduce(:+) sums the array
 		@return [Fixnum]
 =end
-		return @dice.dice.select{|number| number == value}.reduce(:+)
+		 v = @dice.dice.select{|number| number == value}.reduce(:+)
+		 return v unless v.nil?
+		 return 0
 	end
 	def freq # @return [Hash] a frequency hash table
 		return @dice.dice.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
