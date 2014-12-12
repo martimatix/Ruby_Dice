@@ -20,6 +20,8 @@ describe ScoreSheet do
 	end
 	describe "::UpperScores" do
 		subject {ScoreSheet::UpperScores}
-		it {is_expected.to be_include :ones, :twos, :threes, :fours, :fives, :sixes}
+		for field in ScoreSheet::UpperScores
+			it {is_expected.to be_include field}
+		end
 	end
 end
