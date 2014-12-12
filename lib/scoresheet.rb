@@ -10,8 +10,10 @@ class ScoreSheet
 		@sheet, @dice = Hash.new, Dice.new
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
+	
 	def enter_score(field); @sheet[field] = send field, @dice.dice; end # @param field [Symbol] is a score field an the yahtzee scoresheet
 	def filled?; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # @return [Boolean] true if the score sheet is completely filled and no legal moves remain
+	
 	def raw_upper; @sheet.select{|x| UpperScores.include? x }.each{|x| x[1]}.reduce :+; end # @return [Fixnum]
 =begin
 Checks if upper score bonus can be awarded
