@@ -8,4 +8,5 @@ This project is a personal project for educational purposes and becoming accusto
 [![Build Status](https://travis-ci.org/martimatix/Ruby-Dice.svg)](https://travis-ci.org/martimatix/Ruby-Dice)
 ## Other
 https://ruby-dice.herokuapp.com/
+
 http://www.rubydoc.info/find/github?q=Ruby-Dice#
