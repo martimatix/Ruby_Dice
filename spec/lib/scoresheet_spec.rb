@@ -22,6 +22,6 @@ describe ScoreSheet do
 	end
 	describe "::UpperScores" do
 		subject {ScoreSheet::UpperScores}
-		it {is_expected.to be_include :ones}
+		it {is_expected.to be_include :ones, :twos, :threes, :fours, :fives, :sixes}
 	end
 end
