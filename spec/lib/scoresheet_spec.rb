@@ -13,7 +13,11 @@ describe ScoreSheet do
 		its(:yahtzee) {is_expected.to be_zero | eq(50)}
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
 		for score in ScoreSheet::UpperScores
-			its(score) {is_expected.to be_instance_of Fixnum}
+			if i.exists then i += 1
+			else
+				i = 1
+			end
+			its(score) {is_expected.to be_instance_of(Fixnum) & satisfy {|v| (v % i).zero?}}
 		end
 	end
 	describe "::UpperScores" do
