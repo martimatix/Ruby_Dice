@@ -3,15 +3,15 @@ class ScoreSheet
 	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes
 	LowerScores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance
 	
-	attr_reader :sheet # Hash table of two element arrays where the first value is the score and the second is whether the field has been played
-	attr_accessor :dice
+	attr_reader :sheet # @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
+	attr_accessor :dice # @return [Dice]
 	
 	def initialize
 		@sheet, @dice = Hash.new, Dice.new
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
 	def enter_score(field); @sheet[field] = send field, @dice.dice; end # @param field [Symbol] is a score field an the yahtzee scoresheet
-	def filled; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # @return true if the score sheet is completely filled and no legal moves remain
+	def filled; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # @return [Boolean] true if the score sheet is completely filled and no legal moves remain
 	def raw_upper; @sheet.select{|x| UpperScores.include? x }.each{|x| x[1]}.reduce :+; end
 =begin
 Checks if upper score bonus can be awarded
@@ -22,16 +22,16 @@ Checks if upper score bonus can be awarded
 		else; return 0
 		end
 	end
-	def upper_score_total; raw_upper + bonus; end # The total score of the upper part of the ScoreSheet, including bonuses
-	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.each{|x| x[1]}.reduce(:+); end # The total score of the lower part of the ScoreSheet
+	def upper_score_total; raw_upper + bonus; end # @return [Fixnum] The total score of the upper part of the ScoreSheet, including bonuses
+	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.each{|x| x[1]}.reduce(:+); end # @return [Fixnum] The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end # @return [Fixnum]
 		
-	def ones; 	single_face 1	;end # The total of all the ones
-	def twos;	single_face 2	;end # The total of all the twos
-	def threes;	single_face 3	;end # The total of all the threes
-	def fours; 	single_face 4	;end # The total of all the fours
-	def fives; 	single_face 5	;end # The total of all the fives
-	def sixes; 	single_face 6	;end # The total of all the sixes
+	def ones; 	single_face 1	;end # @return [Fixnum] The total of all the ones
+	def twos;	single_face 2	;end # @return [Fixnum] The total of all the twos
+	def threes;	single_face 3	;end # @return [Fixnum] The total of all the threes
+	def fours; 	single_face 4	;end # @return [Fixnum] The total of all the fours
+	def fives; 	single_face 5	;end # @return [Fixnum] The total of all the fives
+	def sixes; 	single_face 6	;end # @return [Fixnum] The total of all the sixes
 
 	def three_of_a_kind; of_a_kind 3; end # Checks to see if you have 3 of the same dice
 	def four_of_a_kind; of_a_kind 4; end # Checks to see if you have 4 of the same dice
@@ -51,7 +51,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	def small_straight; straight 4, 30; end
 	def large_straight; straight 5, 40; end
 
-	def chance; @dice.dice.reduce :+; end # The sum of all the dice
+	def chance; @dice.dice.reduce :+; end # @return [Fixnum] The sum of all the dice
 	
 	private
 =begin
@@ -68,7 +68,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 =end
 		return @dice.dice.select{|number| number == value}.reduce(:+)
 	end
-	def freq # @return a frequency hash table
+	def freq # @return [Hash] a frequency hash table
 		return @dice.dice.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
 		#=> {1=>3, 2=>1, 3=>1}
 	end
@@ -90,7 +90,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	@param score [Fixnum] is the score to return
 	
 =end
-	def straight(limit, score)
+	def straight(limit, score) # @return [Fixnum] 
 		#each_cons is generating every possible value for a straight of length limit
 		(1..6).each_cons(limit).each do |i|
 			# Asking if i is a subset of dice
@@ -101,6 +101,10 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		return 0
 	end
 	public
-	def display; end # displays score sheet
+=begin
+@todo Add definition
+@return [Hash] 
+=end
+	def display; end
 		
 end
