@@ -12,6 +12,7 @@ class ScoreSheet
 	end
 	
 	def enter_score(field); @sheet[field] = send field, @dice.dice; end # @param field [Symbol] is a score field an the yahtzee scoresheet
+	
 	def filled?; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # @return [Boolean] true if the score sheet is completely filled and no legal moves remain
 	
 	def raw_upper; @sheet.select{|x| UpperScores.include? x }.each{|x| x[1]}.reduce :+; end # @return [Fixnum]
@@ -24,6 +25,7 @@ Checks if upper score bonus can be awarded
 		else; return 0
 		end
 	end
+	
 	def upper_score_total; raw_upper + bonus; end # @return [Fixnum] The total score of the upper part of the ScoreSheet, including bonuses
 	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.each{|x| x[1]}.reduce(:+); end # @return [Fixnum] The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end # @return [Fixnum]
@@ -35,8 +37,8 @@ Checks if upper score bonus can be awarded
 	def fives; 	single_face 5	;end # @return [Fixnum] The total of all the fives
 	def sixes; 	single_face 6	;end # @return [Fixnum] The total of all the sixes
 
-	def three_of_a_kind; of_a_kind 3; end # Checks to see if you have 3 of the same dice
-	def four_of_a_kind; of_a_kind 4; end # Checks to see if you have 4 of the same dice
+	def three_of_a_kind; of_a_kind 3; end # @return [Fixnum] Checks to see if you have 3 of the same dice
+	def four_of_a_kind; of_a_kind 4; end # @return [Fixnum] Checks to see if you have 4 of the same dice
 
 	def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
 =begin
@@ -50,17 +52,15 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		end
 	end
 
-	def small_straight; straight 4, 30; end # @return [Fixnum] 
+	def small_straight; straight 4, 30; end # @return [Fixnum]
 	def large_straight; straight 5, 40; end # @return [Fixnum] 
 
 	def chance; @dice.dice.reduce :+; end # @return [Fixnum] The sum of all the dice
 	
-	private
+	private # Helper methods for score calculation methods
 =begin
-	***Helper methods for score calculation methods***
-
-	single_face calculates the score for the upper half fields of the score sheet
-	@param value [Fixnum] indicates which dice face is being counted
+single_face calculates the score for the upper half fields of the score sheet
+@param value [Fixnum] indicates which dice face is being counted
 =end
 	def single_face(value)
 =begin
@@ -69,8 +69,9 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		@return [Fixnum]
 =end
 		 v = @dice.dice.select{|number| number == value}.reduce(:+)
-		 return v unless v.nil?
-		 return 0
+		 unless v.nil; return v
+		 else; return 0
+		 end
 	end
 	def freq # @return [Hash] a frequency hash table
 		return @dice.dice.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
