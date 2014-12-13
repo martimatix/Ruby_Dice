@@ -24,13 +24,29 @@ describe ScoreSheet do
 		end
 	end
 	ss = ScoreSheet.new
-	it "calculates Full House correctly" do
+	it "calculates full_house correctly" do
 		ss.dice.set_dice([1,1,2,2,2])
 		expect(ss.full_house).to eq(25)
 		ss.dice.set_dice([2,2,2,2,2])
 		expect(ss.full_house).to eq(25)
 		ss.dice.set_dice([1,1,2,2,5])
 		expect(ss.full_house).to eq(0)
+	end
+	it "calculates three_of_a_kind correctly" do
+		ss.dice.set_dice([1,2,2,2,2])
+		expect(ss.three_of_a_kind).to eq(9)
+		ss.dice.set_dice([1,5,2,2,2])
+		expect(ss.three_of_a_kind).to eq(12)
+		ss.dice.set_dice([1,2,3,4,2])
+		expect(ss.three_of_a_kind).to eq(0)
+
+	end
+
+	it "caclulates four_of_a_kind correctly" do
+		ss.dice.set_dice([1,2,2,2,2])
+		expect(ss.four_of_a_kind).to eq(9)
+		ss.dice.set_dice([1,1,2,2,2])
+		expect(ss.four_of_a_kind).to eq(0)
 	end
 end
 
