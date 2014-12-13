@@ -49,8 +49,7 @@ describe ScoreSheet do
 		end
 		describe "four_of_a_kind" do
 			fok = proc do |array|
-				s = ScoreSheet.new
-				s.dice.set_dice array
+				s = ScoreSheet.new array
 				s.four_of_a_kind
 			end
 			context "when @dice.dice == [1, 2, 2, 2, 2]" do
