@@ -1,11 +1,6 @@
 require "spec_helper"
 describe ScoreSheet do
 	describe "#new" do
-		full_house = proc do |array|
-			s = ScoreSheet.new
-			s.dice.set_dice array
-			s.full_house
-		end
 		subject {ScoreSheet.new}
 		it {is_expected.to respond_to(:chance, :filled?, :large_straight, :small_straight, :full_house, :yahtzee, :four_of_a_kind, :three_of_a_kind, :enter_score, :dice)}
 		its(:large_straight) {is_expected.to eq(40) | be_zero}
@@ -16,13 +11,8 @@ describe ScoreSheet do
 		its(:yahtzee) {is_expected.to be_zero | eq(50)}
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
 		describe "ones" do
-			single = proc do |array|
-				s = ScoreSheet.new
-				s.dice.set_dice array
-				s.ones
-			end
 			context "when @dice.dice == [1, 1, 2, 2, 2]" do
-				subject {single.call [1,1,2,2,2]}
+				subject {ScoreSheet.new([1,1,2,2,2]).ones}
 				it {is_expected.to eq 2}
 			end
 		end
@@ -98,7 +88,7 @@ describe ScoreSheet do
 			context "when filled" do
 				subject do
 					s = ScoreSheet.new
-					s.sheet.each {|key| key.value = true}
+					s.sheet.each {|key| key = [0, true]}
 					s
 				end
 				it {is_expected.to be_filled}
