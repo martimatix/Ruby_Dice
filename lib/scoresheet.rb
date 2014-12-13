@@ -8,7 +8,7 @@ class ScoreSheet
 	
 	def initialize(custom_dice=nil)
 		@sheet, @dice = Hash.new, Dice.new
-		@dice.dice.set_dice(custom_dice) if custom_dice.is_a? Array
+		@dice.dice = custom_dice if custom_dice.is_a? Array
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
 	
