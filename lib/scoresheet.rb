@@ -30,12 +30,12 @@ Checks if upper score bonus can be awarded
 	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.each{|x| x[1]}.reduce(:+); end # @return [Fixnum] The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end # @return [Fixnum]
 		
-	def ones; 	single_face 1	;end # @return [Fixnum] The total of all the ones
-	def twos;	single_face 2	;end # @return [Fixnum] The total of all the twos
-	def threes;	single_face 3	;end # @return [Fixnum] The total of all the threes
-	def fours; 	single_face 4	;end # @return [Fixnum] The total of all the fours
-	def fives; 	single_face 5	;end # @return [Fixnum] The total of all the fives
-	def sixes; 	single_face 6	;end # @return [Fixnum] The total of all the sixes
+	def ones; 	return single_face 1	;end # @return [Fixnum] The total of all the ones
+	def twos;	return single_face 2	;end # @return [Fixnum] The total of all the twos
+	def threes;	return single_face 3	;end # @return [Fixnum] The total of all the threes
+	def fours; 	return single_face 4	;end # @return [Fixnum] The total of all the fours
+	def fives; 	return single_face 5	;end # @return [Fixnum] The total of all the fives
+	def sixes; 	return single_face 6	;end # @return [Fixnum] The total of all the sixes
 
 	def three_of_a_kind; of_a_kind 3; end # @return [Fixnum] Checks to see if you have 3 of the same dice
 	def four_of_a_kind; of_a_kind 4; end # @return [Fixnum] Checks to see if you have 4 of the same dice
