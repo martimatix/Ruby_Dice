@@ -25,7 +25,7 @@ describe ScoreSheet do
 				it {is_expected.to eq 25}
 			end
 			context "when @dice.dice == [1, 1, 2, 2, 5]" do
-				subject {fh.call [1,1,2,2,5]
+				subject {fh.call [1,1,2,2,5]}
 				it {is_expected.to be_zero}
 			end
 		end
@@ -44,7 +44,7 @@ describe ScoreSheet do
 				it {is_expected.to eq 12}
 			end
 			context "when @dice.dice == [1, 2, 2, 3, 4]" do
-				subject {toc.call [1, 2, 2, 3, 4]}
+				subject {tok.call [1, 2, 2, 3, 4]}
 				it {is_expected.to be_zero}
 			end
 		end
@@ -59,7 +59,7 @@ describe ScoreSheet do
 				it {is_expected.to eq 9}
 			end
 			context "when @dice.dice == [1, 1, 2, 2, 2]" do
-				subject {foc.call [1, 1, 2, 2, 2]}
+				subject {fok.call [1, 1, 2, 2, 2]}
 				it {is_expected.to be_zero}
 			end
 		end
