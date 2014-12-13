@@ -6,9 +6,9 @@ class ScoreSheet
 	attr_reader :sheet # @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice # @return [Dice]
 	
-	def initialize(custom_dice=false)
+	def initialize(custom_dice=nil)
 		@sheet, @dice = Hash.new, Dice.new
-		@dice.dice.set_dice(custom_dice) if custom_dice
+		@dice.dice.set_dice(custom_dice) if custom_dice.is_a? Array
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
 	
