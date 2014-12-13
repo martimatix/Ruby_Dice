@@ -1,6 +1,11 @@
 require "spec_helper"
 describe ScoreSheet do
 	describe "#new" do
+		full_house = proc do |array|
+			s = ScoreSheet.new
+			s.dice.set_dice array
+			s.full_house
+		end
 		subject {ScoreSheet.new}
 		it {is_expected.to respond_to(:chance, :filled?, :large_straight, :small_straight, :full_house, :yahtzee, :four_of_a_kind, :three_of_a_kind, :enter_score, :dice)}
 		its(:large_straight) {is_expected.to eq(40) | be_zero}
@@ -22,11 +27,6 @@ describe ScoreSheet do
 			end
 		end
 		describe "full_house" do
-			fh = proc do |array|
-				s = ScoreSheet.new
-				s.dice.set_dice array
-				s.full_house
-			end
 			context "when @dice.dice == [1, 1, 2, 2, 2]" do
 				subject {fh.call [1,1,2,2,2]}
 				it {is_expected.to eq 25}
@@ -74,12 +74,15 @@ describe ScoreSheet do
 				it {is_expected.to be_zero}
 			end
 		end
-		describe "Enter Score" do
-			it "correctly enters scores" do
-				ss = ScoreSheet.new
-				ss.dice.set_dice([1,1,2,2,2])
-				ss.enter_score(:full_house)
-				expect(ss.sheet[:full_house]).to eq([25, true])
+		describe "enter_score" do
+			enter_score = proc do |array, field|
+				s = full_house.call array
+				s.enter_score field
+				s.sheet[field]
+			end
+			context "@dice.dice == [1, 1, 2, 2, 2]" do
+				subject {enter_score.call [1, 1, 2, 2, 2], :full_house}
+				it {is_expected.to eq [25, true]}
 			end
 		end
 		i = 1
@@ -87,14 +90,18 @@ describe ScoreSheet do
 			its(score) {is_expected.to be_instance_of Fixnum}
 			i += 1
 		end
-		describe "Filled?" do
-			ss = ScoreSheet.new
-			it "works correctly when not filled" do
-				ss.filled?.should be == false
+		describe "filled?" do
+			context "when not filled" do
+				subject {ScoreSheet.new}
+				it {is_expected.to be false}
 			end
-			it "works correctly when filled" do
-				ss.sheet.each {|i| i[1] = true}
-				ss.filled?.should be == true
+			context "when filled" do
+				subject do
+					s = ScoreSheet.new
+					s.sheet.each {|i| i[1] = true}
+					s
+				end
+				it {is_expected.to be true}
 			end
 		end
 	end
