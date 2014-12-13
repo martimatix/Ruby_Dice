@@ -10,17 +10,17 @@ describe ScoreSheet do
 		its(:yahtzee) {is_expected.to be_zero | eq(50)}
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
 		describe "ones" do
-			context "when @dice.dice == [1, 1, 2, 2, 2]" do
+			context "when dice2 == [1, 1, 2, 2, 2]" do
 				subject {ScoreSheet.new([1,1,2,2,2]).ones}
 				it {is_expected.to eq 2}
 			end
 		end
 		describe "full_house" do
-			context "when @dice.dice == [1, 1, 2, 2, 2]" do
+			context "when dice2 == [1, 1, 2, 2, 2]" do
 				subject {ScoreSheet.new([1,1,2,2,2]).full_house}
 				it {is_expected.to eq 25}
 			end
-			context "when @dice.dice == [2, 2, 2, 2, 2]" do
+			context "when dice2 == [2, 2, 2, 2, 2]" do
 				subject {ScoreSheet.new(Array.new(5) {2}).full_house}
 				it {is_expected.to eq 25}
 			end
