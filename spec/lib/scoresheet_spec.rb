@@ -69,7 +69,6 @@ describe ScoreSheet do
 			i += 1
 		end
 	end
-	
 end
 
 
