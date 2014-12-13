@@ -69,7 +69,7 @@ single_face calculates the score for the upper half fields of the score sheet
 		@return [Fixnum]
 =end
 		 v = @dice.dice.select{|number| number == value}.reduce(:+)
-		 unless v.nil; return v
+		 unless v.nil?; return v
 		 else; return 0
 		 end
 	end
