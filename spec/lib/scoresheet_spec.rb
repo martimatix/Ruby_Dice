@@ -28,15 +28,15 @@ describe ScoreSheet do
 		end
 		describe "full_house" do
 			context "when @dice.dice == [1, 1, 2, 2, 2]" do
-				subject {fh.call [1,1,2,2,2]}
+				subject {ScoreSheet.new([1,1,2,2,2]).full_house}
 				it {is_expected.to eq 25}
 			end
 			context "when @dice.dice == [2, 2, 2, 2, 2]" do
-				subject {fh.call Array.new(5) {2}}
+				subject {ScoreSheet.new(Array.new(5) {2}).full_house}
 				it {is_expected.to eq 25}
 			end
 			context "when @dice.dice == [1, 1, 2, 2, 5]" do
-				subject {fh.call [1,1,2,2,5]}
+				subject {ScoreSheet.new([1,1,2,2,5]).full_house}
 				it {is_expected.to be_zero}
 			end
 		end
@@ -75,7 +75,7 @@ describe ScoreSheet do
 		end
 		describe "enter_score" do
 			enter_score = proc do |array, field|
-				s = full_house.call array
+				s = ScoreSheet.new array
 				s.enter_score field
 				s.sheet[field]
 				
