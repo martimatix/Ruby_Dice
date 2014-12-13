@@ -42,8 +42,7 @@ describe ScoreSheet do
 		end
 		describe "three_of_a_kind" do
 			tok = proc do |array|
-				s = ScoreSheet.new
-				s.dice.set_dice array
+				s = ScoreSheet.new array
 				s.three_of_a_kind
 			end
 			context "when @dice.dice == [1, 2, 2, 2, 2]" do
@@ -99,7 +98,7 @@ describe ScoreSheet do
 			context "when filled" do
 				subject do
 					s = ScoreSheet.new
-					s.sheet.each {|i| i[1] = true}
+					s.sheet.each {|key| key.value = true}
 					s
 				end
 				it {is_expected.to be_filled}
