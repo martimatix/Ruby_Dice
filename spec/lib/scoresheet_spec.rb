@@ -79,6 +79,7 @@ describe ScoreSheet do
 				s = full_house.call array
 				s.enter_score field
 				s.sheet[field]
+				
 			end
 			context "@dice.dice == [1, 1, 2, 2, 2]" do
 				subject {enter_score.call [1, 1, 2, 2, 2], :full_house}
@@ -93,7 +94,7 @@ describe ScoreSheet do
 		describe "filled?" do
 			context "when not filled" do
 				subject {ScoreSheet.new}
-				it {is_expected.to be false}
+				it {is_expected.to_not be_filled}
 			end
 			context "when filled" do
 				subject do
@@ -101,7 +102,7 @@ describe ScoreSheet do
 					s.sheet.each {|i| i[1] = true}
 					s
 				end
-				it {is_expected.to be true}
+				it {is_expected.to be_filled}
 			end
 		end
 	end
