@@ -37,7 +37,7 @@ describe ScoreSheet do
 			end
 			context "when @dice.dice == [1, 2, 2, 2, 2]" do
 				subject {tok.call [1, 2, 2, 2, 2]}
-				it {is_expected.to_eq 9}
+				it {is_expected.to eq 9}
 			end
 			context "when @dice.dice == [1, 2, 2, 2, 5]" do
 				subject {tok.call [1,2,2,2,5]}
@@ -51,7 +51,7 @@ describe ScoreSheet do
 		describe "four_of_a_kind" do
 			fok = proc do |array|
 				s = ScoreSheet.new
-				s.dice.set_dice = array
+				s.dice.set_dice array
 				s.four_of_a_kind
 			end
 			context "when @dice.dice == [1, 2, 2, 2, 2]" do
