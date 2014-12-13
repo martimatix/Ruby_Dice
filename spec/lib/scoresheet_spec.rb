@@ -10,6 +10,28 @@ describe ScoreSheet do
 		its(:filled?) {is_expected.to be false}
 		its(:yahtzee) {is_expected.to be_zero | eq(50)}
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
+		describe "ones" do
+			single = proc do |array|
+				s = ScoreSheet.new
+				s.dice.set_dice array
+				s.ones
+			end
+			context "when @dice.dice == [1, 1, 2, 2, 2]" do
+				subject {single.call [1,1,2,2,2]}
+				it {is_expected.to eq 2}
+			end
+		end
+		describe "ones" do
+			single = proc do |array|
+				s = ScoreSheet.new
+				s.dice.set_dice array
+				s.ones
+			end
+			context "when @dice.dice == [1, 1, 2, 2, 2]" do
+				subject {single.call [1,1,2,2,2]}
+				it {is_expected.to eq 2}
+			end
+		end
 		describe "full_house" do
 			fh = proc do |array|
 				s = ScoreSheet.new
