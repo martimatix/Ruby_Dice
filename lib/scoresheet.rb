@@ -48,7 +48,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	def full_house # @return [Fixnum] the score; 25 if you have a full house and 0 if you don't
 		f_table = freq
 		if (f_table.length == 2 && f_table.has_value?(3)) || f_table.length == 1 then return 25			
-		else; return 
+		else; return 0
 		end
 	end
 
