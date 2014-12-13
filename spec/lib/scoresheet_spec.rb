@@ -7,7 +7,6 @@ describe ScoreSheet do
 		its(:chance) {is_expected.to be >= 5}
 		its(:dice) {is_expected.to be_instance_of Dice}
 		its(:sheet) {is_expected.to be_instance_of Hash}
-		its(:filled?) {is_expected.to be false}
 		its(:yahtzee) {is_expected.to be_zero | eq(50)}
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
 		describe "ones" do
