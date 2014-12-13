@@ -23,4 +23,16 @@ describe ScoreSheet do
 			it {is_expected.to be_include field}
 		end
 	end
+	ss = ScoreSheet.new
+	it "calculates Full House correctly" do
+		ss.dice.set_dice([1,1,2,2,2])
+		expect(ss.full_house).to eq(25)
+		ss.dice.set_dice([2,2,2,2,2])
+		expect(ss.full_house).to eq(25)
+		ss.dice.set_dice([1,1,2,2,5])
+		expect(ss.full_house).to eq(0)
+	end
 end
+
+
+
