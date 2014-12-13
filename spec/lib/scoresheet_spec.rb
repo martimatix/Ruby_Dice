@@ -21,17 +21,6 @@ describe ScoreSheet do
 				it {is_expected.to eq 2}
 			end
 		end
-		describe "ones" do
-			single = proc do |array|
-				s = ScoreSheet.new
-				s.dice.set_dice array
-				s.ones
-			end
-			context "when @dice.dice == [1, 1, 2, 2, 2]" do
-				subject {single.call [1,1,2,2,2]}
-				it {is_expected.to eq 2}
-			end
-		end
 		describe "full_house" do
 			fh = proc do |array|
 				s = ScoreSheet.new
@@ -83,6 +72,14 @@ describe ScoreSheet do
 			context "when @dice.dice == [1, 1, 2, 2, 2]" do
 				subject {fok.call [1, 1, 2, 2, 2]}
 				it {is_expected.to be_zero}
+			end
+		end
+		describe "Enter Score" do
+			it "correctly enters scores" do
+				ss = ScoreSheet.new
+				ss.dice.set([1,1,2,2,2])
+				ss.enter_score(:full_house)
+				expect(ss.sheet[:full_house]).to eq([25, true])
 			end
 		end
 		i = 1
