@@ -1,5 +1,5 @@
 class Dice  # Class for working with the 5 dice at the same time
-	attr_accessor :dice # @return [Array] the dice.
+	attr_reader :dice # @return [Array] the dice.
 	def initialize; @dice = Array.new(5) {new_dice}; end
 	def roll(i); @dice[i] = new_dice; end # Rolls the die at the index i
 	def roll_all # Rolls all the dice
@@ -10,11 +10,9 @@ class Dice  # Class for working with the 5 dice at the same time
 		puts "\n"
 	end
 	# setting dice for values for testing
-	def set_dice(values)
+	def dice=(values)
 		# Check that values is an array of length 5 and that each value is a dice value
-		if values.length == 5 && values.all? {|val| (val.is_a? Integer) && (val.between? 1,6)}
-			@dice = values
-		end
+		@dice = values if values.length == 5 && values.all? {|val| (val.is_a? Integer) && (val.between? 1,6)}
 	end
 	private 
 	def new_dice; return (1..6).to_a.sample; end # @return [Fixnum] a random number between 1 and 6, inclusive
