@@ -11,7 +11,7 @@ class ScoreSheet
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
 	
-	def enter_score(field); @sheet[field] = send field, @dice.dice; end # @param field [Symbol] is a score field an the yahtzee scoresheet
+	def enter_score(field); @sheet[field] = (send field), true; end # @param field [Symbol] is a score field an the yahtzee scoresheet
 	
 	def filled?; @sheet.each{|x| x[1]}.all? {|x| x == true}; end # @return [Boolean] true if the score sheet is completely filled and no legal moves remain
 	

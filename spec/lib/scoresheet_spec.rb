@@ -77,8 +77,9 @@ describe ScoreSheet do
 		describe "Enter Score" do
 			it "correctly enters scores" do
 				ss = ScoreSheet.new
-				ss.dice.set([1,1,2,2,2])
+				ss.dice.set_dice([1,1,2,2,2])
 				ss.enter_score(:full_house)
+				p ss.sheet
 				expect(ss.sheet[:full_house]).to eq([25, true])
 			end
 		end
