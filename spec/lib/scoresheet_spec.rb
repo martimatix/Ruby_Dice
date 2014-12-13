@@ -79,7 +79,6 @@ describe ScoreSheet do
 				ss = ScoreSheet.new
 				ss.dice.set_dice([1,1,2,2,2])
 				ss.enter_score(:full_house)
-				p ss.sheet
 				expect(ss.sheet[:full_house]).to eq([25, true])
 			end
 		end
@@ -87,6 +86,16 @@ describe ScoreSheet do
 		for score in ScoreSheet::UpperScores
 			its(score) {is_expected.to be_instance_of Fixnum}
 			i += 1
+		end
+		describe "Filled?" do
+			ss = ScoreSheet.new
+			it "works correctly when not filled" do
+				ss.filled?.should be == false
+			end
+			it "works correctly when filled" do
+				ss.sheet.each {|i| i[1] = true}
+				ss.filled?.should be == true
+			end
 		end
 	end
 end
