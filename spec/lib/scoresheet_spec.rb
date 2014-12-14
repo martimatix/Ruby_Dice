@@ -92,6 +92,15 @@ describe ScoreSheet do
 				it {is_expected.to be_filled}
 			end
 		end
+		describe "raw_upper" do
+			it "correctly calculates the raw upper score total (excludes upper score bonus)" do
+				s = ScoreSheet.new
+				s.dice.dice = [1,1,2,2,2]
+				s.enter_score(:ones)
+				s.enter_score(:twos)
+				expect(s.raw_upper).to eq(8)
+			end
+		end
 	end
 end
 
