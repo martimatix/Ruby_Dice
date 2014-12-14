@@ -6,18 +6,12 @@ class ScoreSheet
 	attr_reader :sheet # @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice # @return [Dice]
 =begin
-Shortcut for dice.dice
-@return [Array<Fixnum>]
-=end
-	def dice2; return @dice.dice; end 
-=begin
 Shortcut for dice.dice=
 @param dice [Array<Fixnum>]
 =end
-	def dice2=(dice); @dice.dice = dice; end
 	def initialize(custom_dice=nil)
 		@sheet, @dice = Hash.new, Dice.new
-		dice2 = custom_dice if custom_dice.is_a? Array
+		@dice.dice = custom_dice if custom_dice.is_a? Array
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
 	
@@ -78,13 +72,13 @@ single_face calculates the score for the upper half fields of the score sheet
 		dice.select{|number| number == value} filters the value
 		reduce(:+) sums the array
 =end
-		 v = dice2.select{|number| number == value}.reduce(:+)
+		 v = @dice.dice.select{|number| number == value}.reduce(:+)
 		 unless v.nil?; return v
 		 else; return 0
 		 end
 	end
 	def freq # @return [Hash] a frequency hash table
-		return dice2.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+		return @dice.dice.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
 		#=> {1=>3, 2=>1, 3=>1}
 	end
 
@@ -110,8 +104,8 @@ single_face calculates the score for the upper half fields of the score sheet
 		#each_cons is generating every possible value for a straight of length limit
 		(1..6).each_cons(limit).each do |i|
 			# Asking if i is a subset of dice
-			if (i - dice2).empty?
-				return score if (i - dice2)
+			if (i - @dice.dice).empty?
+				return score if (i - @dice.dice)
 			end
 		end
 		return 0
