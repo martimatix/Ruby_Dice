@@ -19,7 +19,7 @@ Shortcut for dice.values=
 	
 	def filled?; @sheet.collect{|k,v| v[1]}.reduce{|r,e| r && e}; end # @return [Boolean] true if the score sheet is completely filled and no legal moves remain
 	
-	def raw_upper; @sheet.select{|x| UpperScores.include? x }.each{|x| x[1]}.reduce :+; end # @return [Fixnum]
+	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Fixnum]
 =begin
 Checks if upper score bonus can be awarded
 @return [Fixnum]
@@ -31,7 +31,7 @@ Checks if upper score bonus can be awarded
 	end
 	
 	def upper_score_total; raw_upper + bonus; end # @return [Fixnum] The total score of the upper part of the ScoreSheet, including bonuses
-	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.each{|x| x[1]}.reduce(:+); end # @return [Fixnum] The total score of the lower part of the ScoreSheet
+	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Fixnum] The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end # @return [Fixnum]
 		
 	def ones; 	return single_face 1	;end # @return [Fixnum] The total of all the ones
