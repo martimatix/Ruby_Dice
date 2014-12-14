@@ -86,7 +86,7 @@ describe ScoreSheet do
 			context "when filled" do
 				subject do
 					s = ScoreSheet.new
-					s.sheet.each {|key| key = [s.dice.cice, true]}
+					s.sheet.each {|key, val| s.sheet[key][1] = true}
 					s
 				end
 				it {is_expected.to be_filled}
