@@ -90,7 +90,7 @@ single_face calculates the score for the upper half fields of the score sheet
 =end
 	def of_a_kind(limit)
 		model_value, mode_f = mode
-		if mode_f >= limit then return dice2.reduce :+
+		if mode_f >= limit then return @dice.dice.reduce :+
 		else; return 0
 		end
 	end
