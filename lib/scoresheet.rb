@@ -60,10 +60,16 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	def large_straight; straight 5, 40; end # @return [Fixnum] 
 
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] The sum of all the dice
-
+=begin
+@todo Make chart
+Outputs scoresheet
+=end
 	def to_s
-		"hello world!"
-		# Outputs score sheet
+		<<Output
+==========ScoreSheet=========
+==Upper Scores=Lower Scores==
+Ones: #{@sheet[:ones]} - Three of a Kind: #{@sheet[:three_of_a_kind]}
+Output
 	end
 	
 	private # Helper methods for score calculation methods
