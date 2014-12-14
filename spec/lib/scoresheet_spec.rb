@@ -10,7 +10,7 @@ describe ScoreSheet do
 		its(:yahtzee) {is_expected.to be_zero | eq(50)}
 		its(:small_straight) {is_expected.to eq(30) | be_zero}
 		describe "ones" do
-			context "when dice2 == [1, 1, 2, 2, 2]" do
+			context "when @dice.dice == [1, 1, 2, 2, 2]" do
 				subject {ScoreSheet.new([1,1,2,2,2]).ones}
 				it {is_expected.to eq 2}
 			end
@@ -86,7 +86,7 @@ describe ScoreSheet do
 			context "when filled" do
 				subject do
 					s = ScoreSheet.new
-					s.sheet.each {|key| key = [s.dice2, true]}
+					s.sheet.each {|key| key = [s.dice.cice, true]}
 					s
 				end
 				it {is_expected.to be_filled}
