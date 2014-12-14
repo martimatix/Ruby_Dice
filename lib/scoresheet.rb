@@ -61,14 +61,23 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] The sum of all the dice
 =begin
-@todo Make chart
-Outputs scoresheet
+@todo Finish adding data
+@return [String] scoresheet
 =end
 	def to_s
 		<<Output
-==========ScoreSheet=========
-==Upper Scores=Lower Scores==
-Ones: #{@sheet[:ones]} - Three of a Kind: #{@sheet[:three_of_a_kind]}
+===========ScoreSheet=========
+UPPER SCORE (#{upper_score_total})   LOWER SCORE (#{lower_score_total})
+--------------   ----------------
+Ones    #{sheet[:ones]}        Three of a Kind #{sheet[:three]
+Twos    #{sheet[:twos]}        Four of a Kind  -
+Threes  #{sheet[:threes]}      Full House  25
+Fours   #{sheet[:fours]}       Small Straight  30
+Fives   #{sheet[:fives]}       Large Straight  -
+Sixes   #{sheet[:sixes]}       Chance      -
+Bonus   #{sheet[:upper_bonus]} Yahtzee     
+
+Total (#{sheet[:total]})
 Output
 	end
 	
