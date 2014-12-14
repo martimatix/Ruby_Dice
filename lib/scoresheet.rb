@@ -59,7 +59,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	def small_straight; straight 4, 30; end # @return [Fixnum]
 	def large_straight; straight 5, 40; end # @return [Fixnum] 
 
-	def chance; dice2.reduce :+; end # @return [Fixnum] The sum of all the dice
+	def chance; @dice.dice.reduce :+; end # @return [Fixnum] The sum of all the dice
 	
 	private # Helper methods for score calculation methods
 =begin
