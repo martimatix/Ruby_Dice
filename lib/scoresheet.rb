@@ -61,23 +61,23 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] The sum of all the dice
 =begin
-@todo Finish adding data
+@todo Add method to always output two digits
 @return [String] scoresheet
 =end
 	def to_s
 		<<Output
 ===========ScoreSheet=========
-UPPER SCORE (#{upper_score_total})   LOWER SCORE (#{lower_score_total})
---------------   ----------------
-Ones    #{sheet[:ones]}        Three of a Kind #{sheet[:three]
-Twos    #{sheet[:twos]}        Four of a Kind  -
-Threes  #{sheet[:threes]}      Full House  25
-Fours   #{sheet[:fours]}       Small Straight  30
-Fives   #{sheet[:fives]}       Large Straight  -
-Sixes   #{sheet[:sixes]}       Chance      -
-Bonus   #{sheet[:upper_bonus]} Yahtzee     
+UPPER SCORE (#{upper_score_total})	LOWER SCORE (#{lower_score_total})
+----------------	----------------
+Ones	#{sheet[:ones]}		Three of a Kind	#{sheet[:three_of_a_kind]}
+Twos	#{sheet[:twos]}		Four of a Kind	#{sheet[:four_of_a_kind]}
+Threes	#{sheet[:threes]}	Full House	#{sheet[:four_of_a_kind]
+Fours	#{sheet[:fours]}  	Small Straight	#{sheet[:small_straight]}
+Fives	#{sheet[:fives]}       	Large Straight	#{sheet[:large_straight]}
+Sixes	#{sheet[:sixes]}       	Chance		#{sheet[:chance]}
+Bonus	#{sheet[:upper_bonus]} 	Yahtzee		#{sheet[:yahtzee]}     
 
-Total (#{sheet[:total]})
+Total	(#{sheet[:total]})
 Output
 	end
 	
@@ -130,11 +130,4 @@ single_face calculates the score for the upper half fields of the score sheet
 		end
 		return 0
 	end
-	public
-=begin
-@todo Add definition
-@return [Hash] 
-=end
-	def display; end
-		
 end
