@@ -31,12 +31,15 @@ Shortcut for dice.values=
 	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Fixnum]
 
 	# @!group Total	
+
 		def upper_score_total; raw_upper + bonus; end # @return [Fixnum] The total score of the upper part of the ScoreSheet, including bonuses
 		def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Integer] The total score of the lower part of the ScoreSheet
 		def total; lower_score_total + upper_score_total; end # @return [Integer] The grand total
+
 	# @!endgroup
 
-	# @!group Top Row		
+	# @!group Top Row	
+
 		def ones; 	return single_face 1	;end # @return [Fixnum] the total of all the ones
 		def twos;	return single_face 2	;end # @return [Fixnum] the total of all the twos
 		def threes;	return single_face 3	;end # @return [Fixnum] the total of all the threes
@@ -53,13 +56,27 @@ Checks if upper score bonus can be awarded
 			else; return 0
 			end
 		end
+
 	# @!endgroup
 
 	# @!group Of a Kind
-		def three_of_a_kind; of_a_kind 3; end # @return [Fixnum] Checks to see if you have 3 of the same dice
-		def four_of_a_kind; of_a_kind 4; end # @return [Fixnum] Checks to see if you have 4 of the same dice
+
+=begin
+@note Checks to see if you have 3 of the same dice
+@return [Fixnum] the sum of your dice if you have a a three of a kind
+@return [Fixnum] 0 if you do not have a three of a kind
+=end
+		def three_of_a_kind; of_a_kind 3; end
+
+=begin
+@note Checks to see if you have 4 of the same dice
+@return [Fixnum] the sum of @dice.dice if you have a 4 of a kind
+@return [Fixnum] 0 if you do not have a 4 of a kind
+=end
+		def four_of_a_kind; of_a_kind 4; end 
 
 		def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
+
 	# @!endgroup
 =begin
 Checks to see if you have 3 of one kind of dice and 2 of another
