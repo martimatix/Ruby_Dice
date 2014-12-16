@@ -61,6 +61,7 @@ Checks if upper score bonus can be awarded
 
 # @!group Of a Kind
 
+	def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
 =begin
 @note Checks to see if you have 3 of the same dice
 @return [Fixnum] the sum of your dice if you have a a three of a kind
@@ -75,8 +76,6 @@ Checks if upper score bonus can be awarded
 =end
 	def four_of_a_kind; of_a_kind 4; end 
 
-	def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
-
 # @!endgroup
 
 =begin
@@ -90,11 +89,13 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		end
 	end
 
-	# @!group Straight
-		def small_straight; straight 4, 30; end # @return [Fixnum]
-		def large_straight; straight 5, 40; end # @return [Fixnum] 
-		def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
-	# @!endgroup
+# @!group Straight
+
+	def small_straight; straight 4, 30; end # @return [Fixnum]
+	def large_straight; straight 5, 40; end # @return [Fixnum] 
+	def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
+
+# @!endgroup
 
 =begin
 Displays scoresheet
