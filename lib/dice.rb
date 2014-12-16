@@ -7,11 +7,11 @@ class Dice  # Class for working with the 5 dice at the same time
 # @!group Roll Methods
 
 =begin
-@param i [Fixnum] index < 4
-@raise [ArgumentError] if i > 4
+@param i [Array<Fixnum>] index < 4
+@raise [ArgumentError] if i element > 4
 @return [void]
 =end
-	def roll(*i)
+	def roll(i)
 		for index in i
 			raise ArgumentError, "Illegal index" if index > 4
 			@values[index] = new_dice
