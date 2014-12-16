@@ -4,12 +4,6 @@ class Dice  # Class for working with the 5 dice at the same time
 
 	def initialize; @values = Array.new(5) {new_dice}; end
 
-=begin
-@param i [Fixnum, Array<Fixnum>] index
-@return [void]
-@raise [StandardError] if index > 4
-=end
-
 # @!group Roll Methods
 
 =begin
@@ -28,9 +22,7 @@ class Dice  # Class for working with the 5 dice at the same time
 @note Rolls all the dice
 @return [void]
 =end
-	def roll_all
-		for die in @values; die == new_dice; end
-	end
+	def roll_all; for die in @values; die = new_dice; end
 
 # @!endgroup
 
@@ -48,7 +40,6 @@ class Dice  # Class for working with the 5 dice at the same time
 @!parse attr_writer :values
 =end
 	def values=(values)
-		# 
 		if values.length == 5 && values.all? {|val| (val.is_a? Integer) && (val.between? 1,6)} then @values = values
 		else; raise ArgumentError, "Array must have 5 Integers that are between 1 and 6"
 		end
