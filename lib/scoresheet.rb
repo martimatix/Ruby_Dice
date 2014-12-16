@@ -76,7 +76,7 @@ Fives	#{sheet[:fives]}       	Large Straight	#{sheet[:large_straight]}
 Sixes	#{sheet[:sixes]}       	Chance		#{sheet[:chance]}
 Bonus	#{sheet[:upper_bonus]} 	Yahtzee		#{sheet[:yahtzee]}     
 
-		Total:	(#{sheet[:total]})
+		Total =	(#{sheet[:total]})
 ================================================
 Output
 	end
