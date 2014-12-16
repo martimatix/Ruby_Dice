@@ -1,4 +1,5 @@
 require "spec_helper"
+require "scoresheet"
 describe ScoreSheet do
 	describe "#new" do
 		subject {ScoreSheet.new}
