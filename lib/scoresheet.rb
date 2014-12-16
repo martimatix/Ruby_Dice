@@ -69,7 +69,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		puts "----------------	----------------"
 		puts "Ones	#{sheet[:ones]}		Three of a Kind	#{sheet[:three_of_a_kind]}"
 		puts "Twos	#{sheet[:twos]}		Four of a Kind	#{sheet[:four_of_a_kind]}"
-		puts "Threes	#{sheet[:threes]}	Full House	#{sheet[:four_of_a_kind]"
+		puts "Threes	#{sheet[:threes]}	Full House	#{sheet[:four_of_a_kind]}"
 		puts "Fours	#{sheet[:fours]}  	Small Straight	#{sheet[:small_straight]}"
 		puts "Fives	#{sheet[:fives]}       	Large Straight	#{sheet[:large_straight]}"
 		puts "Sixes	#{sheet[:sixes]}       	Chance		#{sheet[:chance]}"
