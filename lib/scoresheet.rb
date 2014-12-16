@@ -130,4 +130,20 @@ single_face calculates the score for the upper half fields of the score sheet
 		end
 		return 0
 	end
+	alias display to_s
+	protected
+=begin
+@return [String, Integer]
+@author Zachary Perlmutter <zrp200@gmail.com>
+@param int [Integer] A value from the hash @sheet
+@example Usage
+	double_digit 5 #=> "05"
+	double_digit 10 #=> 10
+=end
+	def double_digit(int)
+		if number < 10 then return "0#{number}"
+		else; return number
+		end
+	end
+	alias dd double_digit
 end
