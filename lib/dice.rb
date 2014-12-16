@@ -8,7 +8,9 @@ class Dice  # Class for working with the 5 dice at the same time
 
 =begin
 @param i [Array<Fixnum>] index < 4
+
 @raise [ArgumentError] if i element > 4
+
 @return [void]
 =end
 	def roll(i)
@@ -20,6 +22,7 @@ class Dice  # Class for working with the 5 dice at the same time
 	
 =begin
 @note Rolls all the dice
+
 @return [void]
 =end
 	def roll_all
