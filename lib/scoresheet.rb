@@ -106,6 +106,7 @@ Displays scoresheet
 		(0..(UpperScores.length - 1)).each do |i|
 			puts format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)
 		end
+		puts "Bonus".ljust(20) + "#{upper_score_bonus}".rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)
 		puts '='*80
 	end
 
