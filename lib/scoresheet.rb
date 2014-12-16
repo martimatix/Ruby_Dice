@@ -63,20 +63,22 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 =begin
 @todo Find better output strategy
 =end
-	def to_s;
-		puts "============= S C O R E  S H E E T ============="
-		puts "UPPER SCORE (#{upper_score_total})	LOWER SCORE (#{lower_score_total})"
-		puts "----------------	----------------"
-		puts "Ones	#{sheet[:ones]}		Three of a Kind	#{sheet[:three_of_a_kind]}"
-		puts "Twos	#{sheet[:twos]}		Four of a Kind	#{sheet[:four_of_a_kind]}"
-		puts "Threes	#{sheet[:threes]}	Full House	#{sheet[:four_of_a_kind]}"
-		puts "Fours	#{sheet[:fours]}  	Small Straight	#{sheet[:small_straight]}"
-		puts "Fives	#{sheet[:fives]}       	Large Straight	#{sheet[:large_straight]}"
-		puts "Sixes	#{sheet[:sixes]}       	Chance		#{sheet[:chance]}"
-		puts "Bonus	#{sheet[:upper_bonus]} 	Yahtzee		#{sheet[:yahtzee]}"
-		puts
-		puts "Total =	(#{sheet[:total]})"
-		puts "================================================"
+	def to_s
+		<<OUTPUT
+============= S C O R E  S H E E T =============
+UPPER SCORE (#{upper_score_total})	LOWER SCORE (#{lower_score_total})
+----------------	----------------
+Ones	#{sheet[:ones]}		Three of a Kind	#{sheet[:three_of_a_kind]}
+Twos	#{sheet[:twos]}		Four of a Kind	#{sheet[:four_of_a_kind]}
+Threes	#{sheet[:threes]}	Full House	#{sheet[:four_of_a_kind]}
+Fours	#{sheet[:fours]}  	Small Straight	#{sheet[:small_straight]}
+Fives	#{sheet[:fives]}       	Large Straight	#{sheet[:large_straight]}
+Sixes	#{sheet[:sixes]}       	Chance		#{sheet[:chance]}
+Bonus	#{sheet[:upper_bonus]} 	Yahtzee		#{sheet[:yahtzee]}
+
+Total =	(#{sheet[:total]})
+================================================
+OUTPUT
 	end
 	
 	private # Helper methods for score calculation methods
