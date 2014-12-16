@@ -51,33 +51,34 @@ Shortcut for dice.values=
 Checks if upper score bonus can be awarded
 @return [Fixnum]
 =end
-		def upper_score_bonus
-			if raw_upper >= 63 then return 35
-			else; return 0
-			end
+	def upper_score_bonus
+		if raw_upper >= 63 then return 35
+		else; return 0
 		end
+	end
 
-	# @!endgroup
+# @!endgroup
 
-	# @!group Of a Kind
+# @!group Of a Kind
 
 =begin
 @note Checks to see if you have 3 of the same dice
 @return [Fixnum] the sum of your dice if you have a a three of a kind
 @return [Fixnum] 0 if you do not have a three of a kind
 =end
-		def three_of_a_kind; of_a_kind 3; end
+	def three_of_a_kind; of_a_kind 3; end
 
 =begin
 @note Checks to see if you have 4 of the same dice
 @return [Fixnum] the sum of @dice.dice if you have a 4 of a kind
 @return [Fixnum] 0 if you do not have a 4 of a kind
 =end
-		def four_of_a_kind; of_a_kind 4; end 
+	def four_of_a_kind; of_a_kind 4; end 
 
-		def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
+	def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
 
-	# @!endgroup
+# @!endgroup
+
 =begin
 Checks to see if you have 3 of one kind of dice and 2 of another
 @return [Fixnum]
