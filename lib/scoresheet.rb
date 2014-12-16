@@ -102,22 +102,13 @@ Displays scoresheet
 @return [void]
 =end
 	def to_s
-		<<OUTPUT
-============= S C O R E  S H E E T =============
-UPPER SCORE (#{upper_score_total})	LOWER SCORE (#{lower_score_total})
-----------------	----------------
-Ones	#{sheet[:ones]}		Three of a Kind	#{sheet[:three_of_a_kind]}
-Twos	#{sheet[:twos]}		Four of a Kind	#{sheet[:four_of_a_kind]}
-Threes	#{sheet[:threes]}	Full House	#{sheet[:four_of_a_kind]}
-Fours	#{sheet[:fours]}  	Small Straight	#{sheet[:small_straight]}
-Fives	#{sheet[:fives]}       	Large Straight	#{sheet[:large_straight]}
-Sixes	#{sheet[:sixes]}       	Chance		#{sheet[:chance]}
-Bonus	#{sheet[:upper_bonus]} 	Yahtzee		#{sheet[:yahtzee]}
-
-Total =	(#{sheet[:total]})
-================================================
-OUTPUT
+		puts " S C O R E  S H E E T ".center(80, '=')
+		(0..(UpperScores.length - 1)).each do |i|
+			puts format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)
+		end
+		puts '='*80
 	end
+
 	
 	private # Helper methods for score calculation methods
 
@@ -170,6 +161,9 @@ reduce(:+) sums the array
 			end
 		end
 		return 0
+	end
+	def format_score(score_region, index)
+		return "#{score_region[index]}".ljust(20) + "#{@sheet[score_region[index]][0]}".rjust(3)
 	end
 	alias display to_s
 end
