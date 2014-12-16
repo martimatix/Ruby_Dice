@@ -64,7 +64,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 @todo Add method to always output two digits
 @return [String] scoresheet
 =end
-	def to_s; <<Output
+	def to_s; return <<OUTPUT
 ============= S C O R E  S H E E T =============
 UPPER SCORE (#{upper_score_total})	LOWER SCORE (#{lower_score_total})
 ----------------	----------------
@@ -78,7 +78,7 @@ Bonus	#{sheet[:upper_bonus]} 	Yahtzee		#{sheet[:yahtzee]}
 
 		Total =	(#{sheet[:total]})
 ================================================
-Output
+OUTPUT
 	end
 	
 	private # Helper methods for score calculation methods
