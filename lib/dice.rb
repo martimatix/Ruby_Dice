@@ -7,11 +7,9 @@ class Dice  # Class for working with the 5 dice at the same time
 # @!group Roll Methods
 
 =begin
-@param i [Array<Fixnum>] index < 4
-
 @raise [ArgumentError] if i element > 4
-
 @return [void]
+@param i [Array<Fixnum>] < 4
 =end
 	def roll(i)
 		for index in i
