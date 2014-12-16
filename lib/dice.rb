@@ -22,7 +22,9 @@ class Dice  # Class for working with the 5 dice at the same time
 @note Rolls all the dice
 @return [void]
 =end
-	def roll_all; for die in @values; die = new_dice; end
+	def roll_all
+		for die in @values; die = new_dice; end
+	end
 
 # @!endgroup
 
