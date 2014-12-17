@@ -102,7 +102,7 @@ Displays scoresheet
 @return [void]
 =end
 	def to_s
-		puts " S C O R E  S H E E T ".center(80, '=')
+		puts %Q( S C O R E  S H E E T ).center 80, '='
 		(0..(UpperScores.length - 1)).each do |i|
 			puts format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)
 		end
