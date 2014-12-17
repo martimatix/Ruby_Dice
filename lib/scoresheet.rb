@@ -36,9 +36,10 @@ Shortcut for dice.values=
 		def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Integer] The total score of the lower part of the ScoreSheet
 		def total; lower_score_total + upper_score_total; end # @return [Integer] The grand total
 
-	# @!endgroup
-
-	# @!group Top Row	
+=begin
+	@!endgroup
+	@!group Top Row
+=end
 
 		def ones; 	return single_face 1	;end # @return [Fixnum] the total of all the ones
 		def twos;	return single_face 2	;end # @return [Fixnum] the total of all the twos
@@ -57,9 +58,10 @@ Checks if upper score bonus can be awarded
 		end
 	end
 
-# @!endgroup
-
-# @!group Of a Kind
+=begin
+	@!endgroup
+	@!group Of a Kind
+=end
 
 	def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
 =begin
@@ -76,13 +78,12 @@ Checks if upper score bonus can be awarded
 =end
 	def four_of_a_kind; of_a_kind 4; end 
 
-# @!endgroup
-
 =begin
+@!endgroup
 Checks to see if you have 3 of one kind of dice and 2 of another
-@return [Fixnum]
+@return [Fixnum] the score; 25 if you have a full house and 0 if you don't
 =end
-	def full_house # @return [Fixnum] the score; 25 if you have a full house and 0 if you don't
+	def full_house
 		f_table = freq
 		if (f_table.length == 2 && f_table.has_value?(3)) || f_table.length == 1 then return 25			
 		else; return 0
@@ -95,9 +96,8 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	def large_straight; straight 5, 40; end # @return [Fixnum] 
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
 
-# @!endgroup
-
 =begin
+@!endgroup
 Displays scoresheet
 @return [void]
 =end
