@@ -31,7 +31,7 @@ class Dice  # Class for working with the 5 dice at the same time
 
 	def to_s # @return [String] instance variable dice
 		@values.each {|i| puts i}
-		puts "\n"
+		puts ?\n
 	end
 	alias display to_s
 
