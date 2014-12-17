@@ -2,7 +2,9 @@ class Dice  # Class for working with the 5 dice at the same time
 
 	attr_reader :values # @return [Array] the dice.
 
-	def initialize; @values = Array.new(5) {new_dice}; end
+	def initialize(values=Array.new(5) {new_dice}) # @param values [Array<Fixnum>] that contains 5 Fixnums
+		@values = values
+	end 
 
 # @!group Roll Methods
 
