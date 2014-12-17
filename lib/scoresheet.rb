@@ -1,23 +1,23 @@
 require_relative "dice.rb"
 class ScoreSheet
-	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes
-	LowerScores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance
+	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes # The fields on the top section of the score sheet
+	LowerScores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance # The fields on the bottom section of the score sheet
 	
 	attr_reader :sheet # @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice # @return [Dice]
 
-=begin
-Shortcut for dice.values=
-@param dice [Array<Fixnum>, void]
-=end
-	def initialize(custom_dice=nil)
-		@sheet, @dice = Hash.new, Dice.new
-		@dice.values = custom_dice if custom_dice.is_a? Array
+	def initialize(custom_dice=nil) # @param custom_dice [Array<Fixnum>, void] custom dice for testing
+		@sheet = Hash.new
+		if custom_dice.is_a? Array
+			@dice = Dice.new(custom_dice)
+		else
+			@dice = Dice.new
+		end
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
 	
 =begin
-@param field [Symbol] is a score field an the yahtzee scoresheet
+@param field [Symbol] is a score field on the yahtzee scoresheet
 @return [void]
 =end
 	def enter_score(field); @sheet[field] = (send field), true; end
@@ -28,29 +28,23 @@ Shortcut for dice.values=
 =end
 	def filled?; @sheet.collect{|k,v| v[1]}.reduce{|r,e| r && e}; end # 
 	
-	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Fixnum]
+	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Fixnum]	
 
-	# @!group Total	
-
-		def upper_score_total; raw_upper + bonus; end # @return [Fixnum] The total score of the upper part of the ScoreSheet, including bonuses
-		def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Integer] The total score of the lower part of the ScoreSheet
-		def total; lower_score_total + upper_score_total; end # @return [Integer] The grand total
-
-=begin
-	@!endgroup
-	@!group Top Row
-=end
-
-		def ones; 	return single_face 1	;end # @return [Fixnum] the total of all the ones
-		def twos;	return single_face 2	;end # @return [Fixnum] the total of all the twos
-		def threes;	return single_face 3	;end # @return [Fixnum] the total of all the threes
-		def fours; 	return single_face 4	;end # @return [Fixnum] the total of all the fours
-		def fives; 	return single_face 5	;end # @return [Fixnum] the total of all the fives
-		def sixes; 	return single_face 6	;end # @return [Fixnum] the total of all the sixes
+	def upper_score_total; raw_upper + bonus; end # @return [Fixnum] The total score of the upper part of the ScoreSheet, including bonuses
+	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Integer] The total score of the lower part of the ScoreSheet
+	def total; lower_score_total + upper_score_total; end # @return [Integer] The grand total
+	
+	def ones; 	return single_face 1	;end # @return [Fixnum] the total of all the ones
+	def twos;	return single_face 2	;end # @return [Fixnum] the total of all the twos
+	def threes;	return single_face 3	;end # @return [Fixnum] the total of all the threes
+	def fours; 	return single_face 4	;end # @return [Fixnum] the total of all the fours
+	def fives; 	return single_face 5	;end # @return [Fixnum] the total of all the fives
+	def sixes; 	return single_face 6	;end # @return [Fixnum] the total of all the sixes
 
 =begin
-Checks if upper score bonus can be awarded
-@return [Fixnum]
+@note Checks if upper score bonus can be awarded
+@return [Fixnum] 0 if raw_upper < 63
+@return [Fixnum] 35 if raw_upper >= 63
 =end
 	def upper_score_bonus
 		if raw_upper >= 63 then return 35
@@ -58,30 +52,25 @@ Checks if upper score bonus can be awarded
 		end
 	end
 
-=begin
-	@!endgroup
-	@!group Of a Kind
-=end
-
 	def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
 =begin
 @note Checks to see if you have 3 of the same dice
-@return [Fixnum] the sum of your dice if you have a a three of a kind
+@return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
 @return [Fixnum] 0 if you do not have a three of a kind
 =end
 	def three_of_a_kind; of_a_kind 3; end
 
 =begin
 @note Checks to see if you have 4 of the same dice
-@return [Fixnum] the sum of @dice.dice if you have a 4 of a kind
-@return [Fixnum] 0 if you do not have a 4 of a kind
+@return [Fixnum] @dice.dice.reduce(:+) if <= 4 indices have the same value
+@return [Fixnum] 0 if >= 4 indices have the same value
 =end
 	def four_of_a_kind; of_a_kind 4; end 
 
 =begin
-@!endgroup
-Checks to see if you have 3 of one kind of dice and 2 of another
-@return [Fixnum] the score; 25 if you have a full house and 0 if you don't
+@note Checks to see if you have 3 of one kind of dice and 2 of another
+@return [Fixnum] 25 if @dice.dice contains 3 of one Fixnum and 2 of another
+@return [Fixnum] 0 if @dice.dice does not contain 3 of one Fixnum and 2 of another
 =end
 	def full_house
 		f_table = freq
@@ -90,15 +79,13 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		end
 	end
 
-# @!group Straight
-
 	def small_straight; straight 4, 30; end # @return [Fixnum]
 	def large_straight; straight 5, 40; end # @return [Fixnum] 
+	
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
 
 =begin
-@!endgroup
-Displays scoresheet
+@note Displays scoresheet
 @return [void]
 =end
 	def to_s
@@ -107,7 +94,7 @@ Displays scoresheet
 			puts format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)
 		end
 		puts "Bonus".ljust(20) + %Q(#{upper_score_bonus}).rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)
-		puts '='*80
+		puts ?= * 80
 	end
 
 	
