@@ -5,15 +5,14 @@ class ScoreSheet
 	
 	attr_reader :sheet # @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice # @return [Dice]
-	attr_reader :num_yahtzees #@return [Fixnum] counter for number of yahtzees scored in the game
+	attr_reader :num_yahtzees # @return [Fixnum] counter for number of yahtzees scored in the game
 
 =begin
 @param custom_dice [Array<Fixnum>] custom dice for testing
 =end
 	def initialize(custom_dice=Array.new(5) {Dice.new.instance_eval "new_dice"})
-		@sheet, @dice = Hash.new, Dice.new(custom_dice)
+		@sheet, @dice, @num_yahtzees = Hash.new, Dice.new(custom_dice), 0
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
-		@num_yahtzees = 0
 	end
 	
 =begin
@@ -96,6 +95,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 =begin
 Displays scoresheet
 @return [String]
+@todo Find a less complex way to create final string
 =end
 	def to_s
 		ss = String.new
@@ -178,7 +178,7 @@ common code for both small straight (SS) and large straight (LS)
 		else; score_label = score_label.capitalize
 		end
 		score_field = @sheet[score_region[index]]
-		return score_label.ljust(20) + "#{score_field[1]? score_field[0]:'-'}".rjust(3)
+		return score_label.ljust(20) + "#{score_field[1]? score_field[0]:?-}".rjust(3)
 	end
 	alias display to_s
 end
