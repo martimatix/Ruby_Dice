@@ -154,7 +154,16 @@ reduce(:+) sums the array
 		return 0
 	end
 	def format_score(score_region, index)
-		return "#{score_region[index]}".ljust(20) + "#{@sheet[score_region[index]][0]}".rjust(3)
+		# Remove underscores with spaces
+		score_label = "#{score_region[index]}".tr("_", " ")
+		# Capitalize each letter of each word only if the score label has two words
+		if score_label.split.length == 2
+			score_label = score_label.split.map(&:capitalize)*' '
+		# Else only capitalize the first letter of the score label
+		else
+			score_label = score_label.capitalize
+		end
+		return score_label.ljust(20) + "#{@sheet[score_region[index]][0]}".rjust(3)
 	end
 	alias display to_s
 end
