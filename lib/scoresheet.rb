@@ -49,26 +49,26 @@ Checks if upper score bonus can be awarded
 
 =begin
 @return [Fixnum]
-@note Checks to see if you have all the of the same dice
+Checks to see if you have all the of the same dice
 =end
 	def yahtzee; of_a_kind 5; end
 
 =begin
-@note Checks to see if you have 3 of the same dice
+Checks to see if you have 3 of the same dice
 @return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
 @return [Fixnum] 0 if you do not have a three of a kind
 =end
 	def three_of_a_kind; of_a_kind 3; end
 
 =begin
-@note Checks to see if you have 4 of the same dice
+Checks to see if you have 4 of the same dice
 @return [Fixnum]  0 if <= 4 indices have the same value
 @return [Fixnum]  @dice.dice.reduce(:+) if >= 4 indices have the same value
 =end
 	def four_of_a_kind; of_a_kind 4; end 
 
 =begin
-@note Checks to see if you have 3 of one kind of dice and 2 of another
+Checks to see if you have 3 of one kind of dice and 2 of another
 @return [Fixnum] 25 if @dice.dice contains 3 of one Fixnum and 2 of another
 @return [Fixnum] 0 if @dice.dice does not contain 3 of one Fixnum and 2 of another
 =end
@@ -140,7 +140,7 @@ Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 fo
 =begin
 @param limit [Fixnum] = 4 for small straight
 @param limit [Fixnum] = 5 for large straight
-@note common code for both small straight (SS) and large straight (LS)
+common code for both small straight (SS) and large straight (LS)
 @param score [Fixnum] is the score to return
 @return [Fixnum] 
 =end
