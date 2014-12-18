@@ -52,7 +52,7 @@ class ScoreSheet
 		end
 	end
 
-	def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
+	def yahtzee; of_a_kind 5; end # @note checks to see if you have all the of the same dice
 =begin
 @note Checks to see if you have 3 of the same dice
 @return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
@@ -90,12 +90,12 @@ class ScoreSheet
 =end
 	def to_s
 		puts %Q( S C O R E  S H E E T ).center 80, ?=
-		puts ''
+		puts
 		(0..(UpperScores.length - 1)).each do |i|
 			puts (format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)).center 68
 		end
 		puts ("Bonus".ljust(20) + %Q(#{upper_score_bonus}).rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)).center 68
-		puts ''
+		puts
 		puts "Total Score: #{total}".center 80
 		puts ?= * 80
 	end
