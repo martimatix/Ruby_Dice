@@ -70,6 +70,33 @@ describe ScoreSheet do
 				it {is_expected.to eq [25, true]}
 			end
 		end
+		describe "yahtzee" do
+			yz = proc {|array| ScoreSheet.new(array).yahtzee}
+			context "when @dice.values == [1, 2, 2, 2, 2]" do
+				subject {yz.call [1,2,2,2,2]}
+				it {is_expected.to be_zero}
+			end
+			context "when @dice.values == [2, 2, 2, 2, 2]" do
+				subject {yz.call [2, 2, 2, 2, 2]}
+				it {is_expected.to eq 50}
+			end
+			context "Additional Yahtzee" do
+				subject do
+					s = ScoreSheet.new([2,2,2,2,2])
+					s.enter_score(:yahtzee)
+					s.enter_score(:yahtzee)
+					s.sheet[:yahtzee][0]
+				end
+				it {is_expected.to eq 150}
+			end
+			# context "Another Additional Yahtzee (Three Yahtzees)" do
+			# 		s = ScoreSheet.new([2,2,2,2,2])
+			# 		s.enter_score(:yahtzee)
+			# 		s.enter_score(:yahtzee)
+			# 		s.enter_score(:yahtzee)
+			# 		expect(s.sheet[:yahtzee][0]).to eq(350)
+			# end
+		end
 		i = 1
 		for score in ScoreSheet::UpperScores
 			its(score) {is_expected.to be_instance_of Fixnum}

@@ -5,6 +5,7 @@ class ScoreSheet
 	
 	attr_reader :sheet # @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice # @return [Dice]
+	attr_reader :num_yahtzees #@return [Fixnum] counter for number of yahtzees scored in the game
 
 	def initialize(custom_dice=nil) # @param custom_dice [Array<Fixnum>, void] custom dice for testing
 		@sheet = Hash.new
@@ -14,6 +15,7 @@ class ScoreSheet
 			@dice = Dice.new
 		end
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
+		@num_yahtzees = 0
 	end
 	
 =begin
@@ -52,7 +54,13 @@ class ScoreSheet
 		end
 	end
 
-	def yahtzee; of_a_kind 5; end # checks to see if you have all the of the same dice
+	def yahtzee
+		if dice.values.all? {|x| x == dice.values[0]}
+			@num_yahtzees += 1
+			return sheet[:yahtzee][0] + 50 * 2 ** (@num_yahtzees - 1)
+		else; return 0
+		end
+	end # checks to see if you have all the of the same dice
 =begin
 @note Checks to see if you have 3 of the same dice
 @return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
