@@ -47,7 +47,12 @@ class ScoreSheet
 		end
 	end
 
-	def yahtzee; of_a_kind 5; end # @note checks to see if you have all the of the same dice
+=begin
+@return [Fixnum]
+@note Checks to see if you have all the of the same dice
+=end
+	def yahtzee; of_a_kind 5; end
+
 =begin
 @note Checks to see if you have 3 of the same dice
 @return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
@@ -57,8 +62,8 @@ class ScoreSheet
 
 =begin
 @note Checks to see if you have 4 of the same dice
-@return [Fixnum] @dice.dice.reduce(:+) if <= 4 indices have the same value
-@return [Fixnum] 0 if >= 4 indices have the same value
+@return [Fixnum]  0 if <= 4 indices have the same value
+@return [Fixnum]  @dice.dice.reduce(:+) if >= 4 indices have the same value
 =end
 	def four_of_a_kind; of_a_kind 4; end 
 
