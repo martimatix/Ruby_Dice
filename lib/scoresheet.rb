@@ -90,7 +90,7 @@ Displays scoresheet
 =end
 	def to_s
 		ss = String.new
-		ss += (%Q( S C O R E  S H E E T ).center(80, ?=) + "\n\n"
+		ss += %Q( S C O R E  S H E E T ).center(80, ?=) + "\n\n"
 		(0..(UpperScores.length - 1)).each do |i|
 			ss += ((format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)).center(68) + ?\n)
 		end
