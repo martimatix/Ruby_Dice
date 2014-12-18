@@ -6,7 +6,7 @@ class ScoreSheet
 	attr_reader :sheet # @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice # @return [Dice]
 
-	def initialize(custom_dice=nil) # @param custom_dice [Array<Fixnum>, void] custom dice for testing
+	def initialize(custom_dice=Array.new(5) {Dice.class_eval "new_dice"} # @param custom_dice [Array<Fixnum>] custom dice for testing
 		@sheet = Hash.new
 		if custom_dice.is_a? Array
 			@dice = Dice.new(custom_dice)
