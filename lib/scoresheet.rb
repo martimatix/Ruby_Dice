@@ -1,7 +1,7 @@
 require_relative "dice.rb"
 class ScoreSheet
 	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes # The fields on the top section of the score sheet
-	LowerScores = :full_house, :small_straight, :large_straight, :three_of_a_kind, :four_of_a_kind, :yahtzee, :chance # The fields on the bottom section of the score sheet
+	LowerScores = :three_of_a_kind, :four_of_a_kind, :full_house, :small_straight, :large_straight, :chance, :yahtzee # The fields on the bottom section of the score sheet
 	
 	attr_reader :sheet # @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice # @return [Dice]
