@@ -30,7 +30,7 @@ class ScoreSheet
 	
 	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Fixnum]	
 
-	def upper_score_total; raw_upper + bonus; end # @return [Fixnum] The total score of the upper part of the ScoreSheet, including bonuses
+	def upper_score_total; raw_upper + upper_score_bonus; end # @return [Fixnum] The total score of the upper part of the ScoreSheet, including bonuses
 	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Integer] The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end # @return [Integer] The grand total
 	
@@ -90,10 +90,14 @@ class ScoreSheet
 =end
 	def to_s
 		puts %Q( S C O R E  S H E E T ).center 80, ?=
+		puts ''
 		(0..(UpperScores.length - 1)).each do |i|
-			puts format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)
+			puts (format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)).center 68
 		end
-		puts "Bonus".ljust(20) + %Q(#{upper_score_bonus}).rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)
+		puts ("Bonus".ljust(20) + %Q(#{upper_score_bonus}).rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)).center 68
+		puts ''
+		puts "Total Score: #{total}".center 80
+		puts ''
 		puts ?= * 80
 	end
 
