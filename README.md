@@ -10,4 +10,4 @@ This project is a personal project for educational purposes and becoming accusto
 ## Other
 https://ruby-dice.herokuapp.com/
 
-http://www.rubydoc.info/find/github?q=Ruby-Dice#
+http://www.rubydoc.info/github/martimatix/Ruby-Dice
