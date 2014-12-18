@@ -7,12 +7,7 @@ class ScoreSheet
 	attr_reader :dice # @return [Dice]
 
 	def initialize(custom_dice=Array.new(5) {Dice.class_eval "new_dice"}) # @param custom_dice [Array<Fixnum>] custom dice for testing
-		@sheet = Hash.new
-		if custom_dice.is_a? Array
-			@dice = Dice.new(custom_dice)
-		else
-			@dice = Dice.new
-		end
+		@sheet, @dice = Hash.new, Dice.new(custom_dice)
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 	end
 	
