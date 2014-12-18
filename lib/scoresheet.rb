@@ -177,7 +177,8 @@ common code for both small straight (SS) and large straight (LS)
 		# Else only capitalize the first letter of the score label
 		else; score_label = score_label.capitalize
 		end
-		return score_label.ljust(20) + "#{@sheet[score_region[index]][0]}".rjust(3)
+		score_field = @sheet[score_region[index]]
+		return score_label.ljust(20) + "#{score_field[1]? score_field[0]:'-'}".rjust(3)
 	end
 	alias display to_s
 end
