@@ -7,13 +7,11 @@ class ScoreSheet
 	attr_reader :dice # @return [Dice]
 	attr_reader :num_yahtzees #@return [Fixnum] counter for number of yahtzees scored in the game
 
-	def initialize(custom_dice=nil) # @param custom_dice [Array<Fixnum>, void] custom dice for testing
-		@sheet = Hash.new
-		if custom_dice.is_a? Array
-			@dice = Dice.new(custom_dice)
-		else
-			@dice = Dice.new
-		end
+=begin
+@param custom_dice [Array<Fixnum>] custom dice for testing
+=end
+	def initialize(custom_dice=Array.new(5) {Dice.new.instance_eval "new_dice"})
+		@sheet, @dice = Hash.new, Dice.new(custom_dice)
 		Array.new(UpperScores).concat(LowerScores).each {|s| @sheet[s] = [0, false]}
 		@num_yahtzees = 0
 	end
@@ -44,7 +42,7 @@ class ScoreSheet
 	def sixes; 	return single_face 6	;end # @return [Fixnum] the total of all the sixes
 
 =begin
-@note Checks if upper score bonus can be awarded
+Checks if upper score bonus can be awarded
 @return [Fixnum] 0 if raw_upper < 63
 @return [Fixnum] 35 if raw_upper >= 63
 =end
@@ -61,22 +59,29 @@ class ScoreSheet
 		else; return 0
 		end
 	end # checks to see if you have all the of the same dice
+
 =begin
-@note Checks to see if you have 3 of the same dice
+@return [Fixnum]
+Checks to see if you have all the of the same dice
+=end
+	def yahtzee; of_a_kind 5; end
+
+=begin
+Checks to see if you have 3 of the same dice
 @return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
 @return [Fixnum] 0 if you do not have a three of a kind
 =end
 	def three_of_a_kind; of_a_kind 3; end
 
 =begin
-@note Checks to see if you have 4 of the same dice
-@return [Fixnum] @dice.dice.reduce(:+) if <= 4 indices have the same value
-@return [Fixnum] 0 if >= 4 indices have the same value
+Checks to see if you have 4 of the same dice
+@return [Fixnum]  0 if <= 4 indices have the same value
+@return [Fixnum]  @dice.dice.reduce(:+) if >= 4 indices have the same value
 =end
 	def four_of_a_kind; of_a_kind 4; end 
 
 =begin
-@note Checks to see if you have 3 of one kind of dice and 2 of another
+Checks to see if you have 3 of one kind of dice and 2 of another
 @return [Fixnum] 25 if @dice.dice contains 3 of one Fixnum and 2 of another
 @return [Fixnum] 0 if @dice.dice does not contain 3 of one Fixnum and 2 of another
 =end
@@ -93,26 +98,27 @@ class ScoreSheet
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
 
 =begin
-@note Displays scoresheet
-@return [void]
+Displays scoresheet
+@return [String]
 =end
 	def to_s
-		puts %Q( S C O R E  S H E E T ).center 80, ?=
-		puts ''
+		ss = String.new
+		ss += %Q( S C O R E  S H E E T ).center(80, ?=) + "\n\n"
 		(0..(UpperScores.length - 1)).each do |i|
-			puts (format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)).center 68
+			ss += ((format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)).center(68) + ?\n)
 		end
-		puts ("Bonus".ljust(20) + %Q(#{upper_score_bonus}).rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)).center 68
-		puts ''
-		puts "Total Score: #{total}".center 80
-		puts ?= * 80
+		ss += ("Bonus".ljust(20) + "#{upper_score_bonus}".rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)).center(68)
+		ss += "\n\n"
+		ss += "Total Score: #{total}".center(80) + ?\n
+		ss += (?= * 80) + ?\n
+		return ss
 	end
 
 	
 	private # Helper methods for score calculation methods
 
 =begin
-single_face calculates the score for the upper half fields of the score sheet
+calculates the score for the upper half fields of the score sheet
 @param value [Integer] indicates which dice face is being counted
 @return [Fixnum]
 dice.select{|number| number == value} filters the value
@@ -134,9 +140,9 @@ reduce(:+) sums the array
 	def mode; return freq.max_by{|k,v| v}; end # @return [Array] a 2 element array with the mode and model frequency
 
 =begin
-	helper method for calculating the scores of three of a kind, four of a kind and yahtzee
-	Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 for yahtzee
-	@return [Fixnum]
+helper method for calculating the scores of three of a kind, four of a kind and yahtzee
+Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 for yahtzee
+@return [Fixnum]
 =end
 	def of_a_kind(limit)
 		model_value, mode_f = mode
@@ -147,7 +153,7 @@ reduce(:+) sums the array
 =begin
 @param limit [Fixnum] = 4 for small straight
 @param limit [Fixnum] = 5 for large straight
-@note common code for both small straight (SS) and large straight (LS)
+common code for both small straight (SS) and large straight (LS)
 @param score [Fixnum] is the score to return
 @return [Fixnum] 
 =end
@@ -161,15 +167,19 @@ reduce(:+) sums the array
 		end
 		return 0
 	end
+=begin
+@return [String] the formatted string
+@param index [Fixnum]
+@param score_region [String, Array<String>]
+=end
 	def format_score(score_region, index)
 		# Remove underscores with spaces
-		score_label = "#{score_region[index]}".tr("_", " ")
+		score_label = "#{score_region[index]}".tr(?_, " ")
 		# Capitalize each letter of each word only if the score label has two words
 		if score_label.split.length == 2
 			score_label = score_label.split.map(&:capitalize)*' '
 		# Else only capitalize the first letter of the score label
-		else
-			score_label = score_label.capitalize
+		else; score_label = score_label.capitalize
 		end
 		return score_label.ljust(20) + "#{@sheet[score_region[index]][0]}".rjust(3)
 	end
