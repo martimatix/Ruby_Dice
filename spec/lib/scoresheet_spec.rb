@@ -1,5 +1,5 @@
-require "spec_helper"
 require "scoresheet"
+
 describe ScoreSheet do
 	describe "#new" do
 		subject {ScoreSheet.new}
@@ -79,23 +79,28 @@ describe ScoreSheet do
 			context "when @dice.values == [2, 2, 2, 2, 2]" do
 				subject {yz.call [2, 2, 2, 2, 2]}
 				it {is_expected.to eq 50}
-			end
-			context "Additional Yahtzee" do
-				subject do
-					s = ScoreSheet.new([2,2,2,2,2])
-					s.enter_score(:yahtzee)
-					s.enter_score(:yahtzee)
-					s.sheet[:yahtzee][0]
+				context "Additional Yahtzee" do
+					subject do
+						s = ScoreSheet.new([2,2,2,2,2])
+						s.enter_score(:yahtzee)
+						s.enter_score(:yahtzee)
+						s.sheet[:yahtzee][0]
+					end
+					it {is_expected.to eq 150}
 				end
-				it {is_expected.to eq 150}
+=begin
+				context "Another Additional Yahtzee (Three Yahtzees)" do
+					subject do
+			 			s = ScoreSheet.new [2,2,2,2,2]
+			 			s.enter_score :yahtzee
+			 			s.enter_score :yahtzee
+			 			s.enter_score:yahtzee
+			 			s.sheet[:yahtzee][0]
+			 		end
+			 		it {is_expected.to eq 350}
+				end
+=end
 			end
-			# context "Another Additional Yahtzee (Three Yahtzees)" do
-			# 		s = ScoreSheet.new([2,2,2,2,2])
-			# 		s.enter_score(:yahtzee)
-			# 		s.enter_score(:yahtzee)
-			# 		s.enter_score(:yahtzee)
-			# 		expect(s.sheet[:yahtzee][0]).to eq(350)
-			# end
 		end
 		i = 1
 		for score in ScoreSheet::UpperScores
