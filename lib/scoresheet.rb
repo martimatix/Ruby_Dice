@@ -126,8 +126,9 @@ reduce(:+) sums the array
 	def mode; return freq.max_by{|k,v| v}; end # @return [Array] a 2 element array with the mode and model frequency
 
 =begin
-	helper method for calculating the scores of three of a kind, four of a kind and yahtzee
-	Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 for yahtzee
+	@note
+		helper method for calculating the scores of three of a kind, four of a kind and yahtzee
+		Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 for yahtzee
 	@return [Fixnum]
 =end
 	def of_a_kind(limit)
@@ -153,15 +154,19 @@ reduce(:+) sums the array
 		end
 		return 0
 	end
+=begin
+@return [String] the formatted string
+@param index [Fixnum]
+@param score_region [String, Array<String>]
+=end
 	def format_score(score_region, index)
 		# Remove underscores with spaces
-		score_label = "#{score_region[index]}".tr("_", " ")
+		score_label = "#{score_region[index]}".tr(?_, " ")
 		# Capitalize each letter of each word only if the score label has two words
 		if score_label.split.length == 2
 			score_label = score_label.split.map(&:capitalize)*' '
 		# Else only capitalize the first letter of the score label
-		else
-			score_label = score_label.capitalize
+		else; score_label = score_label.capitalize
 		end
 		return score_label.ljust(20) + "#{@sheet[score_region[index]][0]}".rjust(3)
 	end
