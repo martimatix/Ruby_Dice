@@ -104,7 +104,7 @@ class ScoreSheet
 	private # Helper methods for score calculation methods
 
 =begin
-single_face calculates the score for the upper half fields of the score sheet
+@note calculates the score for the upper half fields of the score sheet
 @param value [Integer] indicates which dice face is being counted
 @return [Fixnum]
 dice.select{|number| number == value} filters the value
