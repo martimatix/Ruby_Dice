@@ -37,7 +37,7 @@ class ScoreSheet
 	def sixes; 	return single_face 6	;end # @return [Fixnum] the total of all the sixes
 
 =begin
-@note Checks if upper score bonus can be awarded
+Checks if upper score bonus can be awarded
 @return [Fixnum] 0 if raw_upper < 63
 @return [Fixnum] 35 if raw_upper >= 63
 =end
@@ -85,26 +85,27 @@ class ScoreSheet
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
 
 =begin
-@note Displays scoresheet
-@return [void]
+Displays scoresheet
+@return [String]
 =end
 	def to_s
-		puts %Q( S C O R E  S H E E T ).center 80, ?=
-		puts
+		ss = String.new
+		ss += (%Q( S C O R E  S H E E T ).center(80, ?=) + "\n\n"
 		(0..(UpperScores.length - 1)).each do |i|
-			puts (format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)).center 68
+			ss += ((format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)).center(68) + ?\n)
 		end
-		puts ("Bonus".ljust(20) + %Q(#{upper_score_bonus}).rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)).center 68
-		puts
-		puts "Total Score: #{total}".center 80
-		puts ?= * 80
+		ss += ("Bonus".ljust(20) + "#{upper_score_bonus}".rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)).center(68)
+		ss += "\n\n"
+		ss += "Total Score: #{total}".center(80) + ?\n
+		ss += (?= * 80) + ?\n
+		return ss
 	end
 
 	
 	private # Helper methods for score calculation methods
 
 =begin
-@note calculates the score for the upper half fields of the score sheet
+calculates the score for the upper half fields of the score sheet
 @param value [Integer] indicates which dice face is being counted
 @return [Fixnum]
 dice.select{|number| number == value} filters the value
@@ -126,10 +127,9 @@ reduce(:+) sums the array
 	def mode; return freq.max_by{|k,v| v}; end # @return [Array] a 2 element array with the mode and model frequency
 
 =begin
-	@note
-		helper method for calculating the scores of three of a kind, four of a kind and yahtzee
-		Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 for yahtzee
-	@return [Fixnum]
+helper method for calculating the scores of three of a kind, four of a kind and yahtzee
+Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 for yahtzee
+@return [Fixnum]
 =end
 	def of_a_kind(limit)
 		model_value, mode_f = mode
