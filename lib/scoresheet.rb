@@ -51,7 +51,10 @@ Checks if upper score bonus can be awarded
 		else; return 0
 		end
 	end
-
+=begin
+@return [Fixnum]
+Checks to see if you have all the of the same dice
+=end
 	def yahtzee
 		if dice.values.all? {|x| x == dice.values[0]}
 			@num_yahtzees += 1
@@ -59,13 +62,6 @@ Checks if upper score bonus can be awarded
 		else; return 0
 		end
 	end # checks to see if you have all the of the same dice
-
-=begin
-@return [Fixnum]
-Checks to see if you have all the of the same dice
-=end
-	def yahtzee; of_a_kind 5; end
-
 =begin
 Checks to see if you have 3 of the same dice
 @return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
