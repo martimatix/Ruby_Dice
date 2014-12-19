@@ -25,12 +25,12 @@ class ScoreSheet
 @return [Boolean] true if the score sheet is completely filled and no legal moves remain
 @return [Boolean] false if the score sheet is not completely filled and there are still legal moves to be made
 =end
-	def filled?; @sheet.collect{|k,v| v[1]}.reduce{|r,e| r && e}; end # 
+	def filled?; @sheet.collect{|k,v| v[1]}.reduce{|r,e| r && e}; end
 	
-	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Fixnum]	
+	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end	# @return [Fixnum]	
 
-	def upper_score_total; raw_upper + upper_score_bonus; end # @return [Fixnum] the total score of the upper part of the ScoreSheet, including bonuses
-	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Integer] The total score of the lower part of the ScoreSheet
+	def upper_score_total; raw_upper + upper_score_bonus; end	# @return [Fixnum] the total score of the upper part of the ScoreSheet, including bonuses
+	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end	# @return [Integer] The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end # @return [Integer] the grand total
 	
 	def ones; return single_face 1; end 	# @return [Fixnum]
@@ -60,7 +60,7 @@ Checks to see if you have all the of the same dice
 			return sheet[:yahtzee][0] + 50 * 2 ** (@num_yahtzees - 1)
 		else; return 0
 		end
-	end # checks to see if you have all the of the same dice
+	ende
 =begin
 Checks to see if you have 3 of the same dice
 @return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
@@ -120,7 +120,7 @@ dice.select{|number| number == value} filters the value
 reduce(:+) sums the array
 =end
 	def single_face(value)
-		 v = @dice.values.select{|number| number == value}.reduce(:+)
+		 v = @dice.values.select{|number| number == value}.reduce :+
 		 unless v.nil?; return v
 		 else; return 0
 		 end
@@ -140,7 +140,7 @@ Use limit = 3 for three of a kind, limit = 4 for four of a kind and limit = 5 fo
 @return [Fixnum]
 =end
 	def of_a_kind(limit)
-		model_value, mode_f = mode
+		mode_f = mode
 		if mode_f >= limit then return @dice.values.reduce :+
 		else; return 0
 		end
