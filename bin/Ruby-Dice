@@ -6,6 +6,5 @@ Usage: $ Ruby-Dice [--help]
 \u00B7 --help -> Displays this help message
 HELP
 }
-require "dice"
-require "scoresheet"
+require "Ruby-Dice"
 sheet = ScoreSheet.new
