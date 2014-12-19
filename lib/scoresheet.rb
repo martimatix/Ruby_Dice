@@ -93,8 +93,9 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
 
 =begin
+	@todo Find a less complex way to create final string
 	@return [String]
-	@todo Find a less complex way to create finrn [String]al string
+	
 =end
 	def to_s
 		ss = String.new
@@ -102,7 +103,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		(0..(UpperScores.length - 1)).each do |i|
 			ss += ((format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)).center(68) + ?\n)
 		end
-		ss += ("Bonus".ljust(20) + "#{upper_score_bonus}".rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)).center(68)
+		ss += ("Bonus".ljust(20) + upper_score_bonus.to_s.rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)).center(68)
 		ss += "\n\n"
 		ss += "Total Score: #{total}".center(80) + ?\n
 		ss += (?= * 80) + ?\n
