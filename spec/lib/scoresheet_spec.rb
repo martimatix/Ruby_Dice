@@ -97,8 +97,8 @@ describe ScoreSheet do
 			 			s.sheet[:yahtzee][0]
 			 		end
 			 		it {is_expected.to eq 350}
-				end
-=end			end
+=end				end
+			end
 		end
 		i = 1
 		for score in ScoreSheet::UpperScores
