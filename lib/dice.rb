@@ -32,7 +32,7 @@ class Dice  # Class for working with the 5 dice at the same time
 # @!endgroup
 
 	def to_s # @return [String] instance variable dice
-		@values.each {|i| puts i}
+		@values.each {|i| print "#{i}".center(16)}
 		puts ?\n
 	end
 	alias display to_s
