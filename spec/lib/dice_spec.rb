@@ -1,4 +1,3 @@
-require "spec_helper"
 require "dice"
 RSpec.describe Dice do
  	describe "#new" do
