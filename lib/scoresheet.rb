@@ -1,11 +1,11 @@
 require_relative "dice.rb"
 class ScoreSheet
-	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes # The fields on the top section of the score sheet
-	LowerScores = :three_of_a_kind, :four_of_a_kind, :full_house, :small_straight, :large_straight, :chance, :yahtzee # The fields on the bottom section of the score sheet
+	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes	# The fields on the top section of the score sheet
+	LowerScores = :three_of_a_kind, :four_of_a_kind, :full_house, :small_straight, :large_straight, :chance, :yahtzee	# The fields on the bottom section of the score sheet
 	
-	attr_reader :sheet # @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
-	attr_reader :dice # @return [Dice]
-	attr_reader :num_yahtzees # @return [Fixnum] counter for number of yahtzees scored in the game
+	attr_reader :sheet	# @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
+	attr_reader :dice	# @return [Dice]
+	attr_reader :num_yahtzees	# @return [Fixnum] counter for number of yahtzees scored in the game
 
 =begin
 @param custom_dice [Array<Fixnum>] custom dice for testing
@@ -16,7 +16,7 @@ class ScoreSheet
 	end
 	
 =begin
-@param field [Symbol] is a score field on the yahtzee scoresheet
+@param field [Symbol]
 @return [void]
 =end
 	def enter_score(field); @sheet[field] = (send field), true; end
@@ -33,12 +33,12 @@ class ScoreSheet
 	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Integer] The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end # @return [Integer] the grand total
 	
-	def ones; 	return single_face 1	;end # @return [Fixnum] the total of all the ones
-	def twos;	return single_face 2	;end # @return [Fixnum] the total of all the twos
-	def threes;	return single_face 3	;end # @return [Fixnum] the total of all the threes
-	def fours; 	return single_face 4	;end # @return [Fixnum] the total of all the fours
-	def fives; 	return single_face 5	;end # @return [Fixnum] the total of all the fives
-	def sixes; 	return single_face 6	;end # @return [Fixnum] the total of all the sixes
+	def ones; return single_face 1; end 	# @return [Fixnum]
+	def twos; return single_face 2; end	# @return [Fixnum]
+	def threes; return single_face 3; end 	# @return [Fixnum] the total of all the threes
+	def fours; return single_face 4; end 	# @return [Fixnum] the total of all the fours
+	def fives; return single_face 5; end 	# @return [Fixnum] the total of all the fives
+	def sixes; return single_face 6; end 	# @return [Fixnum] the total of all the sixes
 
 =begin
 Checks if upper score bonus can be awarded
@@ -93,7 +93,6 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
 
 =begin
-Displays scoresheet
 @return [String]
 @todo Find a less complex way to create final string
 =end
