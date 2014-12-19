@@ -2,7 +2,7 @@ require_relative "scoresheet.rb"
 
 class Player
 
-	attr_reader :score
+	attr_reader :score # @return [ScoreSheet]
 
 	def initialize; @score = ScoreSheet.new; end
 
