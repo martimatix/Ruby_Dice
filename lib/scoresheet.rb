@@ -166,18 +166,26 @@ common code for both small straight (SS) and large straight (LS)
 @return [String] the formatted string
 @param index [Fixnum]
 @param score_region [String, Array<String>]
+Replace underscores with spaces
 =end
 	def format_score(score_region, index)
-		# Remove underscores with spaces
 		score_label = "#{score_region[index]}".tr(?_, " ")
-		# Capitalize each letter of each word only if the score label has two words
-		if score_label.split.length == 2
-			score_label = score_label.split.map(&:capitalize)*' '
-		# Else only capitalize the first letter of the score label
-		else; score_label = score_label.capitalize
-		end
+		cap_label score_label
 		score_field = @sheet[score_region[index]]
 		return score_label.ljust(20) + "#{score_field[1]? score_field[0]:?-}".rjust(3)
+	end
+
+=begin
+@param score_label [String]
+@return [String]
+Capitalize each letter of each word only if the score label has two words
+Else only capitalize the first letter of the score label
+=end
+	def cap_label(score_label)
+		if score_label.split.length == 2
+			score_label = score_label.split.map(&:capitalize)*' '
+		else; score_label.capitalize!
+		end
 	end
 	alias display to_s
 end
