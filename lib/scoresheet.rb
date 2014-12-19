@@ -29,9 +29,9 @@ class ScoreSheet
 	
 	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Fixnum]	
 
-	def upper_score_total; raw_upper + upper_score_bonus; end # @return [Fixnum] The total score of the upper part of the ScoreSheet, including bonuses
+	def upper_score_total; raw_upper + upper_score_bonus; end # @return [Fixnum] the total score of the upper part of the ScoreSheet, including bonuses
 	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end # @return [Integer] The total score of the lower part of the ScoreSheet
-	def total; lower_score_total + upper_score_total; end # @return [Integer] The grand total
+	def total; lower_score_total + upper_score_total; end # @return [Integer] the grand total
 	
 	def ones; 	return single_face 1	;end # @return [Fixnum] the total of all the ones
 	def twos;	return single_face 2	;end # @return [Fixnum] the total of all the twos
