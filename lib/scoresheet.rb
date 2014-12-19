@@ -60,7 +60,7 @@ Checks to see if you have all the of the same dice
 			return sheet[:yahtzee][0] + 50 * 2 ** (@num_yahtzees - 1)
 		else; return 0
 		end
-	ende
+	end
 =begin
 Checks to see if you have 3 of the same dice
 @return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
