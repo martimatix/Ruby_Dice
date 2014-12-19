@@ -3,11 +3,11 @@ RSpec.describe Dice do
  	describe "#new" do
  		subject {Dice.new}
  		it {is_expected.to be_an_instance_of Dice}
-  		describe "dice" do
+  		describe "values" do
     			subject {Dice.new.values}
     			it {is_expected.to be_an_instance_of Array}
 		end
-		describe "dice=" do
+		describe "values=" do
 			subject do
 				test_dice = Dice.new
 				test_dice.values = [1, 2, 3, 4, 5]
