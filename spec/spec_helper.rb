@@ -1,5 +1,5 @@
-require "rspec"
-autoload :its, "rspec/its"
+autoload :RSpec, "rspec"
+autoload :RSpec, "rspec/its"
 require_relative "CodeClimate.rb"
 autoload :ScoreSheet, "scoresheet"
 autoload :Dice, "dice"
