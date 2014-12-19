@@ -1,5 +1,5 @@
 require_relative "dice.rb"
-class ScoreSheet
+class ScoreSheet # Keeps score throughout the game
 	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes	# The fields on the top section of the score sheet
 	LowerScores = :three_of_a_kind, :four_of_a_kind, :full_house, :small_straight, :large_straight, :chance, :yahtzee	# The fields on the bottom section of the score sheet
 	
@@ -93,8 +93,8 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
 
 =begin
-@return [String]
-@todo Find a less complex way to create final string
+	@return [String]
+	@todo Find a less complex way to create finrn [String]al string
 =end
 	def to_s
 		ss = String.new
