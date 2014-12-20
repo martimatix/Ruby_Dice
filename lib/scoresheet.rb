@@ -103,7 +103,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		(0..(UpperScores.length - 1)).each do |i|
 			ss += print_score_sheet_line(i)
 		end
-		ss += score_sheet_line(justify_score("Bonus", upper_score_bonus.to_s), format_score(LowerScores, LowerScores.length - 1))
+		ss += print_bonus_yahtzee_line
 		ss += "\n\n"
 		ss += "Total Score: #{total}".center(80) + ?\n
 		ss += (?= * 80) + ?\n
@@ -111,7 +111,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	end
 
 	
-	private # Helper methods for score calculation methods
+	private # Helper methods for score calculation and printing
 
 	def score_sheet_line(left_val, right_val); (left_val + "\t\t" + right_val).center(68) + ?\n; end
 
@@ -119,6 +119,12 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		first = format_score(UpperScores, i)
 		second = format_scroe(LowerScores, i)
 		score_sheet_line(first, second)
+	end
+
+	def print_bonus_yahtzee_line
+		bonus_string = justify_score("Bonus", upper_score_bonus.to_s)
+		yahtz_string = format_score(LowerScores, LowerScores.length - 1)
+		score_sheet_line(bonus_string, yahtz_string)
 	end
 
 =begin
