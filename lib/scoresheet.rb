@@ -101,9 +101,9 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		ss = String.new
 		ss += %Q( S C O R E  S H E E T ).center(80, ?=) + "\n\n"
 		(0..(UpperScores.length - 1)).each do |i|
-			ss += ((format_score(UpperScores, i) + "\t\t" + format_score(LowerScores, i)).center(68) + ?\n)
+			ss += print_score_sheet_line(i)
 		end
-		ss += ("Bonus".ljust(20) + upper_score_bonus.to_s.rjust(3) + "\t\t" + format_score(LowerScores, LowerScores.length - 1)).center(68)
+		ss += score_sheet_line(justify_score("Bonus", upper_score_bonus.to_s), format_score(LowerScores, LowerScores.length - 1))
 		ss += "\n\n"
 		ss += "Total Score: #{total}".center(80) + ?\n
 		ss += (?= * 80) + ?\n
@@ -112,6 +112,14 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 
 	
 	private # Helper methods for score calculation methods
+
+	def score_sheet_line(left_val, right_val); (left_val + "\t\t" + right_val).center(68) + ?\n; end
+
+	def print_score_sheet_line(i);
+		first = format_score(UpperScores, i)
+		second = format_scroe(LowerScores, i)
+		score_sheet_line(first, second)
+	end
 
 =begin
 calculates the score for the upper half fields of the score sheet
@@ -174,8 +182,10 @@ Replace underscores with spaces
 		score_label = "#{score_region[index]}".tr(?_, " ")
 		cap_label score_label
 		score_field = @sheet[score_region[index]]
-		return score_label.ljust(20) + "#{score_field[1]? score_field[0]:?-}".rjust(3)
+		return justify_score(score_label, "#{score_field[1]? score_field[0]:?-}")
 	end
+
+	def justify_score(label, score); label.ljust(20) + score.rjust(3); end
 
 =begin
 @param score_label [String]
