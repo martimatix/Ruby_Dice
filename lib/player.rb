@@ -14,9 +14,21 @@ class Player
 =end
 	def take_turn
 		(1..3).each do |i|
-			puts "Your current stats: \n#{@score.dice.to_s}"
-			puts "You have #{3-i} rolls remaining. Select dice to re-roll or select a score field."
+			display_dice(i)
+			puts "Select dice to re-roll or select a score category."
 			input = gets.chomp
 		end
 	end
+
+	def display_dice(i)
+		dd = Array.new
+		dd << ''.center(80,'-') 
+		dd << "Here are you dice. You have have #{3-i} rolls remaining.\n\n"
+		dd << "\tDice\t\tZ\tX\tC\tV\tB"
+		dd << "\tValues\t\t" + score.dice.values.map{|i| i.to_s}.join("\t")
+		dd << ''.center(80,'-')
+		dd.each{|line| puts line}
+	end
+
 end
+ 
