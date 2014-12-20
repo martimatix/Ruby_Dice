@@ -136,7 +136,7 @@ reduce(:+) sums the array
 	def mode; return freq.max_by{|k,v| v}; end # @return [Array] a 2 element array with the mode and modal frequency
 
 =begin
-helper method for calculating the scores of three of a kind, four of a kind and yahtzee
+helper method for calculating the scores of three of a kind and four of a kind
 Use limit = 3 for three of a kind, limit = 4 for four of a kind
 @param limit [Integer]
 @return [Fixnum]
