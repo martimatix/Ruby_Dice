@@ -25,7 +25,7 @@ class Player
 		dd << ''.center(80, ?-) 
 		dd << "Here are you dice. You have have #{3-i} rolls remaining.\n\n"
 		dd << "\tDice\t\tZ\tX\tC\tV\tB"
-		dd << "\tValues\t\t" + score.dice.values.map{|i| i.to_s}.join ?\t
+		dd << "\tValues\t\t" + score.dice.values.map{|i| i.to_s}.join("\t")
 		dd << ''.center(80, ?-)
 		dd.each{|line| puts line}
 	end
