@@ -1,4 +1,5 @@
 require_relative "scoresheet.rb"
+require 'set'
 
 class Player
 	ScoreAbbr = {?1.to_sym => :ones, ?2.to_sym => :twos, ?3.to_sym => :threes, ?4.to_sym => :fours, ?5.to_sym => :fives, 
@@ -13,11 +14,11 @@ class Player
 @return [void]
 =end
 	def take_turn
+		turn_over = false
 		(1..3).each do |i|
 			display_dice(i)
-			puts "Select dice to re-roll or select a score category."
-			input = gets.chomp
-		end
+			turn_over = user_input(i)
+		end unless turn_over
 	end
 
 	def display_dice(i)
@@ -29,6 +30,28 @@ class Player
 		dd << ''.center(80, ?-)
 		dd.each{|line| puts line}
 	end
+
+	def user_input(i)
+		if i < 3
+			puts "Select dice to re-roll or select a score category."
+		else
+			puts "Select a score category."
+		end
+		input = gets.chomp
+		# If user wants to enter score
+		if ScoreAbbr.keys.include?(input)
+			score.enter_score(ScoreAbbr[input])
+			return true
+		# Else if user wants to roll the dice
+		elsif i < 3 && Set.new(input.downcase).subset?(Set.new(["zxcvb".split('')]))
+			# Roll dice - need to write code here
+			return false
+		else
+			puts "Invalid input."
+			user_input
+		end
+	end
+				
 
 end
  
