@@ -15,7 +15,7 @@ describe ScoreSheet do
 				it {is_expected.to eq 30}
 			end
 			context "when @dice.values == [1, 2, 3, 5, 6]" do
-				subject {ScoreSheet.new([1, 2, 3, 5, 6])}
+				subject {ScoreSheet.new([1, 2, 3, 5, 6]).small_straight}
 				it {is_expected.to be_zero}
 			end
 		end
