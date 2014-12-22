@@ -87,16 +87,14 @@ describe ScoreSheet do
 					end
 					it {is_expected.to eq 150}
 				end
-=begin				context "Another Additional Yahtzee (Three Yahtzees)" do
+				context "Another Additional Yahtzee (Three Yahtzees)" do
 					subject do
 			 			s = ScoreSheet.new [2,2,2,2,2]
-			 			s.enter_score :yahtzee
-			 			s.enter_score :yahtzee
-			 			s.enter_score :yahtzee
-			 			s.sheet[:yahtzee][0]
+			 			3.times {s.enter_score :yahtzee}
+			 			s.sheet[:yahtzee].first
 			 		end
 			 		it {is_expected.to eq 350}
-=end				end
+				end
 			end
 		end
 		i = 1
