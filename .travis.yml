@@ -1,8 +1,6 @@
 language: ruby
-rvm: 2.0.0
-install:
-- gem update --system
-- bundle install
+rvm: ruby-head
+install: bundle install
 notifications:
   email:
     recipients:
@@ -11,5 +9,5 @@ notifications:
     on_success: change
     on_failure: change
 script: 
-- bundle exec rspec spec
+- bundle exec rspec
 
