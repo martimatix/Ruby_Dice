@@ -24,12 +24,12 @@ class Player
 
 	def display_dice(i)
 		dd = Array.new
-		dd << String.new.center 80, ?- 
+		dd << String.new.center(80, ?-) 
 		dd << "Here are your dice. You have have #{3-i} #{i==2? "roll":"rolls"} remaining.\n\n"
 		dd << "\tDice\t\tZ\tX\tC\tV\tB"
 		dd << "\tValues\t\t" + score.dice.values.map{|value| value.to_s}.join(?\t)
-		dd << String.new.center 80, ?-
-		dd.each{|line| puts line}
+		dd << String.new.center(80, ?-)
+		dd.each {|line| puts line; sleep(1)}
 	end
 =begin
 @param i [Fixnum] Amount of times rolled
