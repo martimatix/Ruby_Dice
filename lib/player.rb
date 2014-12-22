@@ -25,7 +25,7 @@ class Player
 	def display_dice(i)
 		dd = Array.new
 		dd << ''.center(80, ?-) 
-		dd << "Here are you dice. You have have #{3-i} rolls remaining.\n\n"
+		dd << "Here are your dice. You have have #{3-i} #{i==2? "roll":"rolls"} remaining.\n\n"
 		dd << "\tDice\t\tZ\tX\tC\tV\tB"
 		dd << "\tValues\t\t" + score.dice.values.map{|i| i.to_s}.join("\t")
 		dd << ''.center(80, ?-)
@@ -40,12 +40,12 @@ class Player
 		if i < 3
 			puts "Select dice to re-roll or select a score category."
 		else
-			puts "Select a score category."
+			puts "No rolls remaining. Select a score category."
 		end
 
-		input = gets.chomp
+		input = gets.chomp.downcase
 		input_symbol = input.to_sym
-		input_set = Set.new([input.downcase])
+		user_input_set = Set.new(input.split(''))
 		dice_controls = "zxcvb".split('')
 		set_of_dice_controls = Set.new(dice_controls)
 
@@ -54,11 +54,10 @@ class Player
 			score.enter_score(ScoreAbbr[input_symbol])
 			return true
 		# Else if user wants to roll the dice
-		elsif i < 3 && (input_set.subset? set_of_dice_controls)
-			(0..4).each do |i|
-				dice_control = Set.new([dice_controls[i]])
-				if dice_control.subset? input_set; @score.dice.roll(i); end
-			end
+		elsif i < 3 && (user_input_set.subset? set_of_dice_controls)
+			dice_to_roll = (0..4).to_a.select { |i| input.include? dice_controls[i]}
+			@score.dice.roll(dice_to_roll)
+			puts " Rolling Dice! ".center(80,"* ")
 			return false 
 		else
 			puts "Invalid input."
