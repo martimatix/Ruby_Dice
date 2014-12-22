@@ -31,10 +31,13 @@ class Player
 		dd << ''.center(80, ?-)
 		dd.each{|line| puts line}
 	end
-
-	def user_input(i) # @deprecated gets.chomp can cause unexpected results in some contexts
-		if i < 3
-			puts "Select dice to re-roll or select a score category."
+=begin
+@param i [Fixnum] Amount of times rolled
+@return [Boolean, void]
+@deprecated gets.chomp can cause unexpected results in some contexts
+=end
+	def user_input(i)
+		if i < 3 then puts "Select dice to re-roll or select a score category."
 		else
 			puts "Select a score category."
 		end
