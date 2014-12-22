@@ -37,19 +37,24 @@ class Player
 @deprecated gets.chomp can cause unexpected results in some contexts
 =end
 	def user_input(i)
-		if i < 3 then puts "Select dice to re-roll or select a score category."
+		if i < 3
+			puts "Select dice to re-roll or select a score category."
 		else
 			puts "Select a score category."
 		end
-		input = gets.chomp.to_sym
+
+		input = gets.chomp
+		input_as_symbol = input.to_sym
+		input_as_set = Set.new([input.downcase])
+		set_of_dice_labels = Set.new("zxcvb".split(''))
+
 		# If user wants to enter score
-		if ScoreAbbr.keys.include?(input)
-			score.enter_score(ScoreAbbr[input])
+		if ScoreAbbr.keys.include?(input_as_symbol)
+			score.enter_score(ScoreAbbr[input_as_symbol])
 			return true
-		# # Else if user wants to roll the dice
-		# elsif i < 3 && Set.new(input.downcase).subset?(Set.new(["zxcvb".split('')]))
-		# 	# Roll dice - need to write code here
-		# 	return false
+		# Else if user wants to roll the dice
+		elsif i < 3 && (input_as_set.subset? set_of_dice_labels)
+			return false
 		else
 			puts "Invalid input."
 			user_input(i)
