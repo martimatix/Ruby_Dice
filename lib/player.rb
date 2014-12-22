@@ -32,7 +32,7 @@ class Player
 		dd.each{|line| puts line}
 	end
 
-	def user_input(i)
+	def user_input(i) # @deprecated gets.chomp can cause unexpected results in some contexts
 		if i < 3
 			puts "Select dice to re-roll or select a score category."
 		else
