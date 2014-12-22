@@ -44,17 +44,22 @@ class Player
 		end
 
 		input = gets.chomp
-		input_as_symbol = input.to_sym
-		input_as_set = Set.new([input.downcase])
-		set_of_dice_labels = Set.new("zxcvb".split(''))
+		input_symbol = input.to_sym
+		input_set = Set.new([input.downcase])
+		dice_controls = "zxcvb".split('')
+		set_of_dice_controls = Set.new(dice_controls)
 
 		# If user wants to enter score
-		if ScoreAbbr.keys.include?(input_as_symbol)
-			score.enter_score(ScoreAbbr[input_as_symbol])
+		if ScoreAbbr.keys.include?(input_symbol)
+			score.enter_score(ScoreAbbr[input_symbol])
 			return true
 		# Else if user wants to roll the dice
-		elsif i < 3 && (input_as_set.subset? set_of_dice_labels)
-			return false
+		elsif i < 3 && (input_set.subset? set_of_dice_controls)
+			(0..4).each do |i|
+				dice_control = Set.new([dice_controls[i]])
+				if dice_control.subset? input_set; @score.dice.roll(i); end
+			end
+			return false 
 		else
 			puts "Invalid input."
 			user_input(i)
