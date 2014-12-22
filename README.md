@@ -8,4 +8,4 @@ This project is a personal project for educational purposes and becoming accusto
 [![Build Status](https://travis-ci.org/martimatix/Ruby-Dice.svg)](https://travis-ci.org/martimatix/Ruby-Dice)
 [![Test Coverage](https://codeclimate.com/github/martimatix/Ruby-Dice/badges/coverage.svg)](https://codeclimate.com/github/martimatix/Ruby-Dice)
 ## Docs
-[rubydoc.info](http://www.rubydoc.info/github/martimatix/Ruby-Dice/master)
+* [rubydoc.info](http://www.rubydoc.info/github/martimatix/Ruby-Dice/master)
