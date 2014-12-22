@@ -7,7 +7,18 @@ describe ScoreSheet do
 		its(:chance) {is_expected.to be >= 5}
 		its(:dice) {is_expected.to be_instance_of Dice}
 		its(:sheet) {is_expected.to be_instance_of Hash}
-		its(:small_straight) {is_expected.to eq(30) | be_zero}
+		describe "small_straight" do
+			subject {ScoreSheet.new.small_straight}
+			it {is_expected.to be_an_instance_of Fixnum}
+			context "when @dice.values == [1, 2, 3, 4, 6]" do
+				subject {ScoreSheet.new([1, 2, 3, 4, 6]).small_straight}
+				it {is_expected.to eq 30}
+			end
+			context "when @dice.values == [1, 2, 3, 5, 6]" do
+				subject {ScoreSheet.new([1, 2, 3, 5, 6])}
+				it {is_expected.to be_zero}
+			end
+		end
 		describe "ones" do
 			context "when @dice.values == [1, 1, 2, 2, 2]" do
 				subject {ScoreSheet.new([1,1,2,2,2]).ones}
@@ -117,11 +128,11 @@ describe ScoreSheet do
 			end
 		end
 		describe "raw_upper" do
-			context "when @dice.dice == [1, 1, 2, 2, 2] and :ones, :twos is entered into the sheet" do
+			context "when @dice.values == [1, 1, 2, 2, 2] && :ones, :twos is entered into the sheet" do
 				subject do
 					s = ScoreSheet.new([1,1,2,2,2])
 					s.enter_score(:ones)
-					s.enter_score(:twos)
+					s.enter_score :twos
 					s.raw_upper
 				end
 				it {is_expected.to eq 8}
