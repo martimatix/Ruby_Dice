@@ -1,8 +1,8 @@
 language: ruby
-rvm: ruby-head
-install:
+rvm: 
 - 2.0.0
 - 2.1.5
+install: bundle install
 notifications:
   email:
     recipients:
