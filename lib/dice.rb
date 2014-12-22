@@ -3,6 +3,7 @@ class Dice  # Class for working with the 5 dice at the same time
 	attr_reader :values # @return [Array] the dice.
 
 	def initialize(values=Array.new(5) {new_dice}) # @param values [Array<Fixnum>] that contains 5 Fixnums
+		check_dice values
 		@values = values
 	end 
 
@@ -39,17 +40,23 @@ class Dice  # Class for working with the 5 dice at the same time
 
 =begin
 @param values [Array<Integer>]
-@raise [ArgumentError] if values does not have 5 Integers that are between 1 and 6
+@see (#check_dice)
 @note setting dice for values for testing
-@note checks that values is an Array of 5 elements and that each value is a Fixnum
 @!parse attr_writer :values
 =end
 	def values=(values)
-		if values.length == 5 && values.all? {|val| (val.is_a? Integer) && (val.between? 1,6)} then @values = values
-		else; raise ArgumentError, "Array must have 5 Integers that are between 1 and 6"
-		end
+		check_dice values
+		@values = values
 	end
 
 	private 
 	def new_dice; return (1..6).to_a.sample; end # @return [Fixnum] a random number between 1 and 6, inclusive
+=begin
+@param dice [Array<Fixnum>]
+@return [void]
+@raise [ArgumentError] if dice does not meet expectations
+=end
+	def check_dice(dice)
+		raise(ArgumentError, "Array must have 5 Integers that are between 1 and 6") unless dice.length == 5 && dice.all? {|val| (val.is_a? Fixnum) && (val.between? 1,6)}
+	end
 end
