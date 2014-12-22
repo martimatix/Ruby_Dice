@@ -18,7 +18,8 @@ class Player
 		(1..3).each do |i|
 			display_dice(i)
 			turn_over = user_input(i)
-		end unless turn_over
+			break if turn_over
+		end
 	end
 
 	def display_dice(i)
@@ -37,18 +38,18 @@ class Player
 		else
 			puts "Select a score category."
 		end
-		input = gets.chomp
+		input = gets.chomp.to_sym
 		# If user wants to enter score
 		if ScoreAbbr.keys.include?(input)
 			score.enter_score(ScoreAbbr[input])
 			return true
-		# Else if user wants to roll the dice
-		elsif i < 3 && Set.new(input.downcase).subset?(Set.new(["zxcvb".split('')]))
-			# Roll dice - need to write code here
-			return false
+		# # Else if user wants to roll the dice
+		# elsif i < 3 && Set.new(input.downcase).subset?(Set.new(["zxcvb".split('')]))
+		# 	# Roll dice - need to write code here
+		# 	return false
 		else
 			puts "Invalid input."
-			user_input
+			user_input(i)
 		end
 	end
 				
