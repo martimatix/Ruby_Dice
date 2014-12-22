@@ -156,7 +156,7 @@ Use limit = 3 for three of a kind, limit = 4 for four of a kind
 @return [Fixnum]
 =end
 	def of_a_kind(limit)
-		mode_f = mode
+		modal_value, mode_f = mode
 		if mode_f >= limit then return @dice.values.reduce :+
 		else; return 0
 		end
