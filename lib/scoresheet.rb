@@ -22,8 +22,8 @@ class ScoreSheet # Keeps score throughout the game
 	def enter_score(field); @sheet[field] = (send field), true; end
 
 =begin
-@return [Boolean] true if the score sheet is completely filled and no legal moves remain
-@return [Boolean] false if the score sheet is not completely filled and there are still legal moves to be made
+@return [true] if the score sheet is completely filled and no legal moves remain
+@return [false] if the score sheet is not completely filled and there are still legal moves to be made
 =end
 	def filled?; @sheet.collect{|k,v| v[1]}.reduce{|r,e| r && e}; end
 	
