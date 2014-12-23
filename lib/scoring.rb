@@ -9,7 +9,7 @@ module Scoring # methods for calculating score
 =begin
 Checks to see if you have 4 of the same dice
 @return [Fixnum]  0 if <= 4 indices have the same value
-@return [Fixnum]  @dice.dice.reduce(:+) if >= 4 indices have the same value
+@return [Fixnum]  dice.reduce(:+) if >= 4 indices have the same value
 @see (#three_of_a_kind)
 =end
 	def four_of_a_kind(dice)
@@ -47,7 +47,7 @@ Checks to see if you have 4 of the same dice
 =begin
 @see (#four_of_a_kind)
 Checks to see if you have 3 of the same dice
-@return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
+@return [Fixnum] dice.reduce(:+) if there is <= 3 of the same value
 @return [Fixnum] 0 if you do not have a three of a kind
 =end
 	def three_of_a_kind(dice)
@@ -71,7 +71,8 @@ Checks to see if you have 3 of the same dice
 	def small_straight(dice)
 		straight dice, 4, 30
 	end
-
+	alias SS small_straight
+	
 =begin
 @param dice [Array<Fixnum>] the dice to be tested
 @return [Fixnum] 40 if there are 4 consecutive Fixnums in dice
@@ -81,6 +82,7 @@ Checks to see if you have 3 of the same dice
 	def large_straight(dice)
 		straight dice, 5, 40
 	end
+	alias LS large_straight
 	
 	private # Helper methods for score calculation
 
