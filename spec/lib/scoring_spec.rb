@@ -4,7 +4,6 @@ RSpec.describe Scoring do
 	include Scoring
 	for score in Scoring::UpperScores
 		its(score, Dice.new.values) {is_expected.to be_instance_of Fixnum}
-		i += 1
 	end
 	describe "large_straight" do
 		context "when [1, 2, 3, 4, 5]" do
