@@ -1,7 +1,7 @@
 # Ruby-Dice
-A Yahtzee clone written in `Ruby` that runs in the terminal
+A Yahtzee clone written in Ruby that runs in the terminal
 
-This project is a personal project for educational purposes and becoming accustomed to the `Ruby` programming paradigm. Furthermore, it's to become accustomed to the `Git` workflow. Contributions are most welcome!
+This project is a personal project for educational purposes and becoming accustomed to the Ruby programming paradigm. Furthermore, it's to become accustomed to the Git workflow. Contributions are most welcome!
 ## Badges
 [![Inline docs](http://inch-ci.org/github/martimatix/Ruby-Dice.svg?branch=master)](http://inch-ci.org/github/martimatix/Ruby-Dice)
 [![Code Climate](https://codeclimate.com/github/martimatix/Ruby-Dice/badges/gpa.svg)](https://codeclimate.com/github/martimatix/Ruby-Dice)
