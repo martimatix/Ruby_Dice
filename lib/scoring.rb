@@ -50,16 +50,16 @@ Checks to see if you have 3 of the same dice
 @return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
 @return [Fixnum] 0 if you do not have a three of a kind
 =end
-	def three_of_a_kind
-		of_a_kind 3
+	def three_of_a_kind(dice)
+		of_a_kind dice, 3
 	end
 
 =begin
 @param dice [Array<Fixnum>] the dice to be evaluated
 @return [Fixnum] the sum of all the dice
 =end
-	def chance
-		@dice.values.reduce :+
+	def chance(dice)
+		dice.reduce :+
 	end
 
 =begin
@@ -85,7 +85,7 @@ Checks to see if you have 3 of the same dice
 	private # Helper methods for score calculation
 
 		def single_face(dice, value)
-		 	v = dice.values.select{|number| number == value}.reduce :+
+		 	v = dice.select{|number| number == value}.reduce :+
 		 	unless v.nil?
 		 		return v
 		 	else
@@ -103,7 +103,7 @@ Checks to see if you have 3 of the same dice
 
 		def of_a_kind(dice, limit)
 			if modal_frequency >= limit
-				return dice.values.reduce :+
+				return dice.reduce :+
 			else
 				return 0
 			end
