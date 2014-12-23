@@ -8,5 +8,9 @@ HELP
     exit
   end
 }
-require "Ruby-Dice"
+require_relative "../lib/player"
 user = Player.new
+
+until user.score.filled? do
+	user.take_turn
+end
