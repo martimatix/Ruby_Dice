@@ -29,7 +29,7 @@ class Player
 		dd << "\tDice\t\tZ\tX\tC\tV\tB"
 		dd << "\tValues\t\t" + score.dice.values.map{|value| value.to_s}.join(?\t)
 		dd << String.new.center(80, ?-)
-		dd.each {|line| puts line; sleep(1)}
+		dd.each {|line| puts line; sleep(0.2)}
 	end
 =begin
 @param i [Fixnum] Amount of times rolled
@@ -56,13 +56,13 @@ class Player
 		elsif i < 3 && (user_input.subset? dice_controls)
 			dice_to_roll = (0..4).to_a.select { |index| input.include? dice_controls.to_a[index]}
 			@score.dice.roll(dice_to_roll)
+			sleep 0.5
+			puts " Rolling Dice!\ ".center 80, "* "
 			sleep 1
-			puts "\tRolling Dice!\t".center 80, "* "
-			sleep 2
 			return false 
 		else
 			puts "Invalid input. Please try again."
-			sleep 3
+			sleep 1.5
 			user_input i
 		end
 	end
