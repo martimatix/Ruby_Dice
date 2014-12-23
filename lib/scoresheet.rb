@@ -18,7 +18,9 @@ class ScoreSheet # Keeps score throughout the game
 @param field [Symbol]
 @return [void]
 =end
-	def enter_score(field); @sheet[field] = (send field), true; end
+	def enter_score(field)
+		@sheet[field] = send(field), true
+	end
 
 =begin
 @return [true] if the score sheet is completely filled and no legal moves remain
