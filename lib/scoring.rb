@@ -11,8 +11,8 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 @return [Fixnum] 25 if @dice.dice contains 3 of one Fixnum and 2 of another
 @return [Fixnum] 0 if @dice.dice does not contain 3 of one Fixnum and 2 of another
 =end
-	def full_house
-		f_table = freq
+	def full_house(dice)
+		f_table = freq dice
 		if (f_table.length == 2 && f_table.has_value?(3)) || f_table.length == 1 then return 25			
 		else; return 0
 		end
