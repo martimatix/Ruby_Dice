@@ -1,12 +1,9 @@
 require_relative "dice.rb"
+require_relative "scoring.rb"
 class ScoreSheet # Keeps score throughout the game
-	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes	# The fields on the top section of the score sheet
-	LowerScores = :three_of_a_kind, :four_of_a_kind, :full_house, :small_straight, :large_straight, :chance, :yahtzee	# The fields on the bottom section of the score sheet
-	
 	attr_reader :sheet	# @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice	# @return [Dice]
 	attr_reader :num_yahtzees	# @return [Fixnum] counter for number of yahtzees scored in the game
-
 =begin
 @param custom_dice [Array<Fixnum>] custom dice for testing
 =end
@@ -33,12 +30,7 @@ class ScoreSheet # Keeps score throughout the game
 	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end	# @return [Integer] The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end # @return [Integer] the grand total
 	
-	def ones; return single_face 1; end 	# @return [Fixnum]
-	def twos; return single_face 2; end	# @return [Fixnum]
-	def threes; return single_face 3; end 	# @return [Fixnum] the total of all the threes
-	def fours; return single_face 4; end 	# @return [Fixnum] the total of all the fours
-	def fives; return single_face 5; end 	# @return [Fixnum] the total of all the fives
-	def sixes; return single_face 6; end 	# @return [Fixnum] the total of all the sixes
+
 
 =begin
 Checks if upper score bonus can be awarded
@@ -61,36 +53,6 @@ Checks to see if you have all the of the same dice
 		else; return 0
 		end
 	end
-=begin
-Checks to see if you have 3 of the same dice
-@return [Fixnum] @dice.dice.reduce(:+) if there is <= 3 of the same value
-@return [Fixnum] 0 if you do not have a three of a kind
-=end
-	def three_of_a_kind; of_a_kind 3; end
-
-=begin
-Checks to see if you have 4 of the same dice
-@return [Fixnum]  0 if <= 4 indices have the same value
-@return [Fixnum]  @dice.dice.reduce(:+) if >= 4 indices have the same value
-=end
-	def four_of_a_kind; of_a_kind 4; end 
-
-=begin
-Checks to see if you have 3 of one kind of dice and 2 of another
-@return [Fixnum] 25 if @dice.dice contains 3 of one Fixnum and 2 of another
-@return [Fixnum] 0 if @dice.dice does not contain 3 of one Fixnum and 2 of another
-=end
-	def full_house
-		f_table = freq
-		if (f_table.length == 2 && f_table.has_value?(3)) || f_table.length == 1 then return 25			
-		else; return 0
-		end
-	end
-
-	def small_straight; straight 4, 30; end # @return [Fixnum]
-	def large_straight; straight 5, 40; end # @return [Fixnum] 
-	
-	def chance; @dice.values.reduce :+; end # @return [Fixnum] the sum of all the dice
 
 =begin
 	@todo Find a less complex way to create final string
@@ -111,7 +73,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	end
 
 	
-	private # Helper methods for score calculation and printing
+	private # Helper methods for printing
 
 	def score_sheet_line(left_val, right_val); (left_val + "\t\t" + right_val).center(68) + ?\n; end
 	alias ssl score_sheet_line
@@ -127,56 +89,6 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 		ssl bonus_string, yahtzee_string
 	end
 	alias byl bonus_yahtzee_line
-=begin
-calculates the score for the upper half fields of the score sheet
-@param value [Integer] indicates which dice face is being counted
-@return [Fixnum]
-dice.select{|number| number == value} filters the value
-reduce(:+) sums the array
-=end
-	def single_face(value)
-		 v = @dice.values.select{|number| number == value}.reduce :+
-		 unless v.nil?; return v
-		 else; return 0
-		 end
-	end
-=begin
-@return [Hash] a frequency hash table
-@example
-	freq #=> {1=>3, 2=>1, 3=>1}
-=end
-	def freq; return @dice.values.inject(Hash.new(0)) { |h,v| h[v] += 1; h }; end
-
-	def modal_frequency; return freq.max_by{|k,v| v}[1]; end # @return [Fixnum] modal frequency
-
-=begin
-helper method for calculating the scores of three of a kind and four of a kind
-Use limit = 3 for three of a kind, limit = 4 for four of a kind
-@param limit [Integer]
-@return [Fixnum]
-=end
-	def of_a_kind(limit)
-		if modal_frequency >= limit then return @dice.values.reduce :+
-		else; return 0
-		end
-	end
-=begin
-@param limit [Fixnum] = 4 for small straight
-@param limit [Fixnum] = 5 for large straight
-common code for both small straight (SS) and large straight (LS)
-@param score [Fixnum] is the score to return
-@return [Fixnum] 
-=end
-	def straight(limit, score) 
-		#each_cons is generating every possible value for a straight of length limit
-		(1..6).each_cons(limit).each do |i|
-			# Asking if i is a subset of dice
-			if (i - @dice.values).empty?
-				return score if (i - @dice.values)
-			end
-		end
-		return 0
-	end
 =begin
 @return [String] the formatted string
 @param index [Fixnum]
