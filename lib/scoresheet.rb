@@ -1,6 +1,7 @@
 require_relative "dice.rb"
 require_relative "scoring.rb"
 class ScoreSheet # Keeps score throughout the game
+	include Scoring
 	attr_reader :sheet	# @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice	# @return [Dice]
 	attr_reader :num_yahtzees	# @return [Fixnum] counter for number of yahtzees scored in the game
