@@ -147,7 +147,7 @@ reduce(:+) sums the array
 =end
 	def freq; return @dice.values.inject(Hash.new(0)) { |h,v| h[v] += 1; h }; end
 
-	def mode; return freq.max_by{|k,v| v}; end # @return [Array] a 2 element array with the mode and modal frequency
+	def modal_frequency; return freq.max_by{|k,v| v}[1]; end # @return [Fixnum] modal frequency
 
 =begin
 helper method for calculating the scores of three of a kind and four of a kind
@@ -156,8 +156,7 @@ Use limit = 3 for three of a kind, limit = 4 for four of a kind
 @return [Fixnum]
 =end
 	def of_a_kind(limit)
-		modal_value, mode_f = mode
-		if mode_f >= limit then return @dice.values.reduce :+
+		if modal_frequency >= limit then return @dice.values.reduce :+
 		else; return 0
 		end
 	end
