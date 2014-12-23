@@ -21,7 +21,7 @@ RSpec.describe Scoring do
 			it {is_expected.to eq 15}
 		end
 		context "when [1, 2, 2, 5, 6]" do
-			subject {chance [1, 2, 2, 5, 6}
+			subject {chance [1, 2, 2, 5, 6]}
 			it {is_expected.to eq 16}
 		end
 	end
