@@ -3,14 +3,14 @@ Gem::Specification.new do |gem|
   gem.version = "0.0.0.pre" unless ENV['TRAVIS']
   gem.version = ENV['TRAVIS_TAG'] if ENV['TRAVIS'] # Travis-CI takes your tag and uses it for the version
   gem.version = ENV['TRAVIS_BUILD_ID'] if ENV['TRAVIS'] && ENV["TRAVIS_TAG"] == ""
-  gem.files = Dir.glob "lib/*.rb"
+  gem.files = Dir["lib/*.rb"]
   gem.email = "zrp200@gmail.com", "zenitram.oiram@gmail.com"
   gem.bindir = "bin"
-  gem.extra_rdoc_files = Dir.glob "*.md"
+  gem.extra_rdoc_files = Dir["*.md"]
   gem.summary = "A Yahtzee clone written in Ruby that runs in the terminal"
   gem.description = <<DIS
-This project is a personal project for educational purposes and becoming accustomed to the ruby programming paradigm.
-Furthermore, it's to become accustomed to the git workflow.
+This project is a personal project for educational purposes and becoming accustomed to the Ruby programming paradigm.
+Furthermore, it's to become accustomed to the Git workflow.
 Contributions are most welcome!
 DIS
   gem.executables << "Ruby-Dice"
