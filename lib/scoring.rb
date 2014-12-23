@@ -7,6 +7,18 @@ module Scoring # methods for calculating score
 	LowerScores = :three_of_a_kind, :four_of_a_kind, :full_house, :small_straight, :large_straight, :chance, :yahtzee  # The fields on the bottom section of the score sheet
 
 =begin
+Checks to see if you have 3 of one kind of dice and 2 of another
+@return [Fixnum] 25 if @dice.dice contains 3 of one Fixnum and 2 of another
+@return [Fixnum] 0 if @dice.dice does not contain 3 of one Fixnum and 2 of another
+=end
+	def full_house
+		f_table = freq
+		if (f_table.length == 2 && f_table.has_value?(3)) || f_table.length == 1 then return 25			
+		else; return 0
+		end
+	end
+	
+=begin
 Checks to see if you have 4 of the same dice
 @return [Fixnum]  0 if <= 4 indices have the same value
 @return [Fixnum]  dice.reduce(:+) if >= 4 indices have the same value
