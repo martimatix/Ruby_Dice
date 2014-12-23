@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2014 Mario Martinez, Zachary Perlmutter
+Copyright (c) 2014 Mario Martinez and Zachary Perlmutter
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

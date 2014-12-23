@@ -5,6 +5,8 @@ BEGIN {
 Usage: $ Ruby-Dice [--help]
 \u00B7 --help -> Displays this help message
 HELP
+    exit
+  end
 }
 require "Ruby-Dice"
-sheet = ScoreSheet.new
+user = Player.new

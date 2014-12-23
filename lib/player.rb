@@ -24,47 +24,47 @@ class Player
 
 	def display_dice(i)
 		dd = Array.new
-		dd << ''.center(80, ?-) 
+		dd << String.new.center(80, ?-) 
 		dd << "Here are your dice. You have have #{3-i} #{i==2? "roll":"rolls"} remaining.\n\n"
 		dd << "\tDice\t\tZ\tX\tC\tV\tB"
-		dd << "\tValues\t\t" + score.dice.values.map{|i| i.to_s}.join("\t")
-		dd << ''.center(80, ?-)
-		dd.each{|line| puts line}
+		dd << "\tValues\t\t" + score.dice.values.map{|value| value.to_s}.join(?\t)
+		dd << String.new.center(80, ?-)
+		dd.each {|line| puts line; sleep(1)}
 	end
 =begin
 @param i [Fixnum] Amount of times rolled
-@return [Boolean, void]
+@return [Boolean]
 @deprecated gets.chomp can cause unexpected results in some contexts
+@note Gameplay
 =end
 	def user_input(i)
 		if i < 3
-			puts "Select dice to re-roll or select a score category."
+			print "Select dice to re-roll or select a score category: "
 		else
-			puts "No rolls remaining. Select a score category."
+			print "No rolls remaining. Select a score category: "
 		end
-
 		input = gets.chomp.downcase
 		input_symbol = input.to_sym
-		user_input_set = Set.new(input.split(''))
-		dice_controls = "zxcvb".split('')
-		set_of_dice_controls = Set.new(dice_controls)
+		user_input = Set.new(input.split(''))
+		dice_controls = Set.new("zxcvb".split(''))
 
 		# If user wants to enter score
-		if ScoreAbbr.keys.include?(input_symbol)
-			score.enter_score(ScoreAbbr[input_symbol])
+		if ScoreAbbr.keys.include? input_symbol
+			score.enter_score ScoreAbbr[input_symbol]
 			return true
 		# Else if user wants to roll the dice
-		elsif i < 3 && (user_input_set.subset? set_of_dice_controls)
-			dice_to_roll = (0..4).to_a.select { |i| input.include? dice_controls[i]}
+		elsif i < 3 && (user_input.subset? dice_controls)
+			dice_to_roll = (0..4).to_a.select { |index| input.include? dice_controls.to_a[index]}
 			@score.dice.roll(dice_to_roll)
-			puts " Rolling Dice! ".center(80,"* ")
+			sleep 1
+			puts "\tRolling Dice!\t".center 80, "* "
+			sleep 2
 			return false 
 		else
-			puts "Invalid input."
-			user_input(i)
+			puts "Invalid input. Please try again."
+			sleep 3
+			user_input i
 		end
 	end
-				
-
 end
  

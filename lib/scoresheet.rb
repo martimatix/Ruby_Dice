@@ -204,5 +204,6 @@ Else only capitalize the first letter of the score label
 		else; score_label.capitalize!
 		end
 	end
+public
 	alias display to_s
 end
