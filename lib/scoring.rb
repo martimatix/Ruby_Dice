@@ -116,7 +116,7 @@ Checks to see if you have 3 of the same dice
 		end 
 
 		def of_a_kind(dice, limit)
-			if modal_frequency >= limit
+			if modal_frequency(dice) >= limit
 				return dice.reduce :+
 			else
 				return 0
