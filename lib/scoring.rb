@@ -108,7 +108,7 @@ Checks to see if you have 3 of the same dice
 		end
 
 		def freq(dice)
-			dice.values.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+			dice.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
 		end
 
 		def modal_frequency(dice)

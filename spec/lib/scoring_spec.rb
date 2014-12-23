@@ -57,7 +57,7 @@ RSpec.describe Scoring do
 			it {is_expected.to be_zero}
 		end
 	end
-=begin	describe "full_house" do
+	describe "full_house" do
 		context "when [1, 1, 2, 2, 2]" do
 			subject {full_house [1,1,2,2,2]}
 			it {is_expected.to eq 25}
@@ -70,7 +70,7 @@ RSpec.describe Scoring do
 			subject {full_house [1,1,2,2,5]}
 			it {is_expected.to be_zero}
 		end
-=end	end
+	end
 	describe "four_of_a_kind" do
 		context "when [1, 2, 2, 2, 2]" do
 			subject {four_of_a_kind [1,2,2,2,2]}
