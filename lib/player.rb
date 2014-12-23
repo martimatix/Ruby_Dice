@@ -51,6 +51,9 @@ class Player
 		# If user wants to enter score
 		if ScoreAbbr.keys.include? input_symbol
 			score.enter_score ScoreAbbr[input_symbol]
+			puts score
+			@score.dice.roll_all
+			sleep 2
 			return true
 		# Else if user wants to roll the dice
 		elsif i < 3 && (user_input.subset? dice_controls)
