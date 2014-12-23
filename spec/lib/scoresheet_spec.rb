@@ -45,11 +45,6 @@ describe ScoreSheet do
 				end
 			end
 		end
-		i = 1
-		for score in Scoring::UpperScores
-			its(score) {is_expected.to be_instance_of Fixnum}
-			i += 1
-		end
 		describe "filled?" do
 			context "when not filled" do
 				subject {ScoreSheet.new}
