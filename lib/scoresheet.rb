@@ -24,11 +24,13 @@ class ScoreSheet # Keeps score throughout the game
 @return [void]
 =end
 	def enter_score(field)
-		if field == :yahtzee
+		if field == :yahtzee && ((available :yahtzee) || @num_yahtzees > 0)
 			@sheet[field] = yahtzee, true
-		else
+		elsif available field			
 			calculator = Calculator.new
 			@sheet[field] = Calculator.send(field, @dice.values), true
+		else
+			raise "Score already entered."
 		end
 	end
 
@@ -87,7 +89,9 @@ Checks to see if you have all the of the same dice
 	end
 
 	
-	private # Helper methods for printing
+	private # Helper methods
+
+	def available (field); @sheet[field][1] == false; end
 
 	def score_sheet_line(left_val, right_val); (left_val + "\t\t" + right_val).center(68) + ?\n; end
 	alias ssl score_sheet_line
