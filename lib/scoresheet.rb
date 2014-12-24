@@ -24,8 +24,12 @@ class ScoreSheet # Keeps score throughout the game
 @return [void]
 =end
 	def enter_score(field)
-		calculator = Calculator.new
-		@sheet[field] = Calculator.send(field, @dice.values), true
+		if field == :yahtzee
+			@sheet[field] = yahtzee, true
+		else
+			calculator = Calculator.new
+			@sheet[field] = Calculator.send(field, @dice.values), true
+		end
 	end
 
 =begin
