@@ -1,5 +1,10 @@
 require_relative "dice.rb"
 require_relative "scoring.rb"
+
+class Calculator
+	extend Scoring
+end
+
 class ScoreSheet # Keeps score throughout the game
 	
 	include Scoring
@@ -19,7 +24,8 @@ class ScoreSheet # Keeps score throughout the game
 @return [void]
 =end
 	def enter_score(field)
-		@sheet[field] = send(field), true
+		calculator = Calculator.new
+		@sheet[field] = Calculator.send(field, @dice.values), true
 	end
 
 =begin
