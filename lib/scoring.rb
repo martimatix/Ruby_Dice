@@ -1,6 +1,6 @@
 require_relative "dice.rb"
 
-module Scoring # methods for calculating score
+class Scoring # methods for calculating score
 
 	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes	# The fields on the top section of the score sheet
 	
