@@ -1,12 +1,8 @@
 require_relative "dice.rb"
 require_relative "scoring.rb"
 
-class Calculator
-	extend Scoring
-end
-
 class ScoreSheet # Keeps score throughout the game
-	
+	extend Scoring
 	include Scoring
 	attr_reader :sheet	# @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice	# @return [Dice]
@@ -22,15 +18,15 @@ class ScoreSheet # Keeps score throughout the game
 =begin
 @param field [Symbol]
 @return [void]
+@raise ArgumentError
 =end
 	def enter_score(field)
 		if field == :yahtzee && ((available :yahtzee) || @num_yahtzees > 0)
 			@sheet[field] = yahtzee, true
 		elsif available field			
-			calculator = Calculator.new
-			@sheet[field] = Calculator.send(field, @dice.values), true
+			@sheet[field] = send(field, @dice.values), true
 		else
-			raise "Score already entered."
+			raise ArgumentError, "Score already entered."
 		end
 	end
 
