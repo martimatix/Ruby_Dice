@@ -14,8 +14,8 @@ class Dice  # Class for working with the 5 dice at the same time
 @return [void]
 @param i [Array<Fixnum>] < 4
 =end
-	def roll(i)
-		for index in i
+	def roll(dice_to_roll)
+		for index in dice_to_roll
 			raise ArgumentError, "Illegal index" if index > 4
 			@values[index] = new_dice
 		end
@@ -26,15 +26,12 @@ class Dice  # Class for working with the 5 dice at the same time
 
 @return [void]
 =end
-	def roll_all
-		for die in @values; die = new_dice; end
-	end
+	def roll_all; initialize; end
 
 # @!endgroup
 
 	def to_s # @return [String] instance variable dice
-		@values.each {|i| print "#{i}".center(16)}
-		puts ?\n
+		print @values
 	end
 	alias display to_s
 
