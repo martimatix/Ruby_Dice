@@ -2,8 +2,13 @@ require_relative "dice.rb"
 require_relative "scoring.rb"
 
 class ScoreSheet # Keeps score throughout the game
-	extend Scoring
+	# extend Scoring
 	include Scoring
+
+	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes	# The fields on the top section of the score sheet
+	
+	LowerScores = :three_of_a_kind, :four_of_a_kind, :full_house, :small_straight, :large_straight, :chance, :yahtzee  # The fields on the bottom section of the score sheet
+
 	attr_reader :sheet	# @return [Hash] table of two element arrays where the first value is the score and the second is whether the field has been played
 	attr_reader :dice	# @return [Dice]
 	attr_reader :num_yahtzees	# @return [Fixnum] counter for number of yahtzees scored in the game
@@ -20,15 +25,13 @@ class ScoreSheet # Keeps score throughout the game
 @return [void]
 @raise ArgumentError
 =end
-	def enter_score(*field)
-		for f in field.to_a
-			if field == :yahtzee && ((available :yahtzee) || @num_yahtzees > 0)
-				@sheet[field] = yahtzee, true
-			elsif available field			
-				@sheet[field] = send(field, @dice.values), true
-			else
-				raise ArgumentError, "Score already entered."
-			end
+	def enter_score(field)
+		if field == :yahtzee && ((available :yahtzee) || @num_yahtzees > 0)
+			@sheet[field] = yahtzee, true
+		elsif available field			
+			@sheet[field] = send(field, @dice.values), true
+		else
+			raise "Score already entered."
 		end
 	end
 
