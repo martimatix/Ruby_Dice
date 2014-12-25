@@ -21,7 +21,7 @@ class ScoreSheet # Keeps score throughout the game
 @raise ArgumentError
 =end
 	def enter_score(*field)
-		for f in field
+		for f in field.to_a
 			if field == :yahtzee && ((available :yahtzee) || @num_yahtzees > 0)
 				@sheet[field] = yahtzee, true
 			elsif available field			
