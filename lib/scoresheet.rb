@@ -20,13 +20,15 @@ class ScoreSheet # Keeps score throughout the game
 @return [void]
 @raise ArgumentError
 =end
-	def enter_score(field)
-		if field == :yahtzee && ((available :yahtzee) || @num_yahtzees > 0)
-			@sheet[field] = yahtzee, true
-		elsif available field			
-			@sheet[field] = send(field, @dice.values), true
-		else
-			raise ArgumentError, "Score already entered."
+	def enter_score(*field)
+		for f in field
+			if field == :yahtzee && ((available :yahtzee) || @num_yahtzees > 0)
+				@sheet[field] = yahtzee, true
+			elsif available field			
+				@sheet[field] = send(field, @dice.values), true
+			else
+				raise ArgumentError, "Score already entered."
+			end
 		end
 	end
 
@@ -38,7 +40,9 @@ class ScoreSheet # Keeps score throughout the game
 	
 	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end	# @return [Fixnum]	
 
-	def upper_score_total; raw_upper + upper_score_bonus; end	# @return [Fixnum] the total score of the upper part of the ScoreSheet, including bonuses
+	def upper_score_total	# @return [Fixnum] the total score of the upper part of the ScoreSheet, including bonuses
+		raw_upper + upper_score_bonus
+	end
 	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end	# @return [Integer] The total score of the lower part of the ScoreSheet
 	def total; lower_score_total + upper_score_total; end # @return [Integer] the grand total
 	
