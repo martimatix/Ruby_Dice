@@ -2,7 +2,7 @@
 BEGIN {
   if ARGV.include? "-h"
     puts <<HELP
-Usage: $ Ruby-Dice [--help]
+Usage: $ Ruby_Dice [--help]
 \u00B7 --help -> Displays this help message
 
 Gameplay:
@@ -25,7 +25,7 @@ HELP
   end
 }
 
-require "Ruby-Dice"
+require "Ruby_Dice"
 
 user = Player.new
 
