@@ -8,7 +8,7 @@ RSpec.describe Scoring do
 			it {is_expected.to eq 40}
 		end
 		context "when [1, 2, 4, 5, 6]" do
-			subject {large_straight([1, 2, 4, 5, 6])}
+			subject {LS([1, 2, 4, 5, 6])}
 			it {is_expected.to be_zero}
 		end
 	end
