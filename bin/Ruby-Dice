@@ -4,6 +4,22 @@ BEGIN {
     puts <<HELP
 Usage: $ Ruby-Dice [--help]
 \u00B7 --help -> Displays this help message
+
+Gameplay:
+	Abbreviations:
+	\u00B7 1	->	Ones 
+	\u00B7 2	->	Twos 
+	\u00B7 3	->	Threes
+	\u00B7 4	->	Fours 
+	\u00B7 5	->	Fives 
+	\u00B7 6	->	Sixes 
+	\u00B7 ss	->	Small Straight 
+	\u00B7 ls	->	Large Straight 
+	\u00B7 tok	->	Three Of A Kind 
+	\u00B7 fok	->	Four Of A Kind 
+	\u00B7 fh 	-> 	Full House 
+	\u00B7 y 	->	Yahtzee 
+	\u00B7 ?	->	chance
 HELP
     exit
   end
