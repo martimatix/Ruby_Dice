@@ -2,7 +2,6 @@ require_relative "dice.rb"
 require_relative "scoring.rb"
 
 class ScoreSheet # Keeps score throughout the game
-	# extend Scoring
 	include Scoring
 
 	UpperScores = :ones, :twos, :threes, :fours, :fives, :sixes	# The fields on the top section of the score sheet
@@ -31,7 +30,7 @@ class ScoreSheet # Keeps score throughout the game
 		elsif available field			
 			@sheet[field] = send(field, @dice.values), true
 		else
-			raise "Score already entered."
+			raise ArgumentError, "Score already entered."
 		end
 	end
 
@@ -39,15 +38,23 @@ class ScoreSheet # Keeps score throughout the game
 @return [true] if the score sheet is completely filled and no legal moves remain
 @return [false] if the score sheet is not completely filled and there are still legal moves to be made
 =end
-	def filled?; @sheet.collect{|k,v| v[1]}.reduce{|r,e| r && e}; end
+	def filled?
+		@sheet.collect{|k,v| v[1]}.reduce{|r,e| r && e}
+	end
 	
-	def raw_upper; @sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+; end	# @return [Fixnum]	
+	def raw_upper	# @return [Fixnum]
+		@sheet.select{|x| UpperScores.include? x }.collect{|k,v| v[0]}.reduce :+
+	end	
 
 	def upper_score_total	# @return [Fixnum] the total score of the upper part of the ScoreSheet, including bonuses
 		raw_upper + upper_score_bonus
 	end
-	def lower_score_total; @sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+; end	# @return [Integer] The total score of the lower part of the ScoreSheet
-	def total; lower_score_total + upper_score_total; end # @return [Integer] the grand total
+	def lower_score_total	# @return [Integer] The total score of the lower part of the ScoreSheet
+		@sheet.select{|x| LowerScores.include? x }.collect{|k,v| v[0]}.reduce :+
+	end
+	def total	# @return [Integer] the grand total
+		lower_score_total + upper_score_total
+	end
 	
 
 
@@ -57,8 +64,9 @@ Checks if upper score bonus can be awarded
 @return [Fixnum] 35 if raw_upper >= 63
 =end
 	def upper_score_bonus
-		if raw_upper >= 63 then return 35
-		else; return 0
+		if raw_upper >= 63 then 35
+		else
+			0
 		end
 	end
 =begin
@@ -69,7 +77,8 @@ Checks to see if you have all the of the same dice
 		if dice.values.all? {|x| x == dice.values[0]}
 			@num_yahtzees += 1
 			return sheet[:yahtzee][0] + 50 * 2 ** (@num_yahtzees - 1)
-		else; return 0
+		else
+			return 0
 		end
 	end
 
@@ -81,9 +90,7 @@ Checks to see if you have all the of the same dice
 	def to_s
 		ss = String.new
 		ss += %Q( S C O R E  S H E E T ).center(80, ?=) + "\n\n"
-		(0..(UpperScores.length - 1)).each do |i|
-			ss += print_score_sheet_line(i)
-		end
+		(0..(UpperScores.length - 1)).each { |i| ss += print_score_sheet_line(i) }
 		ss += bonus_yahtzee_line
 		ss += "\n\n"
 		ss += "Total Score: #{total}".center(80) + ?\n
@@ -94,9 +101,13 @@ Checks to see if you have all the of the same dice
 	
 	private # Helper methods
 
-	def available (field); @sheet[field][1] == false; end
+	def available (field)
+		@sheet[field][1] == false
+	end
 
-	def score_sheet_line(left_val, right_val); (left_val + "\t\t" + right_val).center(68) + ?\n; end
+	def score_sheet_line(left_val, right_val)
+		(left_val + "\t\t" + right_val).center(68) + ?\n
+	end
 	alias ssl score_sheet_line
 	
 	def print_score_sheet_line(i);
@@ -123,7 +134,9 @@ Replace underscores with spaces
 		return justify_score(score_label, "#{score_field[1]? score_field[0]:?-}")
 	end
 
-	def justify_score(label, score); label.ljust(20) + score.rjust(3); end
+	def justify_score(label, score)
+		label.ljust(20) + score.rjust(3)
+	end
 
 =begin
 @param score_label [String]
@@ -134,7 +147,8 @@ Else only capitalize the first letter of the score label
 	def cap_label(score_label)
 		if score_label.split.length == 2
 			score_label = score_label.split.map(&:capitalize)*' '
-		else; score_label.capitalize!
+		else
+			score_label.capitalize!
 		end
 	end
 public
