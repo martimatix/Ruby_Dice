@@ -45,7 +45,7 @@ class Player
 		dd << String.new.center(80, ?-)
 		dd.each do |line|
 			puts line
-			sleep(0.2)}
+			sleep(0.2)
 		end
 	end
 =begin
