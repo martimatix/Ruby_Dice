@@ -70,6 +70,10 @@ RSpec.describe Scoring do
 			subject {full_house [1,1,2,2,5]}
 			it {is_expected.to be_zero}
 		end
+		context "when [1, 2, 3, 4, 5]" do
+			subject {full_house [1, 2, 3, 4, 5]}
+			it {is_expected.to be_zero}
+		end
 	end
 	describe "four_of_a_kind" do
 		context "when [1, 2, 2, 2, 2]" do
