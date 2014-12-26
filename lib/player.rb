@@ -3,7 +3,7 @@ require 'set'
 
 class Player
 	
-	ScoreAbbr = {
+	ScoreAbbr = { # Abbreviations used in-game
 		?1.to_sym => :ones,
 		?2.to_sym => :twos,
 		?3.to_sym => :threes,
@@ -43,12 +43,14 @@ class Player
 		dd << "\tDice\t\tZ\tX\tC\tV\tB"
 		dd << "\tValues\t\t" + score.dice.values.map{|value| value.to_s}.join(?\t)
 		dd << String.new.center(80, ?-)
-		dd.each {|line| puts line; sleep(0.2)}
+		dd.each do |line|
+			puts line
+			sleep(0.2)}
+		end
 	end
 =begin
 @param i [Fixnum] Amount of times rolled
 @return [Boolean]
-@deprecated gets.chomp can cause unexpected results in some contexts
 @note Gameplay
 =end
 	def user_input(i)
