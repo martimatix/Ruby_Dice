@@ -47,7 +47,7 @@ class Player
 		dd << String.new.center(80, ?-)
 		dd.each do |line|
 			puts line
-			sleep(0.2)
+			sleep 0.2
 		end
 	end
 =begin
@@ -78,7 +78,7 @@ class Player
 			dice_to_roll = (0..4).to_a.select { |index| input.include? dice_controls.to_a[index]}
 			@score.dice.roll(dice_to_roll)
 			sleep 0.5
-			puts ?\n
+			2.times {puts ?\n}
 			puts " Rolling Dice!\ ".center 80, "* "
 			sleep 1
 			return false 
