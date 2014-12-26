@@ -21,7 +21,9 @@ class Player
 
 	attr_reader :score # @return [ScoreSheet]
 
-	def initialize; @score = ScoreSheet.new; end
+	def initialize
+		@score = ScoreSheet.new
+	end
 
 =begin
 @todo finish method
@@ -30,8 +32,8 @@ class Player
 	def take_turn
 		turn_over = false
 		(1..3).each do |i|
-			display_dice(i)
-			turn_over = user_input(i)
+			display_dice i
+			turn_over = user_input i 
 			break if turn_over
 		end
 	end
@@ -76,12 +78,14 @@ class Player
 			dice_to_roll = (0..4).to_a.select { |index| input.include? dice_controls.to_a[index]}
 			@score.dice.roll(dice_to_roll)
 			sleep 0.5
+			puts ?\n
 			puts " Rolling Dice!\ ".center 80, "* "
 			sleep 1
 			return false 
 		else
 			puts "Invalid input. Please try again."
 			sleep 1.5
+			puts \n
 			user_input i
 		end
 	end
