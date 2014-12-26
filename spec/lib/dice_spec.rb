@@ -3,6 +3,7 @@ RSpec.describe Dice do
  	describe "#new" do
  		subject {Dice.new}
  		it {is_expected.to be_an_instance_of Dice}
+ 		it {is_expected.to respond_to :to_s, :values, :values=, :roll, :roll_all}
   		describe "values" do
     			subject {Dice.new.values}
     			it {is_expected.to be_an_instance_of Array}
