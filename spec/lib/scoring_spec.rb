@@ -4,7 +4,7 @@ RSpec.describe Scoring do
 	include Scoring
 	describe "large_straight" do
 		context "when [1, 2, 3, 4, 5]" do
-			subject {large_straight([1, 2, 3, 4, 5])}
+			subject {LS [1, 2, 3, 4, 5]}
 			it {is_expected.to eq 40}
 		end
 		context "when [1, 2, 4, 5, 6]" do
@@ -29,11 +29,11 @@ RSpec.describe Scoring do
 		subject {small_straight Dice.new.values}
 		it {is_expected.to be_an_instance_of Fixnum}
 		context "when [1, 2, 3, 4, 6]" do
-			subject {small_straight [1, 2, 3, 4, 6]}
+			subject {SS [1, 2, 3, 4, 6]}
 			it {is_expected.to eq 30}
 		end
 		context "when [1, 2, 2, 5, 6]" do
-			subject {small_straight [1, 2, 2, 5, 6]}
+			subject {SS [1, 2, 2, 5, 6]}
 			it {is_expected.to be_zero}
 		end
 	end
