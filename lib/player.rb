@@ -85,7 +85,7 @@ class Player
 		else
 			puts "Invalid input. Please try again."
 			sleep 1.5
-			puts \n
+			puts ?\n
 			user_input i
 		end
 	end
