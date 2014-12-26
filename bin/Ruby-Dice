@@ -24,6 +24,7 @@ HELP
     exit
   end
 }
+
 require "Ruby-Dice"
 
 	user = Player.new
