@@ -1,4 +1,4 @@
-# Ruby-Dice
+# Ruby_Dice
 A Yahtzee clone written in Ruby that runs in the terminal
 
 This project is a personal project for educational purposes and becoming accustomed to the Ruby programming paradigm. Furthermore, it's to become accustomed to the Git workflow. Contributions are most welcome!
