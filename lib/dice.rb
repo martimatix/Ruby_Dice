@@ -27,7 +27,7 @@ class Dice  # Class for working with the 5 dice at the same time
 @return [Dice]
 =end
 	def roll_all
-		new
+		initialize
 	end
 
 # @!endgroup
