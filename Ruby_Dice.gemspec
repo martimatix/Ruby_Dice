@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name = "Ruby_Dice"
-  gem.version = "0.0.1" unless ENV['TRAVIS']
+  gem.version = "1.0.0.pre" unless ENV['TRAVIS']
   gem.version = ENV['TRAVIS_TAG'] if ENV['TRAVIS'] # Travis CI takes your tag and uses it for the version
   gem.version = ENV['TRAVIS_BUILD_ID'] if ENV['TRAVIS'] && ENV["TRAVIS_TAG"] == ""
   gem.files = Dir["lib/*.rb"]
@@ -17,6 +17,7 @@ DIS
   gem.authors = "Zachary Perlmutter", "Mario Martinez"
   gem.add_development_dependency "rspec", ">= 3.1"
   gem.add_development_dependency "rspec-its"
+  gem.homepage = "https://rubygems.org/gems/Ruby_Dice"
   gem.license = "MIT"
-  gem.requirements << "terminal"
+  gem.requirements << "Terminal"
 end

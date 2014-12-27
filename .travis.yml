@@ -12,4 +12,10 @@ notifications:
     on_failure: change
 script: 
 - bundle exec rspec
-
+deploy:
+  provider: rubygems
+  api_key: 8116113f807f1b5e7b855f87c870cdd88045b1e9
+  on:
+    tags: true
+    all_branches: true
+    
