@@ -85,7 +85,6 @@ Checks to see if you have all the of the same dice
 =begin
 	@todo Find a less complex way to create final string
 	@return [String]
-	
 =end
 	def to_s
 		ss = String.new

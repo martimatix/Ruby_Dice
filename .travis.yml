@@ -2,6 +2,7 @@ language: ruby
 rvm: 
 - 2.0.0
 - 2.1.5
+- 1.9.2
 install: bundle install
 notifications:
   email:
@@ -10,12 +11,14 @@ notifications:
       - zenitram.oiram@gmail.com
     on_success: change
     on_failure: change
-script: 
-- bundle exec rspec
+script: bundle exec rspec
 deploy:
   provider: rubygems
   api_key: 8116113f807f1b5e7b855f87c870cdd88045b1e9
   on:
     tags: true
     all_branches: true
-    
+matrix:
+  fast_finish: true
+  allow_failures:
+    - rvm: 1.9.2
