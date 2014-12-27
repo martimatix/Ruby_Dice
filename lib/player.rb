@@ -32,19 +32,25 @@ class Player
 	def take_turn
 		turn_over = false
 		(1..3).each do |i|
-			display_dice i
+			puts display_dice i
 			turn_over = user_input i 
 			break if turn_over
 		end
 	end
 
+=begin
+@param i [Fixnum] times rolled
+@return [String]
+=end
 	def display_dice(i)
 		sleep 0.5
-		puts String.new.center(80, ?-) 
-		puts "Here are your dice. You have have #{3-i} #{i==2? "roll":"rolls"} remaining.\n\n"
-		puts "\tDice\t\tZ\tX\tC\tV\tB"
-		puts "\tValues\t\t" + score.dice.values.map{|value| value.to_s}.join(?\t)
-		puts String.new.center(80, ?-)
+		result = String.new
+		result << String.new.center(80, ?-) + ?\n 
+		result << "Here are your dice. You have have #{3-i} #{i==2? "roll":"rolls"} remaining.\n\n\n"
+		result << "\tDice\t\tZ\tX\tC\tV\tB" + ?\n
+		result << "\tValues\t\t" + score.dice.values.map{|value| value.to_s}.join(?\t) + \n
+		result << String.new.center(80, ?-) + ?\n
+		return result
 	end
 
 =begin
