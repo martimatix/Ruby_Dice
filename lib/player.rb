@@ -48,7 +48,7 @@ class Player
 		result << String.new.center(80, ?-) + ?\n 
 		result << "Here are your dice. You have have #{3-i} #{i==2? "roll":"rolls"} remaining.\n\n\n"
 		result << "\tDice\t\tZ\tX\tC\tV\tB" + ?\n
-		result << "\tValues\t\t" + score.dice.values.map{|value| value.to_s}.join(?\t) + \n
+		result << "\tValues\t\t" + score.dice.values.map{|value| value.to_s}.join(?\t) + ?\n
 		result << String.new.center(80, ?-) + ?\n
 		return result
 	end
