@@ -24,9 +24,11 @@ class Dice  # Class for working with the 5 dice at the same time
 =begin
 @note Rolls all the dice
 
-@return [void]
+@return [Dice]
 =end
-	def roll_all; initialize; end
+	def roll_all
+		new
+	end
 
 # @!endgroup
 
@@ -46,8 +48,12 @@ class Dice  # Class for working with the 5 dice at the same time
 		@values = values
 	end
 
-	private 
-	def new_dice; return (1..6).to_a.sample; end # @return [Fixnum] a random number between 1 and 6, inclusive
+	private
+	
+	def new_dice # @return [Fixnum] a random number between 1 and 6, inclusive
+		(1..6).to_a.sample
+	end
+	
 =begin
 @param dice [Array<Fixnum>]
 @return [void]
