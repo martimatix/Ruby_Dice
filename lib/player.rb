@@ -62,7 +62,7 @@ class Player
 
 		# If user wants to enter score
 		if ScoreAbbr.keys.include? input.to_sym
-			user_enter_score input.to_sym
+			user_enter_score input.to_sym, i
 		# Else if user wants to roll the dice
 		elsif i < 3 && (user_input.subset? dice_controls)
 			user_roll_dice input, dice_controls
@@ -81,12 +81,20 @@ class Player
 		end
 	end
 
-	def user_enter_score input_symbol
-		score.enter_score ScoreAbbr[input_symbol]
+	def user_enter_score input_symbol, i
+		field = ScoreAbbr[input_symbol]
+		@score.enter_score field
 		puts score
 		@score.dice.roll_all
 		sleep 2
 		return true
+	rescue
+		puts "\n"
+		sleep 0.5
+		puts " You have already entered a score for that category. Try again. ".center(80, '!')
+		sleep 1.5
+		puts "\n"
+		user_input i
 	end
 
 	def user_roll_dice input, dice_controls
