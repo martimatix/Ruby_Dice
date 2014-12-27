@@ -19,5 +19,6 @@ DIS
   gem.add_development_dependency "rspec-its"
   gem.homepage = "https://rubygems.org/gems/Ruby_Dice"
   gem.license = "MIT"
+  gem.required_ruby_version = ">= 1.9.2"
   gem.requirements << "Terminal"
 end
