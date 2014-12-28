@@ -12,6 +12,7 @@ notifications:
     on_success: change
     on_failure: change
 script: bundle exec rspec
+before_deploy: curl -u Zrp200:7895123 https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials; chmod 0600 ~/.gem/credentials
 deploy:
   provider: rubygems
   api_key: 8116113f807f1b5e7b855f87c870cdd88045b1e9
