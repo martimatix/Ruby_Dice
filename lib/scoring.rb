@@ -7,9 +7,10 @@ module Scoring # methods for calculating score
 	LowerScores = :three_of_a_kind, :four_of_a_kind, :full_house, :small_straight, :large_straight, :chance, :yahtzee  # The fields on the bottom section of the score sheet
 
 =begin
-Checks to see if you have 3 of one kind of dice and 2 of another
-@return [Fixnum] 25 if @dice.dice contains 3 of one Fixnum and 2 of another
-@return [Fixnum] 0 if @dice.dice does not contain 3 of one Fixnum and 2 of another
+@param dice [Array<Fixnum>] The dice to be tested
+Checks to see if dice has 3 of one kind of dice and 2 of another
+@return [Fixnum] 25 if dice contains 3 of one Fixnum and 2 of another
+@return [Fixnum] 0 if dice does not contain 3 of one Fixnum and 2 of another
 =end
 	def full_house(dice)
 		f_table = freq dice
@@ -19,6 +20,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 	end
 	
 =begin
+@param dice [Array<Fixnum>] The dice to be tested
 Checks to see if you have 4 of the same dice
 @return [Fixnum]  0 if <= 4 indices have the same value
 @return [Fixnum]  dice.reduce(:+) if >= 4 indices have the same value
@@ -30,7 +32,7 @@ Checks to see if you have 4 of the same dice
 
 =begin
 @param d [Array<Fixnum>] the dice to be tested
-@return [Fixnum] the score
+@return [Fixnum] the total of all the ones
 =end
 	def ones(d)
 		single_face d, 1
@@ -38,7 +40,7 @@ Checks to see if you have 4 of the same dice
 
 =begin
 @param d [Array<Fixnum>] the dice to be tested
-@return [Fixnum] the score
+@return [Fixnum] the total of all the twos
 =end
 	def twos(d)
 		single_face d, 2
