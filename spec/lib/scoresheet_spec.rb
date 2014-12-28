@@ -3,6 +3,7 @@ require "scoresheet"
 describe ScoreSheet do
 	describe "#new" do
 		subject {ScoreSheet.new}
+		it {is_expected.to be_instance_of ScoreSheet}
 		its(:dice) {is_expected.to be_instance_of Dice}
 		its(:sheet) {is_expected.to be_instance_of Hash}
 		describe "enter_score" do
