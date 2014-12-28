@@ -1,27 +1,38 @@
 #!/usr/bin/env ruby
 BEGIN { # Checks for options
-  if ARGV.include? "-h"
-    puts <<HELP
+	if ARGV.include? "-h"
+    		puts <<HELP
 Usage: $ Ruby_Dice [--help]
 	\u00B7 --help -> Displays this help message
 Gameplay:
-	Abbreviations:
-		\u00B7 1	->	Ones 
-		\u00B7 2	->	Twos 
-		\u00B7 3	->	Threes
-		\u00B7 4	->	Fours 
-		\u00B7 5	->	Fives 
-		\u00B7 6	->	Sixes 
-		\u00B7 ss	->	Small Straight 
-		\u00B7 ls	->	Large Straight 
-		\u00B7 tok	->	Three Of A Kind 
-		\u00B7 fok	->	Four Of A Kind 
-		\u00B7 fh 	-> 	Full House 
-		\u00B7 y 	->	Yahtzee 
-		\u00B7 ?	->	Chance
+	\u00B7	Rolling:
+		\u00B7	You must not put any scoring abbreviations in your input (See Scoring Abbreviations)
+		\u00B7	You can only roll twice before you must score
+		\u00B7	Select the characters of the dice you want to roll again
+			\u00B7	The characters must consist of at least one of these: ZXCVB
+			\u00B7	They can be touching
+			\u00B7	They can be in any order
+	\u00B7	Scoring:
+		\u00B7	You must not roll
+		\u00B7	You must use an abbreviation specified in Scoring Abbreviations
+		\u00B7	It must be available (with the exeception of Yahztee, which can be used multiple times)
+	\u00B7	Scoring Abbreviations:
+		\u00B7	1	->	Ones 
+		\u00B7	2	->	Twos 
+		\u00B7	3	->	Threes
+		\u00B7	4	->	Fours 
+		\u00B7	5	->	Fives 
+		\u00B7	6	->	Sixes 
+		\u00B7	ss	->	Small Straight 
+		\u00B7	ls	->	Large Straight 
+		\u00B7	tok	->	Three Of A Kind 
+		\u00B7	fok	->	Four Of A Kind 
+		\u00B7	fh 	-> 	Full House 
+		\u00B7	y 	->	Yahtzee 
+		\u00B7	?	->	Chance
 HELP
-    exit
-  end
+		exit
+	end
 }
 
 require "Ruby_Dice"
