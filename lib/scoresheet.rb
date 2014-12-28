@@ -56,8 +56,6 @@ class ScoreSheet # Keeps score throughout the game
 		lower_score_total + upper_score_total
 	end
 	
-
-
 =begin
 Checks if upper score bonus can be awarded
 @return [Fixnum] 0 if raw_upper < 63
@@ -70,7 +68,7 @@ Checks if upper score bonus can be awarded
 		end
 	end
 =begin
-@return [Fixnum]
+@return [Integer]
 Checks to see if you have all the of the same dice
 =end
 	def yahtzee
@@ -127,7 +125,7 @@ Checks to see if you have all the of the same dice
 Replace underscores with spaces
 =end
 	def format_score(score_region, index)
-		score_label = "#{score_region[index]}".tr(?_, " ")
+		score_label = score_region[index].to_s.tr(?_, " ")
 		cap_label score_label
 		score_field = @sheet[score_region[index]]
 		return justify_score(score_label, "#{score_field[1]? score_field[0]:?-}")
@@ -140,11 +138,11 @@ Replace underscores with spaces
 =begin
 @param score_label [String]
 @return [String]
-Capitalize each letter of each word only if the score label has two words
+Capitalize each letter of each word only if the score label has two or more words
 Else only capitalize the first letter of the score label
 =end
 	def cap_label(score_label)
-		if score_label.split.length == 2
+		if score_label.split.length >= 2
 			score_label = score_label.split.map(&:capitalize)*' '
 		else
 			score_label.capitalize!
