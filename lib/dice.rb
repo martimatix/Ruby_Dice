@@ -7,8 +7,6 @@ class Dice  # Class for working with the 5 dice at the same time
 		@values = values
 	end 
 
-# @!group Roll Methods
-
 =begin
 @raise [ArgumentError] if i element > 4
 @return [void]
@@ -30,7 +28,6 @@ class Dice  # Class for working with the 5 dice at the same time
 		initialize
 	end
 
-# @!endgroup
 
 	def to_s # @return [String] instance variable dice
 		print @values
