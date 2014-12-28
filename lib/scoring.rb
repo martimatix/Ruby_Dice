@@ -22,7 +22,7 @@ Checks to see if you have 3 of one kind of dice and 2 of another
 Checks to see if you have 4 of the same dice
 @return [Fixnum]  0 if <= 4 indices have the same value
 @return [Fixnum]  dice.reduce(:+) if >= 4 indices have the same value
-@see (#three_of_a_kind)
+@see (three_of_a_kind)
 =end
 	def four_of_a_kind(dice)
 		of_a_kind dice, 4
@@ -36,22 +36,42 @@ Checks to see if you have 4 of the same dice
 		single_face d, 1
 	end
 
-	def twos(d)	# @see (#ones)
+=begin
+@param d [Array<Fixnum>] the dice to be tested
+@return [Fixnum] the score
+=end
+	def twos(d)
 		single_face d, 2
 	end
 
-	def threes(d)	# @see (#ones)
+=begin
+@param d [Array<Fixnum>] the dice to be tested
+@return [Fixnum] the score
+=end
+	def threes(d)
 		single_face d, 3
 	end 
 
-	def fours(d)	# @see (#ones)
+=begin
+@param d [Array<Fixnum>] the dice to be tested
+@return [Fixnum] the score
+=end
+	def fours(d)
 		single_face d, 4
 	end
-
-	def fives(d)	# @see (#ones)
+	
+=begin
+@param d [Array<Fixnum>] the dice to be tested
+@return [Fixnum] the score
+=end
+	def fives(d)
 		single_face d, 5
 	end
 
+=begin
+@param d [Array<Fixnum>] the dice to be tested
+@return [Fixnum] the score
+=end
 	def sixes(d)	# @see (#ones)
 		single_face d, 6
 	end
@@ -78,7 +98,7 @@ Checks to see if you have 3 of the same dice
 @param dice [Array<Fixnum>] the dice to be tested
 @return [Fixnum] 30 if there are 3 consecutive Fixnums in dice
 @return [Fixnum] 0 if there are not three conscecutive Fixnums in dice
-@see (#large_straight)
+@see (large_straight)
 =end
 	def small_straight(dice)
 		straight dice, 4, 30
@@ -89,7 +109,7 @@ Checks to see if you have 3 of the same dice
 @param dice [Array<Fixnum>] the dice to be tested
 @return [Fixnum] 40 if there are 4 consecutive Fixnums in dice
 @return [Fixnum] 0 if there are not three conscecutive Fixnums in dice
-@see (#small_straight)
+@see (small_straight)
 =end
 	def large_straight(dice)
 		straight dice, 5, 40
@@ -98,32 +118,32 @@ Checks to see if you have 3 of the same dice
 	
 	private # Helper methods for score calculation
 
-		def single_face(dice, value)
-		 	v = dice.select{|number| number == value}.reduce :+
-		 	unless v.nil?
-		 		return v
-		 	else
-		 		return 0
-		 	end
+	def single_face(dice, value)
+	 	v = dice.select{|number| number == value}.reduce :+
+	 	unless v.nil?
+		 	return v
+		else
+		 	return 0
 		end
+	end
 
-		def freq(dice)
-			dice.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+	def freq(dice)
+		dice.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+	end
+
+	def modal_frequency(dice)
+		freq(dice).max_by{|k,v| v}[1]
+	end 
+
+	def of_a_kind(dice, limit)
+		if modal_frequency(dice) >= limit
+			dice.reduce :+
+		else
+			0
 		end
+	end
 
-		def modal_frequency(dice)
-			freq(dice).max_by{|k,v| v}[1]
-		end 
-
-		def of_a_kind(dice, limit)
-			if modal_frequency(dice) >= limit
-				dice.reduce :+
-			else
-				0
-			end
-		end
-
-=begin
+=begin	
 @param dice [Fixnum] the dice to be tested
 @param limit [Fixnum] = 4 for small straight
 @param limit [Fixnum] = 5 for large straight
@@ -132,14 +152,11 @@ common code for both small straight (SS) and large straight (LS)
 @return [Fixnum] score
 =end
 	def straight(dice, limit, score) 
-		#each_cons is generating every possible value for a straight of length limit
-		(1..6).each_cons(limit).each do |i|
-			# Asking if i is a subset of dice
-			if (i - dice).empty?
+		(1..6).each_cons(limit).each do |i| #each_cons is generating every possible value for a straight of length limit
+			if (i - dice).empty? # Asking if i is a subset of dice
 				return score if (i - dice)
 			end
 		end
 		return 0
 	end
-
 end
